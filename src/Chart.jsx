@@ -1,0 +1,488 @@
+// App.jsx
+import React, { useState, useEffect } from "react";
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  Legend,
+  ResponsiveContainer,
+  ReferenceLine,
+  ReferenceDot,
+  Tooltip,
+} from "recharts";
+import { rawCsvData } from "./data"; // Make sure the path to data.js is correct
+
+// Function to parse CSV data from a string
+function parseCsvString(csvString) {
+  const lines = csvString.trim().split("\n");
+  const headers = lines[0].split(",").map((header) => header.trim());
+  const data = lines.slice(1).map((line) => {
+    const values = line.split(",").map((value) => value.trim());
+    const row = {};
+    headers.forEach((header, index) => {
+      // Map 'Temperature' to 'Mean' and 'Scenario' to 'scenario'
+      const mappedHeader =
+        header === "Temperature"
+          ? "Mean"
+          : header === "Scenario"
+          ? "scenario"
+          : header;
+      // Convert numeric values to numbers, keep others as strings
+      row[mappedHeader] = isNaN(Number(values[index]))
+        ? values[index]
+        : Number(values[index]);
+    });
+    return row;
+  });
+  return data;
+}
+
+// Custom SVG Shapes for ReferenceDots
+const CircleIcon = (props) => {
+  const { cx, cy, fill } = props;
+  return (
+    <circle cx={cx} cy={cy} r={6} fill={fill} stroke="#fff" strokeWidth={1.5} />
+  );
+};
+
+const TriangleIcon = (props) => {
+  const { cx, cy, fill } = props;
+  // Equilateral triangle path
+  return (
+    <path
+      d={`M ${cx},${cy - 6} L ${cx - 6},${cy + 6} L ${cx + 6},${cy + 6} Z`}
+      fill={fill}
+      stroke="#fff"
+      strokeWidth={1.5}
+    />
+  );
+};
+
+const DiamondIcon = (props) => {
+  const { cx, cy, fill } = props;
+  // Diamond shape path
+  return (
+    <path
+      d={`M ${cx},${cy - 6} L ${cx + 6},${cy} L ${cx},${cy + 6} L ${
+        cx - 6
+      },${cy} Z`}
+      fill={fill}
+      stroke="#fff"
+      strokeWidth={1.5}
+    />
+  );
+};
+
+// Main React component for the application
+function Chart({ maxTemperature = 5 }) {
+  const [fullChartData, setFullChartData] = useState([]);
+  const [chartData, setChartData] = useState([]);
+  const [scenarios, setScenarios] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  // Stores first year each scenario crosses a threshold: { 'SSP1-1.9': { '1.5': 2035, '2.0': null, '4.0': null }, ... }
+  const [scenarioThresholdCrossings, setScenarioThresholdCrossings] = useState(
+    {}
+  );
+
+  // Define an array of colors for the lines (re-ordered slightly for better visual distinction)
+  const lineColors = [
+    "#5d83f1", // Blue
+    "#82ca9d", // Green
+    "#ffc658", // Yellow/Orange
+    "#f17e5d", // Coral
+    "#8884d8", // Purple
+    "#f15d7e", // Pink
+    "#a4de6c", // Light Green
+    "#d0ed57", // Lime Green
+    "#88a8c3", // Light Blue-Gray
+    "#e3516e", // Dark Pink
+  ];
+
+  // Define temperature thresholds and their corresponding icon types
+  const thresholds = [
+    { value: 1.5, label: "1.5°C", icon: CircleIcon },
+    { value: 2.0, label: "2.0°C", icon: TriangleIcon },
+    { value: 4.0, label: "4.0°C", icon: DiamondIcon },
+  ];
+
+  useEffect(() => {
+    try {
+      const rawData = parseCsvString(rawCsvData);
+
+      if (rawData.length === 0) {
+        setError("No data found or failed to parse CSV.");
+        setLoading(false);
+        return;
+      }
+
+      const uniqueScenarios = [
+        ...new Set(rawData.map((d) => d.scenario)),
+      ].sort();
+      setScenarios(uniqueScenarios);
+
+      const groupedData = rawData.reduce((acc, current) => {
+        const year = current.Year;
+        const scenario = current.scenario;
+        const meanTemp = current.Mean;
+
+        let yearEntry = acc.find((entry) => entry.Year === year);
+        if (!yearEntry) {
+          yearEntry = { Year: year };
+          acc.push(yearEntry);
+        }
+        yearEntry[scenario] = meanTemp;
+        return acc;
+      }, []);
+
+      groupedData.sort((a, b) => a.Year - b.Year);
+      const pointsToAdd = [];
+
+      // --- Calculate Threshold Crossing Years ---
+      const crossings = {};
+      for (const scenario of uniqueScenarios) {
+        crossings[scenario] = {};
+        for (const thresh of thresholds) {
+          crossings[scenario][thresh.value] = null; // Initialize to null
+        }
+
+        // Track if a threshold has been crossed for the current scenario
+        const hasCrossed = {};
+        for (const thresh of thresholds) {
+          hasCrossed[thresh.value] = false;
+        }
+
+        let previousDataPoint = null;
+        for (const dataPoint of groupedData) {
+          if (dataPoint[scenario] !== undefined) {
+            // Ensure data exists for this scenario in this year
+            const currentTemp = dataPoint[scenario];
+            const currentYear = dataPoint.Year;
+
+            for (const thresh of thresholds) {
+              if (!hasCrossed[thresh.value] && currentTemp >= thresh.value) {
+                // Determine when the threshold is crossed using linear interpolation
+                if (previousDataPoint !== null) {
+                  // Calculate the crossing year (floating point) using linear interpolation
+                  const slope =
+                    (currentTemp - previousDataPoint[scenario]) /
+                    (currentYear - previousDataPoint.Year);
+                  const intercept = currentTemp - slope * currentYear;
+                  const crossingYear = (thresh.value - intercept) / slope;
+                  crossings[scenario][thresh.value] = crossingYear;
+                  // Add a point for each scenario at this crossing year
+                  console.log(
+                    `Threshold ${thresh.value} crossed for ${scenario} in year ${crossingYear}`
+                  );
+                  const newPoint = {
+                    Year: crossingYear,
+                    [scenario]: thresh.value,
+                  };
+                  for (const otherScenario of uniqueScenarios) {
+                    if (otherScenario === scenario) continue; // Skip the current scenario
+                    console.log(
+                      `Calculating crossing for other scenario: ${otherScenario} (${crossingYear})`
+                    );
+                    // If the scenario exists in the previous year and the current year
+                    if (
+                      previousDataPoint &&
+                      previousDataPoint[otherScenario] !== undefined &&
+                      dataPoint[otherScenario] !== undefined
+                    ) {
+                      // Calculate value at crossing year using linear interpolation
+                      const otherSlope =
+                        (dataPoint[otherScenario] -
+                          previousDataPoint[otherScenario]) /
+                        (currentYear - previousDataPoint.Year);
+                      const otherValue =
+                        previousDataPoint[otherScenario] +
+                        otherSlope * (crossingYear - previousDataPoint.Year);
+                      newPoint[otherScenario] = otherValue;
+                    }
+                  }
+                  // Add the new point to the chart data
+                  pointsToAdd.push(newPoint);
+                } else {
+                  // If no previous data, use the current year directly
+                  crossings[scenario][thresh.value] = currentYear;
+                }
+                hasCrossed[thresh.value] = true;
+              }
+            }
+          }
+          // Update previous values for next iteration
+          previousDataPoint = dataPoint;
+        }
+      }
+      console.log("Threshold crossings calculated:", crossings);
+      setScenarioThresholdCrossings(crossings);
+      // Add all calculated points to the groupedData
+      pointsToAdd.forEach((point) => {
+        groupedData.push(point);
+      });
+      groupedData.sort((a, b) => a.Year - b.Year);
+      setFullChartData(groupedData);
+      console.log("Chart data prepared:", groupedData);
+
+      setLoading(false);
+    } catch (err) {
+      setError("Failed to process data: " + err.message);
+      setLoading(false);
+    }
+  }, []); // Empty dependency array means this effect runs once after initial render
+
+  useEffect(() => {
+    const stoppedScenarios = [];
+    const pointsToAdd = [];
+    const chartData = fullChartData.map((dataPoint) => ({ ...dataPoint })); // Create a shallow copy of fullChartData
+    let previousDataPoint = null;
+    for (const dataPoint of chartData) {
+      for (const scenario of stoppedScenarios) {
+        delete dataPoint[scenario];
+      }
+      for (const scenario of Object.keys(dataPoint)) {
+        if (scenario === "Year") continue; // Skip the Year key
+        // If the scenario exceeds the max temperature, remove it
+        if (dataPoint[scenario] > maxTemperature && previousDataPoint) {
+          // Create a new point with the maxTemperature value as temperature (year is floating point, linear interpolation)
+          const crossingYear =
+            previousDataPoint.Year +
+            ((maxTemperature - previousDataPoint[scenario]) /
+              (dataPoint[scenario] - previousDataPoint[scenario])) *
+              (dataPoint.Year - previousDataPoint.Year);
+
+          const newPoint = {
+            Year: crossingYear,
+            [scenario]: maxTemperature,
+          };
+
+          for (const otherScenario of Object.keys(previousDataPoint)) {
+            if (otherScenario === "Year" || otherScenario === scenario)
+              continue; // Skip the Year key and the current scenario
+            if (stoppedScenarios.includes(otherScenario)) continue; // Skip stopped scenarios
+            // If the scenario exists in the previous year and the current year
+            if (
+              previousDataPoint[otherScenario] !== undefined &&
+              dataPoint[otherScenario] !== undefined
+            ) {
+              // Calculate value at crossing year using linear interpolation
+              const otherSlope =
+                (dataPoint[otherScenario] - previousDataPoint[otherScenario]) /
+                (dataPoint.Year - previousDataPoint.Year);
+              const otherValue =
+                previousDataPoint[otherScenario] +
+                otherSlope * (crossingYear - previousDataPoint.Year);
+              newPoint[otherScenario] = otherValue;
+            }
+          }
+          // Add the new point to the chart data
+          pointsToAdd.push(newPoint);
+          delete dataPoint[scenario];
+          stoppedScenarios.push(scenario);
+        }
+      }
+      previousDataPoint = dataPoint;
+    }
+    // Add all calculated points to the chart data
+    pointsToAdd.forEach((point) => {
+      chartData.push(point);
+    });
+    chartData.sort((a, b) => a.Year - b.Year);
+    setChartData(chartData);
+    console.log("Filtered chart data prepared:", chartData);
+  }, [fullChartData, maxTemperature]);
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-screen bg-gray-100 font-inter">
+        <div className="text-xl text-gray-700">Loading chart data...</div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex justify-center items-center h-screen bg-red-100 font-inter">
+        <div className="text-xl text-red-700 p-4 rounded-lg border border-red-400">
+          Error: {error}
+        </div>
+      </div>
+    );
+  }
+
+  if (chartData.length === 0) {
+    return (
+      <div className="flex justify-center items-center h-screen bg-yellow-100 font-inter">
+        <div className="text-xl text-yellow-700">
+          No data available to display chart.
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50 p-4 sm:p-6 lg:p-8 font-inter">
+      <h1 className="text-3xl sm:text-4xl font-bold text-gray-800 mb-6 text-center">
+        Global surface temperature change relative to 1850-1900
+      </h1>
+      <div className="w-full max-w-4xl bg-white p-4 sm:p-6 rounded-lg shadow-xl border border-gray-200">
+        <ResponsiveContainer width="70%" height={400}>
+          <LineChart
+            data={chartData}
+            margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
+          >
+            <XAxis
+              dataKey="Year"
+              type="number"
+              domain={["dataMin", "dataMax"]}
+              ticks={[
+                1950, 1960, 1970, 1980, 1990, 2000, 2010, 2015, 2020, 2030,
+                2040, 2050, 2060, 2070, 2080, 2090, 2100,
+              ]} // Explicit X-axis ticks
+              tickFormatter={(tick) => Math.round(tick)}
+              stroke="#333"
+              tick={{ fill: "#555", fontSize: 12 }}
+              label={{
+                value: "Year",
+                position: "insideBottom",
+                offset: -5,
+                fill: "#333",
+              }}
+            />
+            <YAxis
+              stroke="#333"
+              ticks={[0, 1, 1.5, 2, 3, 4, 5]} // Explicit Y-axis ticks
+              tick={{ fill: "#555", fontSize: 12 }}
+              label={{
+                value: "Relative temperature (°C)",
+                angle: -90,
+                position: "insideLeft",
+                fill: "#333",
+              }}
+              domain={[0, 5]}
+            />
+            <Legend
+              wrapperStyle={{
+                paddingTop: "20px",
+                fontSize: "14px",
+                color: "#333",
+                display: "flex",
+                flexWrap: "wrap",
+                justifyContent: "center",
+                gap: "10px",
+              }}
+            />
+            <Tooltip
+              formatter={(value) => `${Math.round(value * 1000) / 1000} °C`}
+              labelFormatter={(label) => {
+                if (Math.round(label) === label) {
+                  return `Year: ${label}`;
+                }
+                // calculating the integer year and month
+                const year = Math.floor(label);
+                const month = Math.round((label - year) * 12);
+                // month number to name
+                const monthNames = [
+                  "Jan",
+                  "Feb",
+                  "Mar",
+                  "Apr",
+                  "May",
+                  "Jun",
+                  "Jul",
+                  "Aug",
+                  "Sep",
+                  "Oct",
+                  "Nov",
+                  "Dec",
+                ];
+                return `Year: ${year} ${monthNames[month]}.`;
+              }}
+            />
+            {/* Render Lines for each scenario */}
+            {scenarios.map((scenario, index) => (
+              <Line
+                key={scenario}
+                type="monotone"
+                dataKey={scenario}
+                stroke={lineColors[index % lineColors.length]}
+                strokeWidth={2}
+                dot={false}
+                name={scenario}
+                isAnimationActive={false} // Removed animation on refresh
+                activeDot={true}
+              />
+            ))}
+
+            {/* Render ReferenceLines for temperature thresholds */}
+            {thresholds.map((thresh) => (
+              <ReferenceLine
+                key={`thresh-${thresh.value}`}
+                y={thresh.value}
+                stroke={"#333"}
+                strokeDasharray="3 3"
+                label={{
+                  value: `${thresh.label} Threshold`,
+                  position: "right",
+                  fill: "#333",
+                  fontSize: 12,
+                }}
+                isAnimationActive={false}
+              />
+            ))}
+
+            {/* Render ReferenceDots for threshold crossing years on X-axis */}
+            {scenarios.map(
+              (
+                scenario,
+                scenarioIndex // Added scenarioIndex here
+              ) =>
+                thresholds.map((thresh) => {
+                  if (thresh.value > maxTemperature) return null; // Skip thresholds above maxTemperature
+                  const crossingYear =
+                    scenarioThresholdCrossings[scenario]?.[thresh.value];
+                  if (crossingYear) {
+                    const IconComponent = thresh.icon;
+                    const iconColor =
+                      lineColors[scenarioIndex % lineColors.length]; // Get the color of the scenario line
+                    return (
+                      <ReferenceDot
+                        key={`${scenario}-${thresh.value}-dot`}
+                        x={crossingYear}
+                        y={0.1} // Position slightly above the X-axis for visibility
+                        r={0} // Hide default circle radius as we use a custom shape
+                        fill={iconColor} // Use the scenario's line color
+                        stroke={iconColor} // Use the scenario's line color
+                        isAnimationActive={false}
+                        shape={<IconComponent fill={iconColor} />} // Pass the scenario's line color to the SVG icon
+                      >
+                        {/* Label appears on hover */}
+                        <label
+                          className="custom-dot-label"
+                          style={{ fontSize: "10px", fill: "#333" }}
+                        >
+                          {`${scenario}: ${thresh.label} reached in ${crossingYear}`}
+                        </label>
+                      </ReferenceDot>
+                    );
+                  }
+                  return null;
+                })
+            )}
+          </LineChart>
+        </ResponsiveContainer>
+      </div>
+      <p className="mt-6 text-gray-600 text-center max-w-2xl text-sm">
+        This chart displays global surface temperature changes relative to
+        1850-1900, derived from CMIP6 model simulations and observational
+        constraints. Circles (●) indicate 1.5°C threshold crossings, triangles
+        (▲) for 2.0°C, and diamonds (◆) for 4.0°C. Icons on the X-axis
+        correspond to the color of the scenario line that reached the respective
+        threshold.
+      </p>
+    </div>
+  );
+}
+
+export default Chart;
