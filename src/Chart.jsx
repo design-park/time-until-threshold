@@ -172,18 +172,12 @@ function Chart({ maxTemperature = 5 }) {
                   const crossingYear = (thresh.value - intercept) / slope;
                   crossings[scenario][thresh.value] = crossingYear;
                   // Add a point for each scenario at this crossing year
-                  console.log(
-                    `Threshold ${thresh.value} crossed for ${scenario} in year ${crossingYear}`
-                  );
                   const newPoint = {
                     Year: crossingYear,
                     [scenario]: thresh.value,
                   };
                   for (const otherScenario of uniqueScenarios) {
                     if (otherScenario === scenario) continue; // Skip the current scenario
-                    console.log(
-                      `Calculating crossing for other scenario: ${otherScenario} (${crossingYear})`
-                    );
                     // If the scenario exists in the previous year and the current year
                     if (
                       previousDataPoint &&
@@ -215,7 +209,6 @@ function Chart({ maxTemperature = 5 }) {
           previousDataPoint = dataPoint;
         }
       }
-      console.log("Threshold crossings calculated:", crossings);
       setScenarioThresholdCrossings(crossings);
       // Add all calculated points to the groupedData
       pointsToAdd.forEach((point) => {
@@ -223,7 +216,6 @@ function Chart({ maxTemperature = 5 }) {
       });
       groupedData.sort((a, b) => a.Year - b.Year);
       setFullChartData(groupedData);
-      console.log("Chart data prepared:", groupedData);
 
       setLoading(false);
     } catch (err) {
@@ -290,7 +282,6 @@ function Chart({ maxTemperature = 5 }) {
     });
     chartData.sort((a, b) => a.Year - b.Year);
     setChartData(chartData);
-    console.log("Filtered chart data prepared:", chartData);
   }, [fullChartData, maxTemperature]);
 
   if (loading) {
@@ -330,7 +321,7 @@ function Chart({ maxTemperature = 5 }) {
         <ResponsiveContainer width="70%" height={400}>
           <LineChart
             data={chartData}
-            margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
+            margin={{ top: 20, right: 100, left: 20, bottom: 5 }}
           >
             <XAxis
               dataKey="Year"

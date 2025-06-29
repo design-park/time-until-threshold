@@ -7,10 +7,6 @@ function App() {
   // Animate maxTemperature between 0.5 and 5
   const { value, play } = useAnimatedValue([1, 1.5, 2, 4, 5], 10000, 20);
 
-  useEffect(() => {
-    console.log("Current maxTemperature:", value);
-  }, [value]);
-
   return (
     <div>
       <button
