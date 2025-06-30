@@ -1,5 +1,5 @@
 // App.jsx
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import {
   LineChart,
   Line,
@@ -12,6 +12,7 @@ import {
   Tooltip,
 } from "recharts";
 import { rawCsvData } from "./data"; // Make sure the path to data.js is correct
+import { useBlinker } from "./blinker";
 
 // Function to parse CSV data from a string
 function parseCsvString(csvString) {
@@ -74,10 +75,15 @@ const DiamondIcon = (props) => {
   );
 };
 
+
 // Main React component for the application
-function Chart({ maxTemperature = 5 }) {
+function Chart({
+  maxTemperature = 5,
+  maxYear = 2100,
+  blinkingScenarioForMaxTemp = null,
+}) {
+  const blinker = useBlinker(500); // Blinker hook to toggle visibility every second
   const [fullChartData, setFullChartData] = useState([]);
-  const [chartData, setChartData] = useState([]);
   const [scenarios, setScenarios] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -224,7 +230,7 @@ function Chart({ maxTemperature = 5 }) {
     }
   }, []); // Empty dependency array means this effect runs once after initial render
 
-  useEffect(() => {
+  const chartDataFilteredY = useMemo(() => {
     const stoppedScenarios = [];
     const pointsToAdd = [];
     const chartData = fullChartData.map((dataPoint) => ({ ...dataPoint })); // Create a shallow copy of fullChartData
@@ -281,8 +287,48 @@ function Chart({ maxTemperature = 5 }) {
       chartData.push(point);
     });
     chartData.sort((a, b) => a.Year - b.Year);
-    setChartData(chartData);
+    return chartData;
   }, [fullChartData, maxTemperature]);
+
+  const chartDataFilteredXY = useMemo(() => {
+    const finalChartData = chartDataFilteredY.map((dataPoint) => ({
+      ...dataPoint,
+    })); // Create a shallow copy of fullChartData
+
+    // Add a point using linear interpolation if year is not an integer
+    let previousDataPoint = null;
+    for (const dataPoint of finalChartData) {
+      if (dataPoint.Year > maxYear) {
+        if (Math.round(maxYear) !== maxYear) {
+          const pointToAdd = {
+            Year: maxYear,
+          };
+          // Interpolate values for all scenarios
+          for (const scenario of Object.keys(previousDataPoint)) {
+            if (scenario === "Year") continue; // Skip the Year key
+            if (!dataPoint[scenario]) continue;
+            // If the scenario exists in the previous year and the current year
+            // Calculate value at crossing year using linear interpolation
+            const slope =
+              (dataPoint[scenario] - previousDataPoint[scenario]) /
+              (dataPoint.Year - previousDataPoint.Year);
+            const interpolatedValue =
+              previousDataPoint[scenario] +
+              slope * (maxYear - previousDataPoint.Year);
+            pointToAdd[scenario] = interpolatedValue;
+          }
+          finalChartData.push(pointToAdd);
+          break; // Stop after adding the point for maxYear
+        }
+      }
+      previousDataPoint = dataPoint;
+    }
+    // Remove points past the maxYear
+    finalChartData.sort((a, b) => a.Year - b.Year);
+    return finalChartData.map((dataPoint) => {
+      return dataPoint.Year <= maxYear ? dataPoint : { Year: dataPoint.Year };
+    });
+  }, [chartDataFilteredY, maxYear]);
 
   if (loading) {
     return (
@@ -302,7 +348,7 @@ function Chart({ maxTemperature = 5 }) {
     );
   }
 
-  if (chartData.length === 0) {
+  if (chartDataFilteredXY.length === 0) {
     return (
       <div className="flex justify-center items-center h-screen bg-yellow-100 font-inter">
         <div className="text-xl text-yellow-700">
@@ -320,7 +366,7 @@ function Chart({ maxTemperature = 5 }) {
       <div className="w-full max-w-4xl bg-white p-4 sm:p-6 rounded-lg shadow-xl border border-gray-200">
         <ResponsiveContainer width="100%" height={400}>
           <LineChart
-            data={chartData}
+            data={chartDataFilteredXY}
             margin={{ top: 20, right: 100, left: 20, bottom: 5 }}
           >
             <XAxis
@@ -434,9 +480,17 @@ function Chart({ maxTemperature = 5 }) {
                   const crossingYear =
                     scenarioThresholdCrossings[scenario]?.[thresh.value];
                   if (crossingYear) {
+                    if (crossingYear > maxYear) return null; // Skip if crossing year is beyond maxYear
                     const IconComponent = thresh.icon;
                     const iconColor =
                       lineColors[scenarioIndex % lineColors.length]; // Get the color of the scenario line
+                    if (
+                      blinkingScenarioForMaxTemp === scenario &&
+                      thresh.value === maxTemperature &&
+                      !blinker
+                    ) {
+                      return null; // Skip rendering if blinking is active for this scenario
+                    }
                     return (
                       <ReferenceDot
                         key={`${scenario}-${thresh.value}-dot`}
