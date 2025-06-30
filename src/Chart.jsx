@@ -42,7 +42,7 @@ function parseCsvString(csvString) {
 const CircleIcon = (props) => {
   const { cx, cy, fill } = props;
   return (
-    <circle cx={cx} cy={cy} r={6} fill={fill} stroke="#fff" strokeWidth={1.5} />
+    <circle cx={cx} cy={cy} r={4} fill={fill} stroke="#fff" strokeWidth={1} />
   );
 };
 
@@ -51,10 +51,10 @@ const TriangleIcon = (props) => {
   // Equilateral triangle path
   return (
     <path
-      d={`M ${cx},${cy - 6} L ${cx - 6},${cy + 6} L ${cx + 6},${cy + 6} Z`}
+      d={`M ${cx},${cy - 4} L ${cx - 4},${cy + 4} L ${cx + 4},${cy + 4} Z`}
       fill={fill}
       stroke="#fff"
-      strokeWidth={1.5}
+      strokeWidth={1}
     />
   );
 };
@@ -64,12 +64,12 @@ const DiamondIcon = (props) => {
   // Diamond shape path
   return (
     <path
-      d={`M ${cx},${cy - 6} L ${cx + 6},${cy} L ${cx},${cy + 6} L ${
-        cx - 6
+      d={`M ${cx},${cy - 4} L ${cx + 4},${cy} L ${cx},${cy + 4} L ${
+        cx - 4
       },${cy} Z`}
       fill={fill}
       stroke="#fff"
-      strokeWidth={1.5}
+      strokeWidth={1}
     />
   );
 };
@@ -318,7 +318,7 @@ function Chart({ maxTemperature = 5 }) {
         Global surface temperature change relative to 1850-1900
       </h1>
       <div className="w-full max-w-4xl bg-white p-4 sm:p-6 rounded-lg shadow-xl border border-gray-200">
-        <ResponsiveContainer width="70%" height={400}>
+        <ResponsiveContainer width="100%" height={400}>
           <LineChart
             data={chartData}
             margin={{ top: 20, right: 100, left: 20, bottom: 5 }}
@@ -465,12 +465,12 @@ function Chart({ maxTemperature = 5 }) {
         </ResponsiveContainer>
       </div>
       <p className="mt-6 text-gray-600 text-center max-w-2xl text-sm">
-        This chart displays global surface temperature changes relative to
-        1850-1900, derived from CMIP6 model simulations and observational
-        constraints. Circles (●) indicate 1.5°C threshold crossings, triangles
-        (▲) for 2.0°C, and diamonds (◆) for 4.0°C. Icons on the X-axis
-        correspond to the color of the scenario line that reached the respective
-        threshold.
+        This chart illustrates global surface temperature changes, relative to
+        the 1850-1900 baseline, as projected by CMIP6 model simulations.
+        Threshold crossings are indicated by specific markers: circles (●) for
+        1.5°C, triangles (▲) for 2.0°C, and diamonds (◆) for 4.0°C. The color of
+        each marker on the x-axis corresponds to the color of the scenario line
+        that reached that particular threshold.
       </p>
     </div>
   );
