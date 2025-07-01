@@ -75,7 +75,6 @@ const DiamondIcon = (props) => {
   );
 };
 
-
 // Main React component for the application
 function Chart({
   maxTemperature = 5,
@@ -492,24 +491,38 @@ function Chart({
                       return null; // Skip rendering if blinking is active for this scenario
                     }
                     return (
-                      <ReferenceDot
-                        key={`${scenario}-${thresh.value}-dot`}
-                        x={crossingYear}
-                        y={0.1} // Position slightly above the X-axis for visibility
-                        r={0} // Hide default circle radius as we use a custom shape
-                        fill={iconColor} // Use the scenario's line color
-                        stroke={iconColor} // Use the scenario's line color
-                        isAnimationActive={false}
-                        shape={<IconComponent fill={iconColor} />} // Pass the scenario's line color to the SVG icon
-                      >
-                        {/* Label appears on hover */}
-                        <label
-                          className="custom-dot-label"
-                          style={{ fontSize: "10px", fill: "#333" }}
+                      <>
+                        {/* Dot slightly above X-axis */}
+                        <ReferenceDot
+                          key={`${scenario}-${thresh.value}-dot-above-x`}
+                          x={crossingYear}
+                          y={0.1}
+                          r={0}
+                          fill={iconColor}
+                          stroke={iconColor}
+                          isAnimationActive={false}
+                          shape={<IconComponent fill={iconColor} />}
                         >
-                          {`${scenario}: ${thresh.label} reached in ${crossingYear}`}
-                        </label>
-                      </ReferenceDot>
+                          <label
+                            className="custom-dot-label"
+                            style={{ fontSize: "10px", fill: "#333" }}
+                          >
+                            {`${scenario}: ${thresh.label} reached in ${crossingYear}`}
+                          </label>
+                        </ReferenceDot>
+
+                        {/* Dot at the actual Y-value */}
+                        <ReferenceDot
+                          key={`${scenario}-${thresh.value}-dot-on-line`}
+                          x={crossingYear}
+                          y={thresh.value} // you need to implement this function
+                          r={0}
+                          fill={iconColor}
+                          stroke={iconColor}
+                          isAnimationActive={false}
+                          shape={<IconComponent fill={iconColor} />}
+                        />
+                      </>
                     );
                   }
                   return null;
