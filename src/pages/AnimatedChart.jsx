@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from "react";
 import Chart from "./Chart";
-import { useAnimatedValue } from "./animatedValue";
-import { useSimpleAnimatedValue } from "./simpleAnimatedValue";
+import { useAnimatedValue } from "../animatedValue";
+import { useSimpleAnimatedValue } from "../simpleAnimatedValue";
 
 const ANIMATION_BOUNDS = [
   [2014, 2035],

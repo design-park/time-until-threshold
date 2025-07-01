@@ -1,4 +1,3 @@
-// App.jsx
 import React, { useState, useEffect, useMemo } from "react";
 import {
   LineChart,
@@ -11,8 +10,8 @@ import {
   ReferenceDot,
   Tooltip,
 } from "recharts";
-import { rawCsvData } from "./data"; // Make sure the path to data.js is correct
-import { useBlinker } from "./blinker";
+import { rawCsvData } from "../data"; 
+import { useBlinker } from "../blinker";
 
 // Function to parse CSV data from a string
 function parseCsvString(csvString) {
