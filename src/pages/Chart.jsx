@@ -330,16 +330,16 @@ function Chart({
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center h-screen bg-gray-100 font-inter">
-        <div className="text-xl text-gray-700">Loading chart data...</div>
+      <div>
+        <div>Loading chart data...</div>
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className="flex justify-center items-center h-screen bg-red-100 font-inter">
-        <div className="text-xl text-red-700 p-4 rounded-lg border border-red-400">
+      <div>
+        <div>
           Error: {error}
         </div>
       </div>
@@ -348,8 +348,8 @@ function Chart({
 
   if (chartDataFilteredXY.length === 0) {
     return (
-      <div className="flex justify-center items-center h-screen bg-yellow-100 font-inter">
-        <div className="text-xl text-yellow-700">
+      <div>
+        <div>
           No data available to display chart.
         </div>
       </div>
@@ -357,11 +357,11 @@ function Chart({
   }
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50 p-4 sm:p-6 lg:p-8 font-inter">
-      <h1 className="text-3xl sm:text-4xl font-bold text-gray-800 mb-6 text-center">
+    <div>
+      <h1>
         Global surface temperature change relative to 1850-1900
       </h1>
-      <div className="w-full max-w-4xl bg-white p-4 sm:p-6 rounded-lg shadow-xl border border-gray-200">
+      <div>
         <ResponsiveContainer width="100%" height={400}>
           <LineChart
             data={chartDataFilteredXY}

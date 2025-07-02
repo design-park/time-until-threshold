@@ -22,3 +22,26 @@ body {
         cursor: not-allowed;
     }
 }
+
+.introTitle {
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 5px;
+}
+.introParagraph {
+    font-size:12px;
+    margin-top: 5x;
+    margin-bottom: 0px;
+    max-width: 800px;
+}
+
+.instructionBox {
+    width: 80%; 
+    max-width: 750px; 
+    background-color: #ffffff;
+    border: 1px solid #353434;
+    border-radius: 8px; 
+    padding: 20px; 
+    margin: 20px 0px; 
+}
