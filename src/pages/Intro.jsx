@@ -71,7 +71,7 @@ function Intro() {
 
       <h4 className="introTitle">Benefits of the study:</h4>
       <p className="introParagraph">
-        you may become more informed about the issue of climate change and its
+        You may become more informed about the issue of climate change and its
         potential impacts.
       </p>
 
