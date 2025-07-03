@@ -1,7 +1,13 @@
 import { useState } from "react";
+import { Navigate } from "react-router-dom";
 
 function Intro() {
   let [consentChecked, setConsentChecked] = useState(false);
+  let [buttonClicked, setButtonClicked] = useState(false);
+
+  if (buttonClicked) {
+    return <Navigate to="/demography"/>
+  }
 
   return (
     <>
@@ -16,12 +22,14 @@ function Intro() {
       <p className="subText">Blabla</p>
 
       <h4 className="titleText">Principal Investigator: </h4>
-      <p className="subText">Jihyun Park (jihyun.park@inria.fr)</p>
+      <p className="subText">
+        Jihyun Park (<a href="mailto:jihyun.park@inria.fr" className="text-blue-600 hover:underline">jihyun.park@inria.fr</a>)
+      </p>
 
       <h4 className="titleText">Supervisors: </h4>
       <p className="subText">
-        Florent Cabric (florent.cabric@inria.fr), Vanessa Peña Araya
-        (vanessa.pena-araya@inria.fr)
+        Florent Cabric (<a href="mailto:florent.cabric@inria.fr" className="text-blue-600 hover:underline">florent.cabric@inria.fr</a>), Vanessa Peña Araya
+        (<a href="mailto:vanessa.pena-araya@inria.fr" className="text-blue-600 hover:underline">vanessa.pena-araya@inria.fr</a>)
       </p>
 
       <h4 className="titleText">Purpose of the research project:</h4>
@@ -96,7 +104,7 @@ function Intro() {
       <p className="subText">
         You may ask questions about the research at any time(before, during, and
         after your participation) by contacting the project's principal
-        investigator(jihyun.park@inria.fr).
+        investigator(<a href="mailto:jihyun.park@inria.fr" className="text-blue-600 hover:underline">jihyun.park@inria.fr</a>).
       </p>
 
       <h4 className="titleText">Consent to paticipate:</h4>
@@ -115,7 +123,7 @@ function Intro() {
         }} />
       </label>
 
-      <button className={"userActionButton"} disabled={!consentChecked}>Continue</button>
+      <button className={"userActionButton"} disabled={!consentChecked} onClick={()=>setButtonClicked(true)}>Continue</button>
     </>
   );
 }
