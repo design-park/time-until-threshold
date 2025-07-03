@@ -23,17 +23,35 @@ body {
     }
 }
 
-.introTitle {
+.buttonContainer {
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  margin-top: 20px;
+}
+
+.titleText {
     font-size: 16px;
     font-weight: bold;
     margin-top: 20px;
     margin-bottom: 5px;
 }
-.introParagraph {
+
+.subText {
     font-size:12px;
     margin-top: 5x;
     margin-bottom: 0px;
     max-width: 800px;
+}
+
+.instructionText {
+    font-size: 16px;
+    margin-top: 20px;
+    margin-bottom: 5px;
+    font-weight: normal;
+    & span {
+        font-weight: bold;
+    }
 }
 
 .instructionBox {
@@ -44,4 +62,167 @@ body {
     border-radius: 8px; 
     padding: 20px; 
     margin: 20px 0px; 
+}
+
+.checkBox {
+    margin: 20px 0px;
+    font-size: 16px;
+    display:block;
+}
+
+.sliderContainer {
+    display: flex;
+    align-items: center;
+	justify-content: center;
+    & img {
+        flex-shrink: 0;
+    }
+}
+
+.sliderLabel {
+	font-size: 14px;
+	font-weight: bold;
+	margin-bottom: 10px;
+	text-align: center;
+}
+
+.slider {
+    flex-grow: 0;
+  width: 80%; 
+  max-width: 500px; 
+  margin: 20px;
+  padding: 10px;
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+  gap: 15px; 
+}
+
+.slider input[type="range"],
+.slider img {
+  width: 100%; 
+  height: auto; 
+  display: block; 
+}
+
+/* Optional: To make the image not stretch vertically if its aspect ratio is very different */
+.slider img {
+  object-fit: contain; 
+}
+
+input[type=range]:focus {
+	outline: none;
+}
+
+input[type=range]{
+	/* fix for FF unable to apply focus style bug  */
+	border: 10px solid white;
+
+	/*required for proper track sizing in FF*/
+	width: 80%;
+	margin: 0px;
+	padding: 0px;
+	vertical-align: top;
+	margin-top: 6px;
+}
+
+
+input[type=range]::-moz-range-track {
+	width: 100%;
+	height: 20px;
+	background: #ddd;
+	border-radius: 10px;
+	border: none;
+}
+input[type=range]:focus::-moz-range-track {
+	background: #ccc;
+}
+
+input[type=range]::-moz-range-thumb {
+	height: 35px;
+	width: 35px;
+	border-radius: 60%;
+	background: white;
+	border: 2px solid #505050;
+}
+
+input[type=range]::-moz-range-thumb:hover {
+	background: #505050;
+	border: 2px solid white;
+	cursor: pointer;
+	box-shadow: 0px 0px 12px #212121;
+}
+
+
+input[type=range]{
+	-webkit-appearance: none;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+	width: 100%;
+	height: 20px;
+	border: none;
+	background: #ddd;
+	border-radius: 10px;
+}
+
+input[type=range]::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	height: 35px;
+	width: 35px;
+	border-radius: 60%;
+	background: white;
+	border: 2px solid #505050;
+	margin-top: -8px;
+}
+
+input[type=range]::-webkit-slider-thumb:hover {
+	background: #505050;
+	border: 2px solid white;
+	cursor: pointer;
+	box-shadow: 0px 0px 12px #212121;
+}
+
+
+input[type=range]:focus::-webkit-slider-runnable-track {
+	background: #ccc;
+}
+
+input[type=range]::-ms-track {
+	width: 100%;
+	height: 20px;
+	/*remove bg colour from the track, we'll use ms-fill-lower and ms-fill-upper instead */
+	background: transparent;
+	/*leave room for the larger thumb to overflow with a transparent border */
+	border-color: transparent;
+	border-width: 16px 0;
+	/*remove default tick marks*/
+	color: transparent;
+}
+input[type=range]::-ms-fill-lower {
+	background: #ddd;
+	border-radius: 10px;
+}
+input[type=range]::-ms-fill-upper {
+	background: #ddd;
+	border-radius: 10px;
+}
+input[type=range]::-ms-thumb {
+	height: 35px;
+	width: 35px;
+	border-radius: 60%;
+	background: white;
+	border: 2px solid #505050;
+}
+input[type=range]::-ms-thumb:hover {
+	background: #505050;
+	border: 2px solid white;
+	cursor: pointer;
+	box-shadow: 0px 0px 12px #212121;
+}
+input[type=range]:focus::-ms-fill-lower {
+	background: #ccc;
+}
+input[type=range]:focus::-ms-fill-upper {
+	background: #ccc;
 }
