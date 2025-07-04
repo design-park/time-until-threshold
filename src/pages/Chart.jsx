@@ -357,7 +357,7 @@ function Chart({
   }
 
   return (
-    <div>
+    <div className="chartBody">
       <h1>
         Global surface temperature change relative to 1850-1900
       </h1>

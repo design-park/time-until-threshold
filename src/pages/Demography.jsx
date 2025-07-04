@@ -10,7 +10,7 @@ function Demography() {
   const [religion, setReligion] = useState('');
 
   return (
-    <>
+    <div className="dropDownBody">
       <div className="main-container">
         <div className="card">
           <h4 className="instruction-text">
@@ -170,7 +170,7 @@ function Demography() {
         </form>
       </div>
     </div>
-    </>
+    </div>
   );
 }
 

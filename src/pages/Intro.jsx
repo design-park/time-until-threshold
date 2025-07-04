@@ -21,7 +21,7 @@ function Intro() {
   },[]);
 
   return (
-    <>
+    <div className="dropDownBody">
       <div className="main-container">
         <div className="card">
           <h4 className="instruction-text">
@@ -160,7 +160,7 @@ function Intro() {
           </button>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
