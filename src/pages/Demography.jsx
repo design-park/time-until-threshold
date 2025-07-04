@@ -9,8 +9,6 @@ function Demography() {
   const [income, setIncome] = useState('');
   const [religion, setReligion] = useState('');
 
-
-
   return (
     <>
       <div className="main-container">
