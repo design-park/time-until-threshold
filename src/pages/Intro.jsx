@@ -1,24 +1,28 @@
 import { useState, useEffect } from "react";
 import { Navigate } from "react-router-dom";
+import { useStore } from "../store";
 
 function Intro() {
   let [consentChecked, setConsentChecked] = useState(false);
   let [buttonClicked, setButtonClicked] = useState(false);
-  let [participantCode, setParticipantCode] = useState('');
- 
+  let [participantCode, setParticipantCode] = useState("");
+  const setUserID = useStore((state) => state.setUserID);
+
   if (buttonClicked) {
     return <Navigate to="/demography" />;
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     //TODO: Prevent generating code that already exists
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-      let result = '';
-      for (let i = 0; i < 8; i++) { 
-        result += characters.charAt(Math.floor(Math.random() * characters.length));
-      }
-      setParticipantCode(result);
-  },[]);
+    const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    let result = "";
+    for (let i = 0; i < 10; i++) {
+      result += characters.charAt(
+        Math.floor(Math.random() * characters.length)
+      );
+    }
+    setParticipantCode(result);
+  }, []);
 
   return (
     <div className="dropDownBody">
@@ -154,7 +158,10 @@ function Intro() {
           <button
             className="userActionButton"
             disabled={!consentChecked}
-            onClick={() => setButtonClicked(true)}
+            onClick={() => {
+              setUserID(participantCode);
+              setButtonClicked(true);
+            }}
           >
             Continue
           </button>
