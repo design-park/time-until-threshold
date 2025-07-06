@@ -9,7 +9,7 @@ function Intro() {
   const setUserID = useStore((state) => state.setUserID);
 
   if (buttonClicked) {
-    return <Navigate to="/demography" />;
+    return <Navigate to="/demography"/>;
   }
 
   useEffect(() => {

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
 function Demography() {
-  // State to store the selected values for each demographic question
   const [gender, setGender] = useState('');
   const [age, setAge] = useState('');
   const [education, setEducation] = useState('');
