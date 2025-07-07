@@ -27,7 +27,7 @@ function SubmitPage() {
       alert(
         "Thank you for your participation! Your responses have been recorded."
       );
-      //reset(); // Reset the store after successful submission
+      reset(); // Reset the store after successful submission
     } catch (error) {
       console.error("Error submitting data:", error);
     }
