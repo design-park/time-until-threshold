@@ -13,12 +13,16 @@ export const useSimpleAnimatedValue = (
   const [playing, setPlaying] = useState(false);
   const reset = useRef(true);
 
-  useEffect(() => {
+  const doReset = () => {
     setValue(initial);
     previousFrameTime.current = null;
     elapsedTime.current = 0;
     setPlaying(false);
     reset.current = true;
+  };
+
+  useEffect(() => {
+    doReset();
   }, [initial, final]);
 
   useEffect(() => {
@@ -65,6 +69,7 @@ export const useSimpleAnimatedValue = (
     value,
     play: () => setPlaying(true),
     pause: () => setPlaying(false),
+    reset: doReset,
     isPlaying: playing,
   };
 };

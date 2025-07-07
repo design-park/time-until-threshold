@@ -1,27 +1,32 @@
-import { useState, useEffect } from "react";
-import { Navigate } from "react-router-dom";
+import { useState, useEffect, useMemo } from "react";
 import { useStore } from "../store";
+import { generateRandomCode } from "../utils";
 
 function Intro() {
   let [consentChecked, setConsentChecked] = useState(false);
-  let [buttonClicked, setButtonClicked] = useState(false);
-  let [participantCode, setParticipantCode] = useState("");
-  const setUserID = useStore((state) => state.setUserID);
-
-  if (buttonClicked) {
-    return <Navigate to="/demography"/>;
-  }
+  let participantCode = useMemo(generateRandomCode, []);
+  let [condition, setCondition] = useState("");
+  const storeParticipantInfo = useStore((state) => state.storeParticipantInfo);
 
   useEffect(() => {
-    //TODO: Prevent generating code that already exists
-    const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-    let result = "";
-    for (let i = 0; i < 10; i++) {
-      result += characters.charAt(
-        Math.floor(Math.random() * characters.length)
+    const fetchCondition = async () => {
+      const response = await fetch(
+        "https://chardet.org/time-until-threshold/getFewestCondition.php"
       );
-    }
-    setParticipantCode(result);
+      const data = await response.json();
+      if (
+        data.condition &&
+        (data.condition === "control" || data.condition === "treatment")
+      ) {
+        setCondition(data.condition);
+      } else {
+        console.error("Failed to fetch condition");
+        alert(
+          "Failed to fetch condition. Please try again later or contact the researcher."
+        );
+      }
+    };
+    fetchCondition();
   }, []);
 
   return (
@@ -157,10 +162,9 @@ function Intro() {
 
           <button
             className="userActionButton"
-            disabled={!consentChecked}
+            disabled={!consentChecked || condition === ""}
             onClick={() => {
-              setUserID(participantCode);
-              setButtonClicked(true);
+              storeParticipantInfo(participantCode, condition);
             }}
           >
             Continue

@@ -1,51 +1,92 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
+import { useStore } from "../store";
 
-function Willingness() {
+// step is "pre" or "post"
+function Willingness({ step }) {
   // State to store the selected values for each question
   const [societalWillingness, setSocietalWillingness] = useState({
-    societal1: "",
-    societal2: "",
-    societal3: "",
-    societal4: "",
-    societal5: "",
-    societal6: "",
-    societal7: "",
+    societal1: null,
+    societal2: null,
+    societal3: null,
+    societal4: null,
+    societal5: null,
+    societal6: null,
+    societal7: null,
   });
 
   const [personalWillingness, setPersonalWillingness] = useState({
-    personal1: "",
-    personal2: "",
-    personal3: "",
-    personal4: "",
-    personal5: "",
-    personal6: "",
+    personal1: null,
+    personal2: null,
+    personal3: null,
+    personal4: null,
+    personal5: null,
+    personal6: null,
   });
 
   const [advocacyIndex, setAdvocacyIndex] = useState({
-    advocacy1: "",
-    advocacy2: "",
-    advocacy3: "",
-    advocacy4: "",
+    advocacy1: null,
+    advocacy2: null,
+    advocacy3: null,
+    advocacy4: null,
   });
+
+  const storeWillingnessInfo = useStore((state) => state.storeWillingnessInfo);
+
+  const handleSubmit = useCallback(
+    (e) => {
+      console.log("Submitting willingness data", {
+        step,
+        societalWillingness,
+        personalWillingness,
+        advocacyIndex,
+      });
+      storeWillingnessInfo(
+        step,
+        societalWillingness.societal1,
+        societalWillingness.societal2,
+        societalWillingness.societal3,
+        societalWillingness.societal4,
+        societalWillingness.societal5,
+        societalWillingness.societal6,
+        societalWillingness.societal7,
+        personalWillingness.personal1,
+        personalWillingness.personal2,
+        personalWillingness.personal3,
+        personalWillingness.personal4,
+        personalWillingness.personal5,
+        personalWillingness.personal6,
+        advocacyIndex.advocacy1,
+        advocacyIndex.advocacy2,
+        advocacyIndex.advocacy3,
+        advocacyIndex.advocacy4
+      );
+    },
+    [
+      societalWillingness,
+      personalWillingness,
+      advocacyIndex,
+      storeWillingnessInfo,
+    ]
+  );
 
   // Handler for changing radio button values
   const handleChange = (e, section) => {
     const { name, value } = e.target;
     if (section === "societal") {
-      setSocietalWillingness((prev) => ({ ...prev, [name]: value }));
+      setSocietalWillingness((prev) => ({ ...prev, [name]: parseInt(value) }));
     } else if (section === "personal") {
-      setPersonalWillingness((prev) => ({ ...prev, [name]: value }));
+      setPersonalWillingness((prev) => ({ ...prev, [name]: parseInt(value) }));
     } else if (section === "advocacy") {
-      setAdvocacyIndex((prev) => ({ ...prev, [name]: value }));
+      setAdvocacyIndex((prev) => ({ ...prev, [name]: parseInt(value) }));
     }
   };
 
   // Common options for the Likert scale for Willingness (4-point)
   const likertOptions = [
-    { value: "1", label: "Not at all willing" },
-    { value: "2", label: "Slightly willing" },
-    { value: "3", label: "Moderately willing" },
-    { value: "4", label: "Very willing" },
+    { value: 1, label: "Not at all willing" },
+    { value: 2, label: "Slightly willing" },
+    { value: 3, label: "Moderately willing" },
+    { value: 4, label: "Very willing" },
   ];
 
   // Questions for Societal Willingness
@@ -277,6 +318,17 @@ function Willingness() {
             </table>
           </form>
         </section>
+        <button
+          className="userActionButton"
+          onClick={handleSubmit}
+          disabled={
+            !Object.values(societalWillingness).every((val) => val) ||
+            !Object.values(personalWillingness).every((val) => val) ||
+            !Object.values(advocacyIndex).every((val) => val)
+          }
+        >
+          Submit
+        </button>
       </div>
     </div>
   );

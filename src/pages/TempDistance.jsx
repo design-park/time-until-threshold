@@ -1,27 +1,41 @@
 import React, { useState } from "react";
+import { useStore } from "../store";
 
-function TempDistance() {
+function TempDistance({ step }) {
   // State to store the selected values for each question
   const [temporalResponses, setTemporalResponses] = useState({
-    question1: "",
-    question2: "",
+    question1: null,
+    question2: null,
   });
+  console.log(temporalResponses);
+
+  const storeTempDistanceInfo = useStore(
+    (state) => state.storeTempDistanceInfo
+  );
 
   // Handler for changing radio button values
   const handleChange = (e) => {
     const { name, value } = e.target; // Use 'name' for radio buttons to identify the question
-    setTemporalResponses((prev) => ({ ...prev, [name]: value }));
+    setTemporalResponses((prev) => ({ ...prev, [name]: parseInt(value) }));
+  };
+
+  const handleSubmit = (e) => {
+    storeTempDistanceInfo(
+      step,
+      temporalResponses.question1,
+      temporalResponses.question2
+    );
   };
 
   // Common options for the seven-point Likert scale
   const likertOptions = [
-    { value: "1", label: "Strongly disagree" },
-    { value: "2", label: "Disagree" },
-    { value: "3", label: "Slightly disagree" },
-    { value: "4", label: "Neither agree nor disagree" },
-    { value: "5", label: "Slightly agree" },
-    { value: "6", label: "Agree" },
-    { value: "7", label: "Strongly agree" },
+    { value: 1, label: "Strongly disagree" },
+    { value: 2, label: "Disagree" },
+    { value: 3, label: "Slightly disagree" },
+    { value: 4, label: "Neither agree nor disagree" },
+    { value: 5, label: "Slightly agree" },
+    { value: 6, label: "Agree" },
+    { value: 7, label: "Strongly agree" },
   ];
 
   // Questions for the survey
@@ -81,6 +95,17 @@ function TempDistance() {
             </table>
           </form>
         </section>
+        <div className="button-container">
+          <button
+            className="userActionButton"
+            onClick={handleSubmit}
+            disabled={
+              !temporalResponses.question1 || !temporalResponses.question2
+            }
+          >
+            Submit
+          </button>
+        </div>
       </div>
     </div>
   );

@@ -1,8 +1,16 @@
 import { useState } from "react";
+import { useStore } from "../store";
 
 function SupportingInfo() {
+  let [confirmChecked, setConfirmChecked] = useState(false);
+  const setSupportingInfoSeen = useStore(
+    (state) => state.setSupportingInfoSeen
+  );
 
-let [confirmChecked, SetConfirmChecked] = useState("false");
+  const handleSubmit = () => {
+    setSupportingInfoSeen(true);
+  };
+
   return (
     <div className="centerBody">
       <div className="main-container">
@@ -39,9 +47,7 @@ let [confirmChecked, SetConfirmChecked] = useState("false");
           <button
             className="userActionButton"
             disabled={!confirmChecked}
-            onClick={() => {
-              setButtonClicked(true);
-            }}
+            onClick={handleSubmit}
           >
             Continue
           </button>

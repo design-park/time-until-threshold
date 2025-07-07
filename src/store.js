@@ -1,74 +1,231 @@
-import {create} from 'zustand';
+import { create } from "zustand";
+import { persist, createJSONStorage } from "zustand/middleware";
 
-export const useStore = create((set, get) => ({
-  userID: '',
-  condition: "control",
+export const useStore = create()(
+  persist(
+    (set, get) => ({
+      userID: "",
+      condition: "",
 
-  // Demographic variables
-  gender: '',
-  age: '',
-  education: '',
-  partyAffiliation: '',
-  income: '',
-  religion: '',
-  
-  //Emotion
-  valence: null,
-  arousal: null, 
+      // Demographic variables
+      gender: "",
+      age: "",
+      education: "",
+      partyAffiliation: "",
+      income: "",
+      religion: "",
 
-  // Temporal Distance
-  tempDistance1: null,
-  tempDistance2: null,
+      //Emotion
+      valence: null,
+      arousal: null,
 
-  //Behavioral Willigness
-  societal1: null,
-  societal2: null,
-  societal3: null,
-  societal4: null,
-  societal5: null,
-  societal6: null,
-  societal7: null,
-  personal1: null,
-  personal2: null,
-  personal3: null,
-  personal4: null,
-  personal5: null,
-  personal6: null,
-  advocacy1: null,
-  advocacy2: null,
-  advocacy3: null,
-  advocacy4: null,
+      // Temporal Distance
+      tempDistance1: null,
+      tempDistance2: null,
 
-  // Post Emotion
-  postValence: null,
-  postArousal: null,
+      //Behavioral Willigness
+      societal1: null,
+      societal2: null,
+      societal3: null,
+      societal4: null,
+      societal5: null,
+      societal6: null,
+      societal7: null,
+      personal1: null,
+      personal2: null,
+      personal3: null,
+      personal4: null,
+      personal5: null,
+      personal6: null,
+      advocacy1: null,
+      advocacy2: null,
+      advocacy3: null,
+      advocacy4: null,
 
-  // Post Temporal Distance
-  PostTempDistance1: null,
-  PostTempDistance2: null,
+      // Supporting info seen
+      supportingInfoSeen: false,
 
-  // Post Behavioral Willigness
-  PostSocietal1: null,
-  PostSocietal2: null,
-  PostSocietal3: null,
-  PostSocietal4: null,
-  PostSocietal5: null,
-  PostSocietal6: null,
-  PostSocietal7: null,
-  PostPersonal1: null,
-  PostPersonal2: null,
-  PostPersonal3: null,
-  PostPersonal4: null,
-  PostPersonal5: null,
-  PostPersonal6: null,
-  PostAdvocacy1: null,
-  PostAdvocacy2: null,
-  PostAdvocacy3: null,
-  PostAdvocacy4: null,
+      // Chart seen
+      chartSeen: false,
 
-  increasePopulation: () => set((state) => ({ bears: state.bears + 1 })),
-  removeAllBears: () => set({ bears: 0 }),
-  updateBears: (newBears) => set({ bears: newBears }),
+      // Post Emotion
+      postValence: null,
+      postArousal: null,
 
-  setUserID: (userID) => set({ userID }),
-}))
+      // Post Temporal Distance
+      postTempDistance1: null,
+      postTempDistance2: null,
+
+      // Post Behavioral Willigness
+      postSocietal1: null,
+      postSocietal2: null,
+      postSocietal3: null,
+      postSocietal4: null,
+      postSocietal5: null,
+      postSocietal6: null,
+      postSocietal7: null,
+      postPersonal1: null,
+      postPersonal2: null,
+      postPersonal3: null,
+      postPersonal4: null,
+      postPersonal5: null,
+      postPersonal6: null,
+      postAdvocacy1: null,
+      postAdvocacy2: null,
+      postAdvocacy3: null,
+      postAdvocacy4: null,
+
+      storeParticipantInfo: (userID, condition) => set({ userID, condition }),
+      storeDemographicInfo: (
+        gender,
+        age,
+        education,
+        partyAffiliation,
+        income,
+        religion
+      ) => set({ gender, age, education, partyAffiliation, income, religion }),
+      storeEmotionInfo(step, valence, arousal) {
+        if (step === "pre") {
+          set({ valence, arousal });
+        } else {
+          set({ postValence: valence, postArousal: arousal });
+        }
+      },
+      storeTempDistanceInfo: (step, tempDistance1, tempDistance2) =>
+        step === "pre"
+          ? set({ tempDistance1, tempDistance2 })
+          : set({
+              postTempDistance1: tempDistance1,
+              postTempDistance2: tempDistance2,
+            }),
+      storeWillingnessInfo: (
+        step,
+        societal1,
+        societal2,
+        societal3,
+        societal4,
+        societal5,
+        societal6,
+        societal7,
+        personal1,
+        personal2,
+        personal3,
+        personal4,
+        personal5,
+        personal6,
+        advocacy1,
+        advocacy2,
+        advocacy3,
+        advocacy4
+      ) => {
+        console.log("HEY");
+        if (step === "pre") {
+          console.log("Storing pre willingness info");
+
+          return set({
+            societal1,
+            societal2,
+            societal3,
+            societal4,
+            societal5,
+            societal6,
+            societal7,
+            personal1,
+            personal2,
+            personal3,
+            personal4,
+            personal5,
+            personal6,
+            advocacy1,
+            advocacy2,
+            advocacy3,
+            advocacy4,
+          });
+        } else {
+          return set({
+            postSocietal1: societal1,
+            postSocietal2: societal2,
+            postSocietal3: societal3,
+            postSocietal4: societal4,
+            postSocietal5: societal5,
+            postSocietal6: societal6,
+            postSocietal7: societal7,
+            postPersonal1: personal1,
+            postPersonal2: personal2,
+            postPersonal3: personal3,
+            postPersonal4: personal4,
+            postPersonal5: personal5,
+            postPersonal6: personal6,
+            postAdvocacy1: advocacy1,
+            postAdvocacy2: advocacy2,
+            postAdvocacy3: advocacy3,
+            postAdvocacy4: advocacy4,
+          });
+        }
+      },
+
+      setSupportingInfoSeen: (seen) => set({ supportingInfoSeen: seen }),
+      setChartSeen: (seen) => set({ chartSeen: seen }),
+
+      reset: () =>
+        set({
+          userID: "",
+          condition: "",
+          gender: "",
+          age: "",
+          education: "",
+          partyAffiliation: "",
+          income: "",
+          religion: "",
+          valence: null,
+          arousal: null,
+          tempDistance1: null,
+          tempDistance2: null,
+          societal1: null,
+          societal2: null,
+          societal3: null,
+          societal4: null,
+          societal5: null,
+          societal6: null,
+          societal7: null,
+          personal1: null,
+          personal2: null,
+          personal3: null,
+          personal4: null,
+          personal5: null,
+          personal6: null,
+          advocacy1: null,
+          advocacy2: null,
+          advocacy3: null,
+          advocacy4: null,
+          supportingInfoSeen: false,
+          chartSeen: false,
+          postValence: null,
+          postArousal: null,
+          postTempDistance1: null,
+          postTempDistance2: null,
+          postSocietal1: null,
+          postSocietal2: null,
+          postSocietal3: null,
+          postSocietal4: null,
+          postSocietal5: null,
+          postSocietal6: null,
+          postSocietal7: null,
+          postPersonal1: null,
+          postPersonal2: null,
+          postPersonal3: null,
+          postPersonal4: null,
+          postPersonal5: null,
+          postPersonal6: null,
+          postAdvocacy1: null,
+          postAdvocacy2: null,
+          postAdvocacy3: null,
+          postAdvocacy4: null,
+        }),
+    }),
+    {
+      name: "time-until-threshold-storage", // unique name
+      storage: createJSONStorage(() => localStorage), // use localStorage as the storage
+    }
+  )
+);
