@@ -10,7 +10,7 @@ import {
   ReferenceDot,
   Tooltip,
 } from "recharts";
-import { rawCsvData } from "../data"; 
+import { rawCsvData } from "../data";
 import { useBlinker } from "../blinker";
 
 // Function to parse CSV data from a string
@@ -41,36 +41,76 @@ function parseCsvString(csvString) {
 // Custom SVG Shapes for ReferenceDots
 const CircleIcon = (props) => {
   const { cx, cy, fill } = props;
+  const SCALE = 0.35;
+  const width = 34.19 * SCALE;
+  const height = 83.09 * SCALE;
+
   return (
-    <circle cx={cx} cy={cy} r={4} fill={fill} stroke="#fff" strokeWidth={1} />
+    <svg
+      x={cx - width / 2} // Adjust x position to center the shape
+      y={cy - height} // Adjust y position to center the shape
+      width={width} // Width of the original shape
+      height={height} // Height of the original shape
+      viewBox="0 0 34.19 83.09" // Original viewBox dimensions
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M27.02,52.08V9.93c0-5.47-4.45-9.93-9.93-9.93S7.17,4.45,7.17,9.93v42.16c-4.46,3.19-7.17,8.39-7.17,13.91,0,9.43,7.67,17.09,17.09,17.09s17.09-7.67,17.09-17.09c0-5.53-2.71-10.73-7.17-13.91h0ZM17.1,80.39c-7.95,0-14.39-6.44-14.39-14.39,0-5.32,2.88-9.95,7.17-12.44v-4.39h2.78v-1.92h-2.78v-7.27h2.78v-1.92h-2.78v-7.27h2.78v-1.92h-2.78v-7.27h2.78v-1.92h-2.78v-7.27h2.78v-1.92h-2.78v-.56c0-3.99,3.23-7.22,7.22-7.22s7.22,3.23,7.22,7.22v43.62c4.29,2.49,7.17,7.13,7.17,12.44,0,7.95-6.44,14.39-14.39,14.39h0ZM26.05,66c0,5.03-4.15,9.09-9.21,8.95-4.67-.13-8.56-4.02-8.69-8.69-.11-4.04,2.46-7.5,6.07-8.72v-11.96c0-1.25.75-2.36,1.95-2.73,1.98-.62,3.81.84,3.81,2.74v11.96c3.53,1.2,6.07,4.54,6.07,8.47Z"
+        fill={fill}
+        stroke="#fff"
+        strokeWidth={1}
+      />
+    </svg>
   );
 };
 
 const TriangleIcon = (props) => {
   const { cx, cy, fill } = props;
-  // Equilateral triangle path
+  const SCALE = 0.35;
+  const width = 34.19 * SCALE;
+  const height = 83.09 * SCALE;
+
   return (
-    <path
-      d={`M ${cx},${cy - 4} L ${cx - 4},${cy + 4} L ${cx + 4},${cy + 4} Z`}
-      fill={fill}
-      stroke="#fff"
-      strokeWidth={1}
-    />
+    <svg
+      x={cx - width / 2} // Adjust x position to center the shape
+      y={cy - height} // Adjust y position to center the shape
+      width={width} // Width of the original shape
+      height={height} // Height of the original shape
+      viewBox="0 0 34.19 83.09" // Original viewBox dimensions
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M27.02,52.08V9.93c0-5.47-4.45-9.93-9.93-9.93S7.17,4.45,7.17,9.93v42.16c-4.46,3.19-7.17,8.39-7.17,13.91,0,9.43,7.67,17.09,17.09,17.09s17.09-7.67,17.09-17.09c0-5.53-2.71-10.73-7.17-13.91h0ZM17.1,80.39c-7.95,0-14.39-6.44-14.39-14.39,0-5.32,2.88-9.95,7.17-12.44v-4.39h2.78v-1.92h-2.78v-7.27h2.78v-1.92h-2.78v-7.27h2.78v-1.92h-2.78v-7.27h2.78v-1.92h-2.78v-7.27h2.78v-1.92h-2.78v-.56c0-3.99,3.23-7.22,7.22-7.22s7.22,3.23,7.22,7.22v43.62c4.29,2.49,7.17,7.13,7.17,12.44,0,7.95-6.44,14.39-14.39,14.39h0ZM26.05,66c0,4.94-4.01,8.95-8.95,8.95s-8.95-4.01-8.95-8.95c0-3.93,2.54-7.27,6.07-8.47v-28.53c0-1.59,1.29-2.88,2.88-2.88s2.88,1.29,2.88,2.88v28.53c3.53,1.2,6.07,4.54,6.07,8.47Z"
+        fill={fill}
+        stroke="#fff"
+        strokeWidth={1}
+      />
+    </svg>
   );
 };
 
 const DiamondIcon = (props) => {
   const { cx, cy, fill } = props;
-  // Diamond shape path
+  const SCALE = 0.35;
+  const width = 34.19 * SCALE;
+  const height = 83.09 * SCALE;
+
   return (
-    <path
-      d={`M ${cx},${cy - 4} L ${cx + 4},${cy} L ${cx},${cy + 4} L ${
-        cx - 4
-      },${cy} Z`}
-      fill={fill}
-      stroke="#fff"
-      strokeWidth={1}
-    />
+    <svg
+      x={cx - width / 2} // Adjust x position to center the shape
+      y={cy - height} // Adjust y position to center the shape
+      width={width} // Width of the original shape
+      height={height} // Height of the original shape
+      viewBox="0 0 34.19 83.09" // Original viewBox dimensions
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M27.02,52.08V9.93c0-5.47-4.45-9.93-9.93-9.93S7.17,4.45,7.17,9.93v42.16c-4.46,3.19-7.17,8.39-7.17,13.91,0,9.43,7.67,17.09,17.09,17.09s17.09-7.67,17.09-17.09c0-5.53-2.71-10.73-7.17-13.91h0ZM17.1,80.39c-7.95,0-14.39-6.44-14.39-14.39,0-5.32,2.88-9.95,7.17-12.44v-4.39h2.78v-1.92h-2.78v-7.27h2.78v-1.92h-2.78v-7.27h2.78v-1.92h-2.78v-7.27h2.78v-1.92h-2.78v-7.27h2.78v-1.92h-2.78v-.56c0-3.99,3.23-7.22,7.22-7.22s7.22,3.23,7.22,7.22v43.62c4.29,2.49,7.17,7.13,7.17,12.44,0,7.95-6.44,14.39-14.39,14.39h0ZM26.05,66c0,4.94-4.01,8.95-8.95,8.95s-8.95-4.01-8.95-8.95c0-3.93,2.54-7.27,6.07-8.47V9.16c0-1.59,1.29-2.88,2.88-2.88s2.88,1.29,2.88,2.88v48.37c3.53,1.2,6.07,4.54,6.07,8.47Z"
+        fill={fill}
+        stroke="#fff"
+        strokeWidth={1}
+      />
+    </svg>
   );
 };
 
@@ -339,9 +379,7 @@ function Chart({
   if (error) {
     return (
       <div>
-        <div>
-          Error: {error}
-        </div>
+        <div>Error: {error}</div>
       </div>
     );
   }
@@ -349,18 +387,14 @@ function Chart({
   if (chartDataFilteredXY.length === 0) {
     return (
       <div>
-        <div>
-          No data available to display chart.
-        </div>
+        <div>No data available to display chart.</div>
       </div>
     );
   }
 
   return (
     <div className="chartBody">
-      <h1>
-        Global surface temperature change relative to 1850-1900
-      </h1>
+      <h1>Global surface temperature change relative to 1850-1900</h1>
       <div>
         <ResponsiveContainer width="100%" height={400}>
           <LineChart
