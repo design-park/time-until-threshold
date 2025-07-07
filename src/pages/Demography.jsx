@@ -9,7 +9,7 @@ function Demography() {
   const [religion, setReligion] = useState('');
 
   return (
-    <div className="dropDownBody">
+    <div className="centerBody">
       <div className="main-container">
         <div className="card">
           <h4 className="instruction-text">

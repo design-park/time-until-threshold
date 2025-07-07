@@ -25,7 +25,7 @@ function Intro() {
   }, []);
 
   return (
-    <div className="dropDownBody">
+    <div className="centerBody">
       <div className="main-container">
         <div className="card">
           <h4 className="instruction-text">
@@ -145,7 +145,7 @@ function Intro() {
           </p>
 
           <label className="checkBox">
-            I have signed the consent form:{" "}
+            I have signed the consent form:
             <input
               type="checkbox"
               name="consentCheckbox"
