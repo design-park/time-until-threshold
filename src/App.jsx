@@ -9,12 +9,14 @@ import { useStore } from "./store.js";
 import ChartPage from "./pages/ChartPage.jsx";
 import SubmitPage from "./pages/SubmitPage.jsx";
 import Test from "./Test.js";
+import Chart2 from "./components/Chart2.jsx"
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<Form />} />
       <Route path="/test" element={<Test />} />
+      <Route path="/sea-chart" element={<Chart2 />} />
     </Routes>
   );
 }

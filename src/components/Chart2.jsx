@@ -10,7 +10,7 @@ import {
   ReferenceDot,
   Tooltip,
 } from "recharts";
-import { rawCsvData } from "../temperatureData";
+import { rawCsvData2 } from "../seaLevelData";
 import { useBlinker } from "../blinker";
 
 // Function to parse CSV data from a string
@@ -21,9 +21,9 @@ function parseCsvString(csvString) {
     const values = line.split(",").map((value) => value.trim());
     const row = {};
     headers.forEach((header, index) => {
-      // Map 'Temperature' to 'Mean' and 'Scenario' to 'scenario'
+      // Map 'SeaLevel' to 'Mean' and 'Scenario' to 'scenario'
       const mappedHeader =
-        header === "Temperature"
+        header === "SeaLevel"
           ? "Mean"
           : header === "Scenario"
           ? "scenario"
@@ -114,31 +114,6 @@ const ThirdThermoIcon = (props) => {
   );
 };
 
-const ThunderIcon = (props) => {
-  const { cx, cy, fill } = props;
-  const SCALE = 0.5;
-  const width = 34.19 * SCALE;
-  const height = 83.09 * SCALE;
-
-  return (
-    <svg
-      x={cx - width / 2} // Adjust x position to center the shape
-      y={cy - height} // Adjust y position to center the shape
-      width={width} // Width of the original shape
-      height={height} // Height of the original shape
-      viewBox="0 0 24 24" // Original viewBox dimensions
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M11.5 13.8H10.1299C8.72143 13.8 8.01721 13.8 7.72228 13.3385C7.42735 12.8769 7.72321 12.2379 8.31493 10.9597L11.0463 5.06006C11.4205 4.25182 11.6075 3.8477 11.8038 3.89091C12 3.93413 12 4.37946 12 5.27013V9.7C12 9.9357 12 10.0536 12.0732 10.1268C12.1464 10.2 12.2643 10.2 12.5 10.2H13.8701C15.2786 10.2 15.9828 10.2 16.2777 10.6615C16.5726 11.1231 16.2768 11.7621 15.6851 13.0402L12.9537 18.9399C12.5795 19.7482 12.3925 20.1523 12.1962 20.1091C12 20.0659 12 19.6205 12 18.7299V14.3C12 14.0643 12 13.9464 11.9268 13.8732C11.8536 13.8 11.7357 13.8 11.5 13.8Z"
-        fill={fill}
-        stroke="#fff"
-        strokeWidth={1}
-      />
-    </svg>
-  );
-};
-
 const FirstIcon = (props) => {
   const { cx, cy, fill } = props;
   const SCALE = 0.35;
@@ -215,8 +190,8 @@ const ThirdIcon = (props) => {
 };
 
 // Main React component for the application
-function Chart({
-  maxTemperature = 5,
+function Chart2({
+  maxSeaLevel = 1,
   maxYear = 2100,
   blinkingScenarioForMaxTemp = null,
 }) {
@@ -246,14 +221,14 @@ function Chart({
 
   // Define temperature thresholds and their corresponding icon types
   const thresholds = [
-    { value: 1.5, label: "1.5°C", iconX: FirstThermoIcon, iconY: ThunderIcon },
-    { value: 2.0, label: "2.0°C", iconX: SecondThermoIcon, iconY: ThunderIcon },
-    { value: 4.0, label: "4.0°C", iconX: ThirdThermoIcon, iconY: ThunderIcon },
+    { value: 0.3, label: "0.3 meters", iconX: FirstThermoIcon, iconY: FirstIcon },
+    { value: 0.5, label: "0.5 meters", iconX: SecondThermoIcon, iconY: SecondIcon },
+    { value: 0.8, label: "0.8 meters", iconX: ThirdThermoIcon, iconY: ThirdIcon },
   ];
 
   useEffect(() => {
     try {
-      const rawData = parseCsvString(rawCsvData);
+      const rawData = parseCsvString(rawCsvData2);
 
       if (rawData.length === 0) {
         setError("No data found or failed to parse CSV.");
@@ -269,14 +244,14 @@ function Chart({
       const groupedData = rawData.reduce((acc, current) => {
         const year = current.Year;
         const scenario = current.scenario;
-        const meanTemp = current.Mean;
+        const meanSeaLevel = current.Mean;
 
         let yearEntry = acc.find((entry) => entry.Year === year);
         if (!yearEntry) {
           yearEntry = { Year: year };
           acc.push(yearEntry);
         }
-        yearEntry[scenario] = meanTemp;
+        yearEntry[scenario] = meanSeaLevel;
         return acc;
       }, []);
 
@@ -301,18 +276,18 @@ function Chart({
         for (const dataPoint of groupedData) {
           if (dataPoint[scenario] !== undefined) {
             // Ensure data exists for this scenario in this year
-            const currentTemp = dataPoint[scenario];
+            const currentSeaLevel = dataPoint[scenario];
             const currentYear = dataPoint.Year;
 
             for (const thresh of thresholds) {
-              if (!hasCrossed[thresh.value] && currentTemp >= thresh.value) {
+              if (!hasCrossed[thresh.value] && currentSeaLevel >= thresh.value) {
                 // Determine when the threshold is crossed using linear interpolation
                 if (previousDataPoint !== null) {
                   // Calculate the crossing year (floating point) using linear interpolation
                   const slope =
-                    (currentTemp - previousDataPoint[scenario]) /
+                    (currentSeaLevel - previousDataPoint[scenario]) /
                     (currentYear - previousDataPoint.Year);
-                  const intercept = currentTemp - slope * currentYear;
+                  const intercept = currentSeaLevel - slope * currentYear;
                   const crossingYear = (thresh.value - intercept) / slope;
                   crossings[scenario][thresh.value] = crossingYear;
                   // Add a point for each scenario at this crossing year
@@ -380,17 +355,17 @@ function Chart({
       for (const scenario of Object.keys(dataPoint)) {
         if (scenario === "Year") continue; // Skip the Year key
         // If the scenario exceeds the max temperature, remove it
-        if (dataPoint[scenario] > maxTemperature && previousDataPoint) {
-          // Create a new point with the maxTemperature value as temperature (year is floating point, linear interpolation)
+        if (dataPoint[scenario] > maxSeaLevel && previousDataPoint) {
+          // Create a new point with the maxSeaLevel value as temperature (year is floating point, linear interpolation)
           const crossingYear =
             previousDataPoint.Year +
-            ((maxTemperature - previousDataPoint[scenario]) /
+            ((maxSeaLevel - previousDataPoint[scenario]) /
               (dataPoint[scenario] - previousDataPoint[scenario])) *
               (dataPoint.Year - previousDataPoint.Year);
 
           const newPoint = {
             Year: crossingYear,
-            [scenario]: maxTemperature,
+            [scenario]: maxSeaLevel,
           };
 
           for (const otherScenario of Object.keys(previousDataPoint)) {
@@ -426,7 +401,7 @@ function Chart({
     });
     chartData.sort((a, b) => a.Year - b.Year);
     return chartData;
-  }, [fullChartData, maxTemperature]);
+  }, [fullChartData, maxSeaLevel]);
 
   const chartDataFilteredXY = useMemo(() => {
     const finalChartData = chartDataFilteredY.map((dataPoint) => ({
@@ -494,7 +469,7 @@ function Chart({
 
   return (
     <div className="chartBody">
-      <h1>Global surface temperature change relative to 1850-1900</h1>
+      <h1>Global mean sea level change relative to 1900</h1>
       <div>
         <ResponsiveContainer width="100%" height={400}>
           <LineChart
@@ -524,7 +499,7 @@ function Chart({
               ticks={[0, 1, 1.5, 2, 3, 4, 5]} // Explicit Y-axis ticks
               tick={{ fill: "#555", fontSize: 12 }}
               label={{
-                value: "Relative temperature (°C)",
+                value: "Relative sea level (m)",
                 angle: -90,
                 position: "insideLeft",
                 fill: "#333",
@@ -608,7 +583,7 @@ function Chart({
                 scenarioIndex // Added scenarioIndex here
               ) =>
                 thresholds.map((thresh) => {
-                  if (thresh.value > maxTemperature) return null; // Skip thresholds above maxTemperature
+                  if (thresh.value > maxSeaLevel) return null; // Skip thresholds above maxSeaLevel
                   const crossingYear =
                     scenarioThresholdCrossings[scenario]?.[thresh.value];
                   if (crossingYear) {
@@ -619,7 +594,7 @@ function Chart({
                       lineColors[scenarioIndex % lineColors.length]; // Get the color of the scenario line
                     if (
                       blinkingScenarioForMaxTemp === scenario &&
-                      thresh.value === maxTemperature &&
+                      thresh.value === maxSeaLevel &&
                       !blinker
                     ) {
                       return null; // Skip rendering if blinking is active for this scenario
@@ -649,7 +624,7 @@ function Chart({
                         <ReferenceDot
                           key={`${scenario}-${thresh.value}-dot-on-line`}
                           x={crossingYear}
-                          y={thresh.value-0.3} // you need to implement this function
+                          y={thresh.value-0.21} // you need to implement this function
                           r={0}
                           fill={iconColor}
                           stroke={iconColor}
@@ -677,4 +652,4 @@ function Chart({
   );
 }
 
-export default Chart;
+export default Chart2;

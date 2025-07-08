@@ -72,7 +72,7 @@ const OPTIONS = {
   7: {
     title: "Stop at first and last crossing of every temperature limit",
     animationBounds: [
-      [2014, 2028],
+      [2024, 2028],
       [2028, 2034.3],
       [2034.3, 2042],
       [2042, 2052.5],
