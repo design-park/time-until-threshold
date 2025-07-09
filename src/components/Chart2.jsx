@@ -496,7 +496,7 @@ function Chart2({
             />
             <YAxis
               stroke="#333"
-              ticks={[0, 1, 1.5, 2, 3, 4, 5]} // Explicit Y-axis ticks
+              ticks={[0, 0.3, 0.5, 0.8, 1.0]} // Explicit Y-axis ticks
               tick={{ fill: "#555", fontSize: 12 }}
               label={{
                 value: "Relative sea level (m)",
@@ -504,7 +504,7 @@ function Chart2({
                 position: "insideLeft",
                 fill: "#333",
               }}
-              domain={[0, 5]}
+              domain={[0, 1]}
             />
             <Legend
               wrapperStyle={{
