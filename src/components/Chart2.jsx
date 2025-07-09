@@ -114,9 +114,9 @@ const ThirdThermoIcon = (props) => {
   );
 };
 
-const FirstIcon = (props) => {
+const ThunderIcon = (props) => {
   const { cx, cy, fill } = props;
-  const SCALE = 0.35;
+  const SCALE = 0.5;
   const width = 34.19 * SCALE;
   const height = 83.09 * SCALE;
 
@@ -130,57 +130,7 @@ const FirstIcon = (props) => {
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
-        d="M7.10711 2.87868C7.66972 2.31607 8.43278 2 9.22843 2H14.7716C15.5672 2 16.3303 2.31607 16.8929 2.87868L21.1213 7.10711C21.6839 7.66972 22 8.43278 22 9.22843V14.7716C22 15.5672 21.6839 16.3303 21.1213 16.8929L16.8929 21.1213C16.3303 21.6839 15.5672 22 14.7716 22H9.22843C8.43278 22 7.66972 21.6839 7.10711 21.1213L2.87868 16.8929C2.31607 16.3303 2 15.5672 2 14.7716V9.22843C2 8.43278 2.31607 7.66972 2.87868 7.10711L7.10711 2.87868ZM13 8C13 7.44772 12.5523 7 12 7C11.4477 7 11 7.44772 11 8V13C11 13.5523 11.4477 14 12 14C12.5523 14 13 13.5523 13 13V8ZM13 15.9888C13 15.4365 12.5523 14.9888 12 14.9888C11.4477 14.9888 11 15.4365 11 15.9888V16C11 16.5523 11.4477 17 12 17C12.5523 17 13 16.5523 13 16V15.9888Z"
-        fill={fill}
-        stroke="#fff"
-        strokeWidth={1}
-      />
-    </svg>
-  );
-};
-
-const SecondIcon = (props) => {
-  const { cx, cy, fill } = props;
-  const SCALE = 0.35;
-  const width = 34.19 * SCALE;
-  const height = 83.09 * SCALE;
-
-  return (
-    <svg
-      x={cx - width / 2} // Adjust x position to center the shape
-      y={cy - height} // Adjust y position to center the shape
-      width={width} // Width of the original shape
-      height={height} // Height of the original shape
-      viewBox="0 0 24 24" // Original viewBox dimensions
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M11 13C11 13.5523 11.4477 14 12 14C12.5523 14 13 13.5523 13 13V8C13 7.44772 12.5523 7 12 7C11.4477 7 11 7.44772 11 8V13ZM13 15.9888C13 15.4365 12.5523 14.9888 12 14.9888C11.4477 14.9888 11 15.4365 11 15.9888V16C11 16.5523 11.4477 17 12 17C12.5523 17 13 16.5523 13 16V15.9888ZM7.25007 2.38782C8.54878 2.0992 10.1243 2 12 2C13.8757 2 15.4512 2.0992 16.7499 2.38782C18.06 2.67897 19.1488 3.176 19.9864 4.01358C20.824 4.85116 21.321 5.94002 21.6122 7.25007C21.9008 8.54878 22 10.1243 22 12C22 13.8757 21.9008 15.4512 21.6122 16.7499C21.321 18.06 20.824 19.1488 19.9864 19.9864C19.1488 20.824 18.06 21.321 16.7499 21.6122C15.4512 21.9008 13.8757 22 12 22C10.1243 22 8.54878 21.9008 7.25007 21.6122C5.94002 21.321 4.85116 20.824 4.01358 19.9864C3.176 19.1488 2.67897 18.06 2.38782 16.7499C2.0992 15.4512 2 13.8757 2 12C2 10.1243 2.0992 8.54878 2.38782 7.25007C2.67897 5.94002 3.176 4.85116 4.01358 4.01358C4.85116 3.176 5.94002 2.67897 7.25007 2.38782Z"
-        fill={fill}
-        stroke="#fff"
-        strokeWidth={1}
-      />
-    </svg>
-  );
-};
-
-const ThirdIcon = (props) => {
-  const { cx, cy, fill } = props;
-  const SCALE = 0.35;
-  const width = 34.19 * SCALE;
-  const height = 83.09 * SCALE;
-
-  return (
-    <svg
-      x={cx - width / 2} // Adjust x position to center the shape
-      y={cy - height} // Adjust y position to center the shape
-      width={width} // Width of the original shape
-      height={height} // Height of the original shape
-      viewBox="0 0 24 24" // Original viewBox dimensions
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M11 13C11 13.5523 11.4477 14 12 14C12.5523 14 13 13.5523 13 13V10C13 9.44772 12.5523 9 12 9C11.4477 9 11 9.44772 11 10V13ZM13 15.9888C13 15.4365 12.5523 14.9888 12 14.9888C11.4477 14.9888 11 15.4365 11 15.9888V16C11 16.5523 11.4477 17 12 17C12.5523 17 13 16.5523 13 16V15.9888ZM9.37735 4.66136C10.5204 2.60393 13.4793 2.60393 14.6223 4.66136L21.2233 16.5431C22.3341 18.5427 20.8882 21 18.6008 21H5.39885C3.11139 21 1.66549 18.5427 2.77637 16.5431L9.37735 4.66136Z"
+        d="M11.5 13.8H10.1299C8.72143 13.8 8.01721 13.8 7.72228 13.3385C7.42735 12.8769 7.72321 12.2379 8.31493 10.9597L11.0463 5.06006C11.4205 4.25182 11.6075 3.8477 11.8038 3.89091C12 3.93413 12 4.37946 12 5.27013V9.7C12 9.9357 12 10.0536 12.0732 10.1268C12.1464 10.2 12.2643 10.2 12.5 10.2H13.8701C15.2786 10.2 15.9828 10.2 16.2777 10.6615C16.5726 11.1231 16.2768 11.7621 15.6851 13.0402L12.9537 18.9399C12.5795 19.7482 12.3925 20.1523 12.1962 20.1091C12 20.0659 12 19.6205 12 18.7299V14.3C12 14.0643 12 13.9464 11.9268 13.8732C11.8536 13.8 11.7357 13.8 11.5 13.8Z"
         fill={fill}
         stroke="#fff"
         strokeWidth={1}
@@ -221,9 +171,9 @@ function Chart2({
 
   // Define temperature thresholds and their corresponding icon types
   const thresholds = [
-    { value: 0.3, label: "0.3 meters", iconX: FirstThermoIcon, iconY: FirstIcon },
-    { value: 0.5, label: "0.5 meters", iconX: SecondThermoIcon, iconY: SecondIcon },
-    { value: 0.8, label: "0.8 meters", iconX: ThirdThermoIcon, iconY: ThirdIcon },
+    { value: 0.3, label: "0.3m", iconX: FirstThermoIcon, iconY: ThunderIcon },
+    { value: 0.5, label: "0.5m", iconX: SecondThermoIcon, iconY: ThunderIcon },
+    { value: 0.8, label: "0.8m", iconX: ThirdThermoIcon, iconY: ThunderIcon },
   ];
 
   useEffect(() => {
@@ -605,7 +555,7 @@ function Chart2({
                         <ReferenceDot
                           key={`${scenario}-${thresh.value}-dot-above-x`}
                           x={crossingYear}
-                          y={0.1}
+                          y={0.01}
                           r={0}
                           fill={iconColor}
                           stroke={iconColor}
@@ -624,7 +574,7 @@ function Chart2({
                         <ReferenceDot
                           key={`${scenario}-${thresh.value}-dot-on-line`}
                           x={crossingYear}
-                          y={thresh.value-0.21} // you need to implement this function
+                          y={thresh.value-0.06} 
                           r={0}
                           fill={iconColor}
                           stroke={iconColor}
