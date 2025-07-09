@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, Fragment } from "react";
 import {
   LineChart,
   Line,
@@ -625,7 +625,7 @@ function Chart({
                       return null; // Skip rendering if blinking is active for this scenario
                     }
                     return (
-                      <>
+                      <Fragment key={thresh.label}>
                         {/* Dot slightly above X-axis */}
                         <ReferenceDot
                           key={`${scenario}-${thresh.value}-dot-above-x`}
@@ -656,7 +656,7 @@ function Chart({
                           isAnimationActive={false}
                           shape={<IconComponentY fill={iconColor} />}
                         />
-                      </>
+                      </Fragment>
                     );
                   }
                   return null;
