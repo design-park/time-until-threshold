@@ -1,4 +1,4 @@
-export const rawCsvData2 = `Year,Temperature,Scenario
+export const rawCsvData2 = `Year,SeaLevel,Scenario
 1950,0.070733008,Historical
 1951,0.070502682,Historical
 1952,0.077601212,Historical
