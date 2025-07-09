@@ -7,9 +7,9 @@ const OPTIONS = {
     title: "Temperature limits go back to first crossing",
     animationBounds: [
       [2014, 2035],
-      [2028, 2100],
-      [2042, 2100],
-      [2085, 2100],
+      [2028, 2099],
+      [2042, 2099],
+      [2085, 2099],
     ],
     maxTemperatures: [1.5, 2, 4, 5],
   },
@@ -17,9 +17,9 @@ const OPTIONS = {
     title: "No temperature limits go back to first crossing",
     animationBounds: [
       [2014, 2035],
-      [2028, 2100],
-      [2042, 2100],
-      [2085, 2100],
+      [2028, 2099],
+      [2042, 2099],
+      [2085, 2099],
     ],
     maxTemperatures: [5, 5, 5, 5],
   },
@@ -27,9 +27,9 @@ const OPTIONS = {
     title: "Temperature limits go back to start",
     animationBounds: [
       [2014, 2035],
-      [2014, 2100],
-      [2014, 2100],
-      [2014, 2100],
+      [2014, 2099],
+      [2014, 2099],
+      [2014, 2099],
     ],
     maxTemperatures: [1.5, 2, 4, 5],
   },
@@ -37,9 +37,9 @@ const OPTIONS = {
     title: "No temperature limits go back to start",
     animationBounds: [
       [2014, 2035],
-      [2014, 2100],
-      [2014, 2100],
-      [2014, 2100],
+      [2014, 2099],
+      [2014, 2099],
+      [2014, 2099],
     ],
     maxTemperatures: [5, 5, 5, 5],
   },
@@ -55,7 +55,7 @@ const OPTIONS = {
       [2042, 2047],
       [2047, 2052.5],
       [2052.5, 2084.5],
-      [2084.5, 2100],
+      [2084.5, 2099],
     ],
     maxTemperatures: [5, 5, 5, 5],
   },
@@ -65,7 +65,7 @@ const OPTIONS = {
       [2014, 2028],
       [2028, 2042],
       [2042, 2084.5],
-      [2084.5, 2100],
+      [2084.5, 2099],
     ],
     maxTemperatures: [5, 5, 5, 5],
   },
@@ -77,7 +77,7 @@ const OPTIONS = {
       [2034.3, 2042],
       [2042, 2052.5],
       [2052.5, 2084.5],
-      [2084.5, 2100],
+      [2084.5, 2099],
     ],
     maxTemperatures: [5, 5, 5, 5],
   },
@@ -113,6 +113,7 @@ function AnimatedChart({ option = 1 }) {
   return (
     <div>
       <h2 className="chartTitle">{OPTIONS[option].title}</h2>
+      <p className="yearLabel">Year: {Math.round(value)}</p>
       <Chart
         maxTemperature={maxTemperature}
         maxYear={value}

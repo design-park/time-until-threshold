@@ -65,6 +65,10 @@ body {
   margin-top: 20px;
 }
 
+.yearLabel {
+  text-align: right;
+}
+
 .titleText {
   font-size: 16px;
   font-weight: bold;
