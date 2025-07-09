@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, Fragment } from "react";
 import {
   LineChart,
   Line,
@@ -39,11 +39,11 @@ function parseCsvString(csvString) {
 }
 
 // Custom SVG Shapes for ReferenceDots
-const FirstThermoIcon = (props) => {
+const FirstSeaIcon = (props) => {
   const { cx, cy, fill } = props;
-  const SCALE = 0.35;
-  const width = 34.19 * SCALE;
-  const height = 83.09 * SCALE;
+  const SCALE = 0.035;
+  const width = 800 * SCALE;
+  const height = 800 * SCALE;
 
   return (
     <svg
@@ -51,24 +51,43 @@ const FirstThermoIcon = (props) => {
       y={cy - height} // Adjust y position to center the shape
       width={width} // Width of the original shape
       height={height} // Height of the original shape
-      viewBox="0 0 34.19 83.09" // Original viewBox dimensions
+      viewBox="0 0 800 800" // Original viewBox dimensions
       xmlns="http://www.w3.org/2000/svg"
+      fill="none"
     >
-      <path
-        d="M27.02,52.08V9.93c0-5.47-4.45-9.93-9.93-9.93S7.17,4.45,7.17,9.93v42.16c-4.46,3.19-7.17,8.39-7.17,13.91,0,9.43,7.67,17.09,17.09,17.09s17.09-7.67,17.09-17.09c0-5.53-2.71-10.73-7.17-13.91h0ZM17.1,80.39c-7.95,0-14.39-6.44-14.39-14.39,0-5.32,2.88-9.95,7.17-12.44v-4.39h2.78v-1.92h-2.78v-7.27h2.78v-1.92h-2.78v-7.27h2.78v-1.92h-2.78v-7.27h2.78v-1.92h-2.78v-7.27h2.78v-1.92h-2.78v-.56c0-3.99,3.23-7.22,7.22-7.22s7.22,3.23,7.22,7.22v43.62c4.29,2.49,7.17,7.13,7.17,12.44,0,7.95-6.44,14.39-14.39,14.39h0ZM26.05,66c0,5.03-4.15,9.09-9.21,8.95-4.67-.13-8.56-4.02-8.69-8.69-.11-4.04,2.46-7.5,6.07-8.72v-11.96c0-1.25.75-2.36,1.95-2.73,1.98-.62,3.81.84,3.81,2.74v11.96c3.53,1.2,6.07,4.54,6.07,8.47Z"
-        fill={fill}
-        stroke="#fff"
-        strokeWidth={1}
-      />
+      <g clipPath="url(#clip0_53_6)">
+        <path d="M800 0H0V800H800V0Z" fill="white" fillOpacity="0.01" />
+        <path
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M400 733.333C538.072 733.333 650 621.405 650 483.333C650 250 400 66.6665 400 66.6665C400 66.6665 150 250 150 483.333C150 621.405 261.928 733.333 400 733.333Z"
+          stroke="black"
+          strokeWidth="66.6667"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M164.5 569.065C227.5 702.5 321 733.5 415.5 733.5C523 733.5 616.5 653 649 522.5C649 522.5 533.5 587.854 415.5 553.456C275 512.5 164.5 569.065 164.5 569.065Z"
+          fill={fill}
+          stroke="black"
+          strokeWidth="66.6667"
+          strokeLinejoin="round"
+        />
+      </g>
+      <defs>
+        <clipPath id="clip0_53_6">
+          <rect width="800" height="800" fill="white" />
+        </clipPath>
+      </defs>
     </svg>
   );
 };
 
-const SecondThermoIcon = (props) => {
+const SecondSeaIcon = (props) => {
   const { cx, cy, fill } = props;
-  const SCALE = 0.35;
-  const width = 34.19 * SCALE;
-  const height = 83.09 * SCALE;
+  const SCALE = 0.035;
+  const width = 800 * SCALE;
+  const height = 800 * SCALE;
 
   return (
     <svg
@@ -76,24 +95,43 @@ const SecondThermoIcon = (props) => {
       y={cy - height} // Adjust y position to center the shape
       width={width} // Width of the original shape
       height={height} // Height of the original shape
-      viewBox="0 0 34.19 83.09" // Original viewBox dimensions
+      viewBox="0 0 800 800" // Original viewBox dimensions
       xmlns="http://www.w3.org/2000/svg"
+      fill="none"
     >
-      <path
-        d="M27.02,52.08V9.93c0-5.47-4.45-9.93-9.93-9.93S7.17,4.45,7.17,9.93v42.16c-4.46,3.19-7.17,8.39-7.17,13.91,0,9.43,7.67,17.09,17.09,17.09s17.09-7.67,17.09-17.09c0-5.53-2.71-10.73-7.17-13.91h0ZM17.1,80.39c-7.95,0-14.39-6.44-14.39-14.39,0-5.32,2.88-9.95,7.17-12.44v-4.39h2.78v-1.92h-2.78v-7.27h2.78v-1.92h-2.78v-7.27h2.78v-1.92h-2.78v-7.27h2.78v-1.92h-2.78v-7.27h2.78v-1.92h-2.78v-.56c0-3.99,3.23-7.22,7.22-7.22s7.22,3.23,7.22,7.22v43.62c4.29,2.49,7.17,7.13,7.17,12.44,0,7.95-6.44,14.39-14.39,14.39h0ZM26.05,66c0,4.94-4.01,8.95-8.95,8.95s-8.95-4.01-8.95-8.95c0-3.93,2.54-7.27,6.07-8.47v-28.53c0-1.59,1.29-2.88,2.88-2.88s2.88,1.29,2.88,2.88v28.53c3.53,1.2,6.07,4.54,6.07,8.47Z"
-        fill={fill}
-        stroke="#fff"
-        strokeWidth={1}
-      />
+      <g clipPath="url(#clip0_53_10)">
+        <path d="M800 0H0V800H800V0Z" fill="white" fillOpacity="0.01" />
+        <path
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M400 733.333C538.072 733.333 650 621.405 650 483.333C650 250 400 66.6665 400 66.6665C400 66.6665 150 250 150 483.333C150 621.405 261.928 733.333 400 733.333Z"
+          stroke="black"
+          strokeWidth="66.6667"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M156.5 426.5C139.896 497.946 159.69 584.397 208 643.5C255.707 701.866 331.398 733.333 400 733.333C469.935 733.333 545.085 699.534 593 641.5C639.682 584.959 660.272 505.211 643 426.5C643 426.5 500 495.5 400 445.5C300 395.5 156.5 426.5 156.5 426.5Z"
+          fill={fill}
+          stroke="black"
+          strokeWidth="66.6667"
+          strokeLinejoin="round"
+        />
+      </g>
+      <defs>
+        <clipPath id="clip0_53_10">
+          <rect width="800" height="800" fill="white" />
+        </clipPath>
+      </defs>
     </svg>
   );
 };
 
-const ThirdThermoIcon = (props) => {
+const ThirdSeaIcon = (props) => {
   const { cx, cy, fill } = props;
-  const SCALE = 0.35;
-  const width = 34.19 * SCALE;
-  const height = 83.09 * SCALE;
+  const SCALE = 0.035;
+  const width = 800 * SCALE;
+  const height = 800 * SCALE;
 
   return (
     <svg
@@ -101,15 +139,34 @@ const ThirdThermoIcon = (props) => {
       y={cy - height} // Adjust y position to center the shape
       width={width} // Width of the original shape
       height={height} // Height of the original shape
-      viewBox="0 0 34.19 83.09" // Original viewBox dimensions
+      viewBox="0 0 800 800" // Original viewBox dimensions
       xmlns="http://www.w3.org/2000/svg"
+      fill="none"
     >
-      <path
-        d="M27.02,52.08V9.93c0-5.47-4.45-9.93-9.93-9.93S7.17,4.45,7.17,9.93v42.16c-4.46,3.19-7.17,8.39-7.17,13.91,0,9.43,7.67,17.09,17.09,17.09s17.09-7.67,17.09-17.09c0-5.53-2.71-10.73-7.17-13.91h0ZM17.1,80.39c-7.95,0-14.39-6.44-14.39-14.39,0-5.32,2.88-9.95,7.17-12.44v-4.39h2.78v-1.92h-2.78v-7.27h2.78v-1.92h-2.78v-7.27h2.78v-1.92h-2.78v-7.27h2.78v-1.92h-2.78v-7.27h2.78v-1.92h-2.78v-.56c0-3.99,3.23-7.22,7.22-7.22s7.22,3.23,7.22,7.22v43.62c4.29,2.49,7.17,7.13,7.17,12.44,0,7.95-6.44,14.39-14.39,14.39h0ZM26.05,66c0,4.94-4.01,8.95-8.95,8.95s-8.95-4.01-8.95-8.95c0-3.93,2.54-7.27,6.07-8.47V9.16c0-1.59,1.29-2.88,2.88-2.88s2.88,1.29,2.88,2.88v48.37c3.53,1.2,6.07,4.54,6.07,8.47Z"
-        fill={fill}
-        stroke="#fff"
-        strokeWidth={1}
-      />
+      <g clipPath="url(#clip0_53_15)">
+        <path d="M800 0H0V800H800V0Z" fill="white" fillOpacity="0.01" />
+        <path
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M400 733.333C538.072 733.333 650 621.405 650 483.333C650 250 400 66.6665 400 66.6665C400 66.6665 150 250 150 483.333C150 621.405 261.928 733.333 400 733.333Z"
+          stroke="black"
+          strokeWidth="66.6667"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M175.5 350.5C154 398.5 145 460.5 154 515C165.559 585 202.401 644.076 250 684.5C294.164 722.006 366.708 732.5 412 732.5C476.701 732.5 552 691 608 617.5C638.095 578 650 521 650 468C650 415 629.5 360.5 614.5 328C614.5 328 500 368 400 318C300 268 175.5 350.5 175.5 350.5Z"
+          fill={fill}
+          stroke="black"
+          strokeWidth="66.6667"
+          strokeLinejoin="round"
+        />
+      </g>
+      <defs>
+        <clipPath id="clip0_53_15">
+          <rect width="800" height="800" fill="white" />
+        </clipPath>
+      </defs>
     </svg>
   );
 };
@@ -171,9 +228,9 @@ function Chart2({
 
   // Define temperature thresholds and their corresponding icon types
   const thresholds = [
-    { value: 0.3, label: "0.3m", iconX: FirstThermoIcon, iconY: ThunderIcon },
-    { value: 0.5, label: "0.5m", iconX: SecondThermoIcon, iconY: ThunderIcon },
-    { value: 0.8, label: "0.8m", iconX: ThirdThermoIcon, iconY: ThunderIcon },
+    { value: 0.4, label: "0.4m", iconX: FirstSeaIcon, iconY: ThunderIcon },
+    { value: 0.6, label: "0.6m", iconX: SecondSeaIcon, iconY: ThunderIcon },
+    { value: 0.8, label: "0.8m", iconX: ThirdSeaIcon, iconY: ThunderIcon },
   ];
 
   useEffect(() => {
@@ -230,7 +287,10 @@ function Chart2({
             const currentYear = dataPoint.Year;
 
             for (const thresh of thresholds) {
-              if (!hasCrossed[thresh.value] && currentSeaLevel >= thresh.value) {
+              if (
+                !hasCrossed[thresh.value] &&
+                currentSeaLevel >= thresh.value
+              ) {
                 // Determine when the threshold is crossed using linear interpolation
                 if (previousDataPoint !== null) {
                   // Calculate the crossing year (floating point) using linear interpolation
@@ -388,9 +448,48 @@ function Chart2({
     }
     // Remove points past the maxYear
     finalChartData.sort((a, b) => a.Year - b.Year);
-    return finalChartData.map((dataPoint) => {
+
+    const pointsToAdd = [];
+
+    // Add a point for each year using linear interpolation
+    previousDataPoint = null;
+    for (const dataPoint of finalChartData) {
+      if (previousDataPoint && dataPoint.Year <= maxYear) {
+        for (
+          let year = Math.floor(previousDataPoint.Year + 1);
+          year < dataPoint.Year;
+          year++
+        ) {
+          const pointToAdd = { Year: year };
+          // Interpolate values for all scenarios
+          for (const scenario of Object.keys(previousDataPoint)) {
+            if (scenario === "Year") continue; // Skip the Year key
+            if (!dataPoint[scenario]) continue;
+            // If the scenario exists in the previous year and the current year
+            // Calculate value at crossing year using linear interpolation
+            const slope =
+              (dataPoint[scenario] - previousDataPoint[scenario]) /
+              (dataPoint.Year - previousDataPoint.Year);
+            const interpolatedValue =
+              previousDataPoint[scenario] +
+              slope * (year - previousDataPoint.Year);
+            pointToAdd[scenario] = interpolatedValue;
+          }
+          pointsToAdd.push(pointToAdd);
+        }
+      }
+      previousDataPoint = dataPoint;
+    }
+
+    for (const point of pointsToAdd) {
+      finalChartData.push(point);
+    }
+
+    finalChartData.sort((a, b) => a.Year - b.Year);
+    const result = finalChartData.map((dataPoint) => {
       return dataPoint.Year <= maxYear ? dataPoint : { Year: dataPoint.Year };
     });
+    return result; 
   }, [chartDataFilteredY, maxYear]);
 
   if (loading) {
@@ -431,7 +530,7 @@ function Chart2({
               type="number"
               domain={["dataMin", "dataMax"]}
               ticks={[
-                1950, 1960, 1970, 1980, 1990, 2000, 2010, 2020, 2025, 2030,
+                1950, 1960, 1970, 1980, 1990, 2000, 2010, 2020, 2024, 2030,
                 2040, 2050, 2060, 2070, 2080, 2090, 2100,
               ]} // Explicit X-axis ticks
               tickFormatter={(tick) => Math.round(tick)}
@@ -446,7 +545,7 @@ function Chart2({
             />
             <YAxis
               stroke="#333"
-              ticks={[0, 0.3, 0.5, 0.8, 1.0]} // Explicit Y-axis ticks
+              ticks={[0, 0.4, 0.6, 0.8, 1.0]} // Explicit Y-axis ticks
               tick={{ fill: "#555", fontSize: 12 }}
               label={{
                 value: "Relative sea level (m)",
@@ -468,7 +567,7 @@ function Chart2({
               }}
             />
             <Tooltip
-              formatter={(value) => `${Math.round(value * 1000) / 1000} °C`}
+              formatter={(value) => `${Math.round(value * 1000) / 1000} m`}
               labelFormatter={(label) => {
                 if (Math.round(label) === label) {
                   return `Year: ${label}`;
@@ -498,7 +597,7 @@ function Chart2({
             {scenarios.map((scenario, index) => (
               <Line
                 key={scenario}
-                type="monotone"
+                type="linear"
                 dataKey={scenario}
                 stroke={lineColors[index % lineColors.length]}
                 strokeWidth={2}
@@ -550,7 +649,7 @@ function Chart2({
                       return null; // Skip rendering if blinking is active for this scenario
                     }
                     return (
-                      <>
+                      <Fragment key={thresh.label}>
                         {/* Dot slightly above X-axis */}
                         <ReferenceDot
                           key={`${scenario}-${thresh.value}-dot-above-x`}
@@ -574,14 +673,14 @@ function Chart2({
                         <ReferenceDot
                           key={`${scenario}-${thresh.value}-dot-on-line`}
                           x={crossingYear}
-                          y={thresh.value-0.06} 
+                          y={thresh.value - 0.06}
                           r={0}
                           fill={iconColor}
                           stroke={iconColor}
                           isAnimationActive={false}
                           shape={<IconComponentY fill={iconColor} />}
                         />
-                      </>
+                      </Fragment>
                     );
                   }
                   return null;
