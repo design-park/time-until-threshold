@@ -69,51 +69,51 @@ export const rawCsvData2 = `Year,SeaLevel,Scenario
 2017,0.201585716,Historical
 2018,0.203025214,Historical
 2019,0.206922507,Historical
-2023,0.220,Historical
-2024,0.224,SSP1-1.9
-2030,0.248,SSP1-1.9
-2040,0.288,SSP1-1.9
-2050,0.338,SSP1-1.9
-2060,0.368,SSP1-1.9
-2070,0.418,SSP1-1.9
-2080,0.458,SSP1-1.9
-2090,0.508,SSP1-1.9
-2100,0.538,SSP1-1.9
-2024,0.224,SSP1-2.6
-2030,0.248,SSP1-2.6
-2040,0.298,SSP1-2.6
-2050,0.348,SSP1-2.6
-2060,0.388,SSP1-2.6
-2070,0.448,SSP1-2.6
-2080,0.498,SSP1-2.6
-2090,0.548,SSP1-2.6
-2100,0.598,SSP1-2.6
-2024,0.224,SSP2-4.5
-2030,0.248,SSP2-4.5
-2040,0.298,SSP2-4.5
-2050,0.358,SSP2-4.5
-2060,0.418,SSP2-4.5
-2070,0.488,SSP2-4.5
-2080,0.558,SSP2-4.5
-2090,0.638,SSP2-4.5
-2100,0.718,SSP2-4.5
-2024,0.224,SSP3-7.0
-2030,0.248,SSP3-7.0
-2040,0.298,SSP3-7.0
-2050,0.368,SSP3-7.0
-2060,0.438,SSP3-7.0
-2070,0.528,SSP3-7.0
-2080,0.618,SSP3-7.0
-2090,0.718,SSP3-7.0
-2100,0.838,SSP3-7.0
-2024,0.224,SSP5-8.5
-2030,0.258,SSP5-8.5
-2040,0.318,SSP5-8.5
-2050,0.388,SSP5-8.5
-2060,0.468,SSP5-8.5
-2070,0.558,SSP5-8.5
-2080,0.668,SSP5-8.5
-2090,0.788,SSP5-8.5
-2100,0.928,SSP5-8.5
+2024,0.224,Historical
+2025,0.228,SSP1-1.9 (Very low emissions)
+2030,0.248,SSP1-1.9 (Very low emissions)
+2040,0.288,SSP1-1.9 (Very low emissions)
+2050,0.338,SSP1-1.9 (Very low emissions)
+2060,0.368,SSP1-1.9 (Very low emissions)
+2070,0.418,SSP1-1.9 (Very low emissions)
+2080,0.458,SSP1-1.9 (Very low emissions)
+2090,0.508,SSP1-1.9 (Very low emissions)
+2100,0.538,SSP1-1.9 (Very low emissions)
+2025,0.228,SSP1-2.6 (Low emissions)
+2030,0.248,SSP1-2.6 (Low emissions)
+2040,0.298,SSP1-2.6 (Low emissions)
+2050,0.348,SSP1-2.6 (Low emissions)
+2060,0.388,SSP1-2.6 (Low emissions)
+2070,0.448,SSP1-2.6 (Low emissions)
+2080,0.498,SSP1-2.6 (Low emissions)
+2090,0.548,SSP1-2.6 (Low emissions)
+2100,0.598,SSP1-2.6 (Low emissions)
+2025,0.228,SSP2-4.5 (Intermediate emissions)
+2030,0.248,SSP2-4.5 (Intermediate emissions)
+2040,0.298,SSP2-4.5 (Intermediate emissions)
+2050,0.358,SSP2-4.5 (Intermediate emissions)
+2060,0.418,SSP2-4.5 (Intermediate emissions)
+2070,0.488,SSP2-4.5 (Intermediate emissions)
+2080,0.558,SSP2-4.5 (Intermediate emissions)
+2090,0.638,SSP2-4.5 (Intermediate emissions)
+2100,0.718,SSP2-4.5 (Intermediate emissions)
+2025,0.228, SSP3-7.0 (High emissions)
+2030,0.248, SSP3-7.0 (High emissions)
+2040,0.298, SSP3-7.0 (High emissions)
+2050,0.368, SSP3-7.0 (High emissions)
+2060,0.438, SSP3-7.0 (High emissions)
+2070,0.528, SSP3-7.0 (High emissions)
+2080,0.618, SSP3-7.0 (High emissions)
+2090,0.718, SSP3-7.0 (High emissions)
+2100,0.838, SSP3-7.0 (High emissions)
+2025,0.228, SSP5-8.5 (Very high emissions)
+2030,0.258, SSP5-8.5 (Very high emissions)
+2040,0.318, SSP5-8.5 (Very high emissions)
+2050,0.388, SSP5-8.5 (Very high emissions)
+2060,0.468, SSP5-8.5 (Very high emissions)
+2070,0.558, SSP5-8.5 (Very high emissions)
+2080,0.668, SSP5-8.5 (Very high emissions)
+2090,0.788, SSP5-8.5 (Very high emissions)
+2100,0.928, SSP5-8.5 (Very high emissions)
 `;
 

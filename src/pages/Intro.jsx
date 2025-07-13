@@ -39,7 +39,7 @@ function Intro() {
           </h4>
 
           <h4 className="titleText">Title of the project:</h4>
-          <p className="subText">Time Until Threshold</p>
+          <p className="subText">Affective Climate Change Visualization</p>
 
           <h4 className="titleText">Participant Code:</h4>
           <p className="subText">{participantCode}</p>

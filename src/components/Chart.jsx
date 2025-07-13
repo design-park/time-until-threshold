@@ -114,30 +114,13 @@ const ThirdThermoIcon = (props) => {
   );
 };
 
-const ThunderIcon = (props) => {
+const CircleIcon = (props) => {
   const { cx, cy, fill } = props;
-  const SCALE = 0.5;
-  const width = 34.19 * SCALE;
-  const height = 83.09 * SCALE;
-
   return (
-    <svg
-      x={cx - width / 2} // Adjust x position to center the shape
-      y={cy - height} // Adjust y position to center the shape
-      width={width} // Width of the original shape
-      height={height} // Height of the original shape
-      viewBox="0 0 24 24" // Original viewBox dimensions
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M11.5 13.8H10.1299C8.72143 13.8 8.01721 13.8 7.72228 13.3385C7.42735 12.8769 7.72321 12.2379 8.31493 10.9597L11.0463 5.06006C11.4205 4.25182 11.6075 3.8477 11.8038 3.89091C12 3.93413 12 4.37946 12 5.27013V9.7C12 9.9357 12 10.0536 12.0732 10.1268C12.1464 10.2 12.2643 10.2 12.5 10.2H13.8701C15.2786 10.2 15.9828 10.2 16.2777 10.6615C16.5726 11.1231 16.2768 11.7621 15.6851 13.0402L12.9537 18.9399C12.5795 19.7482 12.3925 20.1523 12.1962 20.1091C12 20.0659 12 19.6205 12 18.7299V14.3C12 14.0643 12 13.9464 11.9268 13.8732C11.8536 13.8 11.7357 13.8 11.5 13.8Z"
-        fill={fill}
-        stroke="#fff"
-        strokeWidth={1}
-      />
-    </svg>
+    <circle cx={cx} cy={cy} r={4} fill={fill} stroke="#333" strokeWidth={1} />
   );
 };
+
 
 const FirstIcon = (props) => {
   const { cx, cy, fill } = props;
@@ -232,9 +215,9 @@ function Chart({
 
   // Define an array of colors for the lines (re-ordered slightly for better visual distinction)
   const lineColors = [
-    "#5d83f1", // Blue
+    "#7F8CAA", // Gray
     "#82ca9d", // Green
-    "#ffc658", // Yellow/Orange
+    "#8DD8FF", // Blue
     "#f17e5d", // Coral
     "#8884d8", // Purple
     "#f15d7e", // Pink
@@ -246,9 +229,9 @@ function Chart({
 
   // Define temperature thresholds and their corresponding icon types
   const thresholds = [
-    { value: 1.5, label: "1.5°C", iconX: FirstThermoIcon, iconY: ThunderIcon },
-    { value: 2.0, label: "2.0°C", iconX: SecondThermoIcon, iconY: ThunderIcon },
-    { value: 4.0, label: "4.0°C", iconX: ThirdThermoIcon, iconY: ThunderIcon },
+    { value: 1.5, label: "1.5°C", iconX: FirstThermoIcon, iconY: CircleIcon },
+    { value: 2.0, label: "2.0°C", iconX: SecondThermoIcon, iconY: CircleIcon },
+    { value: 4.0, label: "4.0°C", iconX: ThirdThermoIcon, iconY: CircleIcon },
   ];
 
   useEffect(() => {
@@ -495,6 +478,11 @@ function Chart({
   return (
     <div className="chartBody">
       <h1>Global surface temperature change relative to 1850-1900</h1>
+      <p>
+        This chart illustrates observed (1950–2024) and projected (2025–2099)
+        global surface temperature changes relative to the 1900 baseline. The projections
+        are based on different greenhouse gas emission scenarios.
+      </p>
       <div>
         <ResponsiveContainer width="100%" height={400}>
           <LineChart
@@ -649,7 +637,7 @@ function Chart({
                         <ReferenceDot
                           key={`${scenario}-${thresh.value}-dot-on-line`}
                           x={crossingYear}
-                          y={thresh.value-0.3} // you need to implement this function
+                          y={thresh.value} // you need to implement this function
                           r={0}
                           fill={iconColor}
                           stroke={iconColor}
@@ -665,14 +653,6 @@ function Chart({
           </LineChart>
         </ResponsiveContainer>
       </div>
-      <p className="mt-6 text-gray-600 text-center max-w-2xl text-sm">
-        This chart illustrates global surface temperature changes, relative to
-        the 1850-1900 baseline, as projected by CMIP6 model simulations.
-        Threshold crossings are indicated by specific markers: circles (●) for
-        1.5°C, triangles (▲) for 2.0°C, and diamonds (◆) for 4.0°C. The color of
-        each marker on the x-axis corresponds to the color of the scenario line
-        that reached that particular threshold.
-      </p>
     </div>
   );
 }

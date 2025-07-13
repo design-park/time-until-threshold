@@ -61,7 +61,7 @@ const FirstSeaIcon = (props) => {
           fillRule="evenodd"
           clipRule="evenodd"
           d="M400 733.333C538.072 733.333 650 621.405 650 483.333C650 250 400 66.6665 400 66.6665C400 66.6665 150 250 150 483.333C150 621.405 261.928 733.333 400 733.333Z"
-          stroke="black"
+          stroke="#333"
           strokeWidth="66.6667"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -69,7 +69,7 @@ const FirstSeaIcon = (props) => {
         <path
           d="M164.5 569.065C227.5 702.5 321 733.5 415.5 733.5C523 733.5 616.5 653 649 522.5C649 522.5 533.5 587.854 415.5 553.456C275 512.5 164.5 569.065 164.5 569.065Z"
           fill={fill}
-          stroke="black"
+          stroke="#333"
           strokeWidth="66.6667"
           strokeLinejoin="round"
         />
@@ -105,7 +105,7 @@ const SecondSeaIcon = (props) => {
           fillRule="evenodd"
           clipRule="evenodd"
           d="M400 733.333C538.072 733.333 650 621.405 650 483.333C650 250 400 66.6665 400 66.6665C400 66.6665 150 250 150 483.333C150 621.405 261.928 733.333 400 733.333Z"
-          stroke="black"
+          stroke="#333"
           strokeWidth="66.6667"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -113,7 +113,7 @@ const SecondSeaIcon = (props) => {
         <path
           d="M156.5 426.5C139.896 497.946 159.69 584.397 208 643.5C255.707 701.866 331.398 733.333 400 733.333C469.935 733.333 545.085 699.534 593 641.5C639.682 584.959 660.272 505.211 643 426.5C643 426.5 500 495.5 400 445.5C300 395.5 156.5 426.5 156.5 426.5Z"
           fill={fill}
-          stroke="black"
+          stroke="#333"
           strokeWidth="66.6667"
           strokeLinejoin="round"
         />
@@ -149,7 +149,7 @@ const ThirdSeaIcon = (props) => {
           fillRule="evenodd"
           clipRule="evenodd"
           d="M400 733.333C538.072 733.333 650 621.405 650 483.333C650 250 400 66.6665 400 66.6665C400 66.6665 150 250 150 483.333C150 621.405 261.928 733.333 400 733.333Z"
-          stroke="black"
+          stroke="#333"
           strokeWidth="66.6667"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -157,7 +157,7 @@ const ThirdSeaIcon = (props) => {
         <path
           d="M175.5 350.5C154 398.5 145 460.5 154 515C165.559 585 202.401 644.076 250 684.5C294.164 722.006 366.708 732.5 412 732.5C476.701 732.5 552 691 608 617.5C638.095 578 650 521 650 468C650 415 629.5 360.5 614.5 328C614.5 328 500 368 400 318C300 268 175.5 350.5 175.5 350.5Z"
           fill={fill}
-          stroke="black"
+          stroke="#333"
           strokeWidth="66.6667"
           strokeLinejoin="round"
         />
@@ -171,28 +171,10 @@ const ThirdSeaIcon = (props) => {
   );
 };
 
-const ThunderIcon = (props) => {
+const CircleIcon = (props) => {
   const { cx, cy, fill } = props;
-  const SCALE = 0.5;
-  const width = 34.19 * SCALE;
-  const height = 83.09 * SCALE;
-
   return (
-    <svg
-      x={cx - width / 2} // Adjust x position to center the shape
-      y={cy - height} // Adjust y position to center the shape
-      width={width} // Width of the original shape
-      height={height} // Height of the original shape
-      viewBox="0 0 24 24" // Original viewBox dimensions
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M11.5 13.8H10.1299C8.72143 13.8 8.01721 13.8 7.72228 13.3385C7.42735 12.8769 7.72321 12.2379 8.31493 10.9597L11.0463 5.06006C11.4205 4.25182 11.6075 3.8477 11.8038 3.89091C12 3.93413 12 4.37946 12 5.27013V9.7C12 9.9357 12 10.0536 12.0732 10.1268C12.1464 10.2 12.2643 10.2 12.5 10.2H13.8701C15.2786 10.2 15.9828 10.2 16.2777 10.6615C16.5726 11.1231 16.2768 11.7621 15.6851 13.0402L12.9537 18.9399C12.5795 19.7482 12.3925 20.1523 12.1962 20.1091C12 20.0659 12 19.6205 12 18.7299V14.3C12 14.0643 12 13.9464 11.9268 13.8732C11.8536 13.8 11.7357 13.8 11.5 13.8Z"
-        fill={fill}
-        stroke="#fff"
-        strokeWidth={1}
-      />
-    </svg>
+    <circle cx={cx} cy={cy} r={4} fill={fill} stroke="#333" strokeWidth={1} />
   );
 };
 
@@ -214,9 +196,9 @@ function Chart2({
 
   // Define an array of colors for the lines (re-ordered slightly for better visual distinction)
   const lineColors = [
-    "#5d83f1", // Blue
+    "#7F8CAA", // Gray
     "#82ca9d", // Green
-    "#ffc658", // Yellow/Orange
+    "#8DD8FF", // Blue
     "#f17e5d", // Coral
     "#8884d8", // Purple
     "#f15d7e", // Pink
@@ -228,9 +210,9 @@ function Chart2({
 
   // Define temperature thresholds and their corresponding icon types
   const thresholds = [
-    { value: 0.4, label: "0.4m", iconX: FirstSeaIcon, iconY: ThunderIcon },
-    { value: 0.6, label: "0.6m", iconX: SecondSeaIcon, iconY: ThunderIcon },
-    { value: 0.8, label: "0.8m", iconX: ThirdSeaIcon, iconY: ThunderIcon },
+    { value: 0.4, label: "0.4m", iconX: FirstSeaIcon, iconY: CircleIcon },
+    { value: 0.6, label: "0.6m", iconX: SecondSeaIcon, iconY: CircleIcon },
+    { value: 0.8, label: "0.8m", iconX: ThirdSeaIcon, iconY: CircleIcon },
   ];
 
   useEffect(() => {
@@ -489,7 +471,7 @@ function Chart2({
     const result = finalChartData.map((dataPoint) => {
       return dataPoint.Year <= maxYear ? dataPoint : { Year: dataPoint.Year };
     });
-    return result; 
+    return result;
   }, [chartDataFilteredY, maxYear]);
 
   if (loading) {
@@ -519,6 +501,11 @@ function Chart2({
   return (
     <div className="chartBody">
       <h1>Global mean sea level change relative to 1900</h1>
+      <p>
+        This chart illustrates observed (1950–2024) and projected (2025–2099)
+        global sea level changes relative to the 1900 baseline. The projections
+        are based on different greenhouse gas emission scenarios.
+      </p>
       <div>
         <ResponsiveContainer width="100%" height={400}>
           <LineChart
@@ -530,7 +517,7 @@ function Chart2({
               type="number"
               domain={["dataMin", "dataMax"]}
               ticks={[
-                1950, 1960, 1970, 1980, 1990, 2000, 2010, 2020, 2024, 2030,
+                1950, 1960, 1970, 1980, 1990, 2000, 2010, 2020, 2025, 2030,
                 2040, 2050, 2060, 2070, 2080, 2090, 2100,
               ]} // Explicit X-axis ticks
               tickFormatter={(tick) => Math.round(tick)}
@@ -673,7 +660,7 @@ function Chart2({
                         <ReferenceDot
                           key={`${scenario}-${thresh.value}-dot-on-line`}
                           x={crossingYear}
-                          y={thresh.value - 0.06}
+                          y={thresh.value}
                           r={0}
                           fill={iconColor}
                           stroke={iconColor}
@@ -689,14 +676,7 @@ function Chart2({
           </LineChart>
         </ResponsiveContainer>
       </div>
-      <p className="mt-6 text-gray-600 text-center max-w-2xl text-sm">
-        This chart illustrates global surface temperature changes, relative to
-        the 1850-1900 baseline, as projected by CMIP6 model simulations.
-        Threshold crossings are indicated by specific markers: circles (●) for
-        1.5°C, triangles (▲) for 2.0°C, and diamonds (◆) for 4.0°C. The color of
-        each marker on the x-axis corresponds to the color of the scenario line
-        that reached that particular threshold.
-      </p>
+      <div></div>
     </div>
   );
 }
