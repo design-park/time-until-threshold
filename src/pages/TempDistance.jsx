@@ -51,16 +51,14 @@ function TempDistance({ step }) {
   ];
 
   return (
-    <div className="tempDistanceBody">
-      <div className="survey-container">
-        <h2 className="survey-title">Temporal Distance Survey</h2>
+    <div className="centerBody">
+      <div className="survey-section">
         <p className="survey-description">
           Please indicate the extent to which you agree or disagree with the
           following statements:
         </p>
 
         <section>
-          <h3 className="section-title">Perception of Temporal Distance</h3>
           <form>
             <table className="survey-table">
               <thead>
@@ -95,7 +93,7 @@ function TempDistance({ step }) {
             </table>
           </form>
         </section>
-        <div className="button-container">
+        <div className="buttonContainer">
           <button
             className="userActionButton"
             onClick={handleSubmit}

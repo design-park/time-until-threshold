@@ -653,6 +653,18 @@ function Chart({
           </LineChart>
         </ResponsiveContainer>
       </div>
+      <div className="iconLegend">
+        <FirstThermoIcon cx={14} cy={14} fill="#7F8CAA" />
+        <p className="legendText">0.4m Threshold Reached</p>
+        <SecondThermoIcon cx={14} cy={14} fill="#7F8CAA" />
+        <p className="legendText">0.4m Threshold Reached</p>
+        <ThirdThermoIcon cx={14} cy={14} fill="#7F8CAA" />
+        <p className="legendText">0.4m Threshold Reached</p>
+        <svg width="20" height="20" viewBox="0 0 20 20">
+          <CircleIcon cx={10} cy={10} fill="#7F8CAA" />
+        </svg>
+        <p className="legendText">Scenario Line Crossing</p>
+      </div>
     </div>
   );
 }

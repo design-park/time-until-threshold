@@ -676,7 +676,18 @@ function Chart2({
           </LineChart>
         </ResponsiveContainer>
       </div>
-      <div></div>
+      <div className="iconLegend">
+        <FirstSeaIcon cx={14} cy={14} fill="#7F8CAA" />
+        <p className="legendText">0.4m Threshold Reached</p>
+        <SecondSeaIcon cx={14} cy={14} fill="#7F8CAA" />
+        <p className="legendText">0.4m Threshold Reached</p>
+        <ThirdSeaIcon cx={14} cy={14} fill="#7F8CAA" />
+        <p className="legendText">0.4m Threshold Reached</p>
+        <svg width="20" height="20" viewBox="0 0 20 20">
+          <CircleIcon cx={10} cy={10} fill="#7F8CAA" />
+        </svg>
+        <p className="legendText">Scenario Line Crossing</p>
+      </div>
     </div>
   );
 }

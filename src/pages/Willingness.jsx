@@ -161,163 +161,145 @@ function Willingness({ step }) {
   ];
 
   return (
-    <div className="willingnessBody">
-      <div className="survey-container">
-        <h2 className="survey-title">Behavioural Willingness Survey</h2>
-        <p className="survey-description">
-          Please indicate the extent to which you would be willing to take the
-          following actions.
+    <div className="centerBody">
+      {/* Societal Willingness Section */}
+      <section className="survey-section">
+        <p className="section-description">
+          For the following items, please indicate the extent to which you think
+          that as a society we should be willing to take these actions:
         </p>
-
-        {/* Societal Willingness Section */}
-        <section className="survey-section">
-          <h3 className="section-title">Societal Willingness</h3>
-          <p className="section-description">
-            For the following items, please indicate the extent to which you
-            think that as a society we should be willing to take these actions:
-          </p>
-          <form>
-            <table className="likert-table">
-              <thead>
-                <tr>
-                  <th className="table-header statement-header">Statement</th>
+        <form>
+          <table className="likert-table">
+            <thead>
+              <tr>
+                <th className="table-header statement-header">Statement</th>
+                {likertOptions.map((option) => (
+                  <th key={option.value} className="table-header option-header">
+                    {option.label}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {societalQuestions.map((q) => (
+                <tr key={q.id}>
+                  <td className="table-cell statement-cell">{q.text}</td>
                   {likertOptions.map((option) => (
-                    <th
-                      key={option.value}
-                      className="table-header option-header"
+                    <td
+                      key={`${q.id}-${option.value}`}
+                      className="table-cell radio-cell"
                     >
-                      {option.label}
-                    </th>
+                      <label className="radio-label">
+                        <input
+                          type="radio"
+                          name={q.id}
+                          value={option.value}
+                          checked={societalWillingness[q.id] === option.value}
+                          onChange={(e) => handleChange(e, "societal")}
+                          className="radio-input"
+                        />
+                      </label>
+                    </td>
                   ))}
                 </tr>
-              </thead>
-              <tbody>
-                {societalQuestions.map((q) => (
-                  <tr key={q.id}>
-                    <td className="table-cell statement-cell">{q.text}</td>
-                    {likertOptions.map((option) => (
-                      <td
-                        key={`${q.id}-${option.value}`}
-                        className="table-cell radio-cell"
-                      >
-                        <label className="radio-label">
-                          <input
-                            type="radio"
-                            name={q.id}
-                            value={option.value}
-                            checked={societalWillingness[q.id] === option.value}
-                            onChange={(e) => handleChange(e, "societal")}
-                            className="radio-input"
-                          />
-                        </label>
-                      </td>
-                    ))}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </form>
-        </section>
+              ))}
+            </tbody>
+          </table>
+        </form>
+      </section>
 
-        {/* Personal Willingness Section */}
-        <section className="survey-section">
-          <h3 className="section-title">Personal Willingness</h3>
-          <p className="section-description">
-            For the following items, please indicate the extent to which you
-            would be willing to personally take these actions:
-          </p>
-          <form>
-            <table className="likert-table">
-              <thead>
-                <tr>
-                  <th className="table-header statement-header">Statement</th>
+      {/* Personal Willingness Section */}
+      <section className="survey-section">
+        <p className="section-description">
+          For the following items, please indicate the extent to which you would
+          be willing to personally take these actions:
+        </p>
+        <form>
+          <table className="likert-table">
+            <thead>
+              <tr>
+                <th className="table-header statement-header">Statement</th>
+                {likertOptions.map((option) => (
+                  <th key={option.value} className="table-header option-header">
+                    {option.label}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {personalQuestions.map((q) => (
+                <tr key={q.id}>
+                  <td className="table-cell statement-cell">{q.text}</td>
                   {likertOptions.map((option) => (
-                    <th
-                      key={option.value}
-                      className="table-header option-header"
+                    <td
+                      key={`${q.id}-${option.value}`}
+                      className="table-cell radio-cell"
                     >
-                      {option.label}
-                    </th>
+                      <label className="radio-label">
+                        <input
+                          type="radio"
+                          name={q.id}
+                          value={option.value}
+                          checked={personalWillingness[q.id] === option.value}
+                          onChange={(e) => handleChange(e, "personal")}
+                          className="radio-input"
+                        />
+                      </label>
+                    </td>
                   ))}
                 </tr>
-              </thead>
-              <tbody>
-                {personalQuestions.map((q) => (
-                  <tr key={q.id}>
-                    <td className="table-cell statement-cell">{q.text}</td>
-                    {likertOptions.map((option) => (
-                      <td
-                        key={`${q.id}-${option.value}`}
-                        className="table-cell radio-cell"
-                      >
-                        <label className="radio-label">
-                          <input
-                            type="radio"
-                            name={q.id}
-                            value={option.value}
-                            checked={personalWillingness[q.id] === option.value}
-                            onChange={(e) => handleChange(e, "personal")}
-                            className="radio-input"
-                          />
-                        </label>
-                      </td>
-                    ))}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </form>
-        </section>
+              ))}
+            </tbody>
+          </table>
+        </form>
+      </section>
 
-        {/* Advocacy Index Section */}
-        <section className="survey-section">
-          <h3 className="section-title">Advocacy Index</h3>
-          <p className="section-description">
-            Please indicate the extent to which you would be willing to take
-            these actions:
-          </p>
-          <form>
-            <table className="likert-table">
-              <thead>
-                <tr>
-                  <th className="table-header statement-header">Statement</th>
+      {/* Advocacy Index Section */}
+      <section className="survey-section">
+        <p className="section-description">
+          Please indicate the extent to which you would be willing to take these
+          actions:
+        </p>
+        <form>
+          <table className="likert-table">
+            <thead>
+              <tr>
+                <th className="table-header statement-header">Statement</th>
+                {likertOptions.map((option) => (
+                  <th key={option.value} className="table-header option-header">
+                    {option.label}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {advocacyQuestions.map((q) => (
+                <tr key={q.id}>
+                  <td className="table-cell statement-cell">{q.text}</td>
                   {likertOptions.map((option) => (
-                    <th
-                      key={option.value}
-                      className="table-header option-header"
+                    <td
+                      key={`${q.id}-${option.value}`}
+                      className="table-cell radio-cell"
                     >
-                      {option.label}
-                    </th>
+                      <label className="radio-label">
+                        <input
+                          type="radio"
+                          name={q.id}
+                          value={option.value}
+                          checked={advocacyIndex[q.id] === option.value}
+                          onChange={(e) => handleChange(e, "advocacy")}
+                          className="radio-input"
+                        />
+                      </label>
+                    </td>
                   ))}
                 </tr>
-              </thead>
-              <tbody>
-                {advocacyQuestions.map((q) => (
-                  <tr key={q.id}>
-                    <td className="table-cell statement-cell">{q.text}</td>
-                    {likertOptions.map((option) => (
-                      <td
-                        key={`${q.id}-${option.value}`}
-                        className="table-cell radio-cell"
-                      >
-                        <label className="radio-label">
-                          <input
-                            type="radio"
-                            name={q.id}
-                            value={option.value}
-                            checked={advocacyIndex[q.id] === option.value}
-                            onChange={(e) => handleChange(e, "advocacy")}
-                            className="radio-input"
-                          />
-                        </label>
-                      </td>
-                    ))}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </form>
-        </section>
+              ))}
+            </tbody>
+          </table>
+        </form>
+      </section>
+      <div className="buttonContainer">
         <button
           className="userActionButton"
           onClick={handleSubmit}

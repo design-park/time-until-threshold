@@ -161,7 +161,7 @@ function Intro() {
           </label>
 
           <button
-            className="userActionButton"
+            className="userActionButton rightButton"
             disabled={!consentChecked || condition === ""}
             onClick={() => {
               storeParticipantInfo(participantCode, condition);

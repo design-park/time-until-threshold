@@ -4,49 +4,21 @@ import { useSimpleAnimatedValue } from "../simpleAnimatedValue";
 
 const OPTIONS = {
   1: {
-    title: "Temperature limits go back to first crossing",
+    title: "Stop at first and last crossing of every temperature limit",
     animationBounds: [
-      [2014, 2035],
-      [2028, 2099],
-      [2042, 2099],
-      [2085, 2099],
+      [2024, 2028],
+      [2028, 2034.3],
+      [2034.3, 2042],
+      [2042, 2052.5],
+      [2052.5, 2084.5],
+      [2084.5, 2099],
     ],
-    maxTemperatures: [1.5, 2, 4, 5],
+    maxTemperatures: [5, 5, 5, 5],
   },
   2: {
-    title: "No temperature limits go back to first crossing",
-    animationBounds: [
-      [2014, 2035],
-      [2028, 2099],
-      [2042, 2099],
-      [2085, 2099],
-    ],
-    maxTemperatures: [5, 5, 5, 5],
-  },
-  3: {
-    title: "Temperature limits go back to start",
-    animationBounds: [
-      [2014, 2035],
-      [2014, 2099],
-      [2014, 2099],
-      [2014, 2099],
-    ],
-    maxTemperatures: [1.5, 2, 4, 5],
-  },
-  4: {
-    title: "No temperature limits go back to start",
-    animationBounds: [
-      [2014, 2035],
-      [2014, 2099],
-      [2014, 2099],
-      [2014, 2099],
-    ],
-    maxTemperatures: [5, 5, 5, 5],
-  },
-  5: {
     title: "Stop at every crossing, no going back",
     animationBounds: [
-      [2014, 2028],
+      [2024, 2028],
       [2028, 2030.5],
       [2030.5, 2030.9],
       [2030.9, 2032.3],
@@ -54,28 +26,6 @@ const OPTIONS = {
       [2034.3, 2042],
       [2042, 2047],
       [2047, 2052.5],
-      [2052.5, 2084.5],
-      [2084.5, 2099],
-    ],
-    maxTemperatures: [5, 5, 5, 5],
-  },
-  6: {
-    title: "Stop at first crossing of every temperature limit",
-    animationBounds: [
-      [2014, 2028],
-      [2028, 2042],
-      [2042, 2084.5],
-      [2084.5, 2099],
-    ],
-    maxTemperatures: [5, 5, 5, 5],
-  },
-  7: {
-    title: "Stop at first and last crossing of every temperature limit",
-    animationBounds: [
-      [2024, 2028],
-      [2028, 2034.3],
-      [2034.3, 2042],
-      [2042, 2052.5],
       [2052.5, 2084.5],
       [2084.5, 2099],
     ],

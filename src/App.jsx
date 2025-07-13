@@ -9,7 +9,7 @@ import { useStore } from "./store.js";
 import ChartPage from "./pages/ChartPage.jsx";
 import SubmitPage from "./pages/SubmitPage.jsx";
 import Test from "./Test.js";
-import Chart2 from "./components/Chart2.jsx"
+import Chart2 from "./components/Chart2.jsx";
 
 function App() {
   return (
@@ -32,7 +32,19 @@ function Form() {
     <div className="withToolbar">
       <div className="toolbar">
         <span>Participant ID: {userID}</span>
-        <button onClick={reset}>Reset</button>
+        <button
+          onClick={() => {
+            const confirmed = window.confirm(
+              "Are you sure you want to reset the experiment?"
+            );
+            if (confirmed) {
+              reset();
+            }
+          }}
+          className="resetButton"
+        >
+          Reset
+        </button>
       </div>
       <div className="content">
         <NotIntroContent />
