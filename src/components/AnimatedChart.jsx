@@ -6,28 +6,28 @@ const OPTIONS = {
   1: {
     title: "Stop at first and last crossing of every temperature limit",
     animationBounds: [
-      [2024, 2028],
-      [2028, 2034.3],
-      [2034.3, 2042],
-      [2042, 2052.5],
-      [2052.5, 2084.5],
-      [2084.5, 2099],
+      [2024, 2027.8],
+      [2027.8, 2034.1],
+      [2034.1, 2041.8],
+      [2041.8, 2052.3],
+      [2052.3, 2084.2],
+      [2084.2, 2099],
     ],
     maxTemperatures: [5, 5, 5, 5],
   },
   2: {
     title: "Stop at every crossing, no going back",
     animationBounds: [
-      [2024, 2028],
-      [2028, 2030.5],
-      [2030.5, 2030.9],
-      [2030.9, 2032.3],
-      [2032.3, 2034.3],
-      [2034.3, 2042],
-      [2042, 2047],
-      [2047, 2052.5],
-      [2052.5, 2084.5],
-      [2084.5, 2099],
+      [2024, 2027.8],
+      [2027.8, 2030.5],
+      [2030.5, 2030.8],
+      [2030.8, 2032.1],
+      [2032.1, 2034.1],
+      [2034.1, 2041.8],
+      [2041.8, 2046.9],
+      [2046.9, 2052.3],
+      [2052.3, 2084.2],
+      [2084.2, 2099],
     ],
     maxTemperatures: [5, 5, 5, 5],
   },
@@ -60,47 +60,57 @@ function AnimatedChart({ option = 1 }) {
     reset();
   };
 
+  const changeBoundsAndPlay = () => {
+    changeBounds();
+    if (index + 1 < OPTIONS[option].animationBounds.length) {
+      setTimeout(() => {
+        play();
+      }, 0);
+    }
+  };
+
   return (
     <div>
       <h2 className="chartTitle">{OPTIONS[option].title}</h2>
-      <p className="yearLabel">Year: {Math.round(value)}</p>
       <Chart
         maxTemperature={maxTemperature}
         maxYear={value}
         blinkingScenarioForMaxTemp={isPlaying ? undefined : "SSP5-8.5"}
+        aboveChart={
+          <div className="aboveChart">
+            <div className="actionButtonContainer">
+              {!isPlaying && value === bounds[0] && (
+                <button
+                  className="userActionButton"
+                  onClick={() => {
+                    play();
+                  }}
+                >
+                  Play animation
+                </button>
+              )}
+              {!isPlaying && value === bounds[1] && (
+                <button
+                  className="userActionButton"
+                  onClick={() => {
+                    changeBoundsAndPlay();
+                  }}
+                >
+                  {index + 1 === OPTIONS[option].animationBounds.length
+                    ? "Reset"
+                    : `Continue animation`}
+                </button>
+              )}
+              {isPlaying && (
+                <button className="userActionButton" disabled>
+                  Playing...
+                </button>
+              )}
+            </div>
+            <p className="yearLabel">Year: {Math.round(value)}</p>
+          </div>
+        }
       />
-      <div className="actionButtonContainer">
-        {!isPlaying && value === bounds[0] && (
-          <button
-            className="userActionButton"
-            onClick={() => {
-              play();
-            }}
-          >
-            Play until +{maxTemperature}°C
-          </button>
-        )}
-        {!isPlaying && value === bounds[1] && (
-          <button
-            className="userActionButton"
-            onClick={() => {
-              changeBounds();
-            }}
-          >
-            {maxTemperature ===
-            OPTIONS[option].maxTemperatures[
-              OPTIONS[option].maxTemperatures.length - 1
-            ]
-              ? "Reset"
-              : `Return to blinking year`}
-          </button>
-        )}
-        {isPlaying && (
-          <button className="userActionButton" disabled>
-            Playing...
-          </button>
-        )}
-      </div>
     </div>
   );
 }

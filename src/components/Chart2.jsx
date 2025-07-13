@@ -183,6 +183,7 @@ function Chart2({
   maxSeaLevel = 1,
   maxYear = 2100,
   blinkingScenarioForMaxTemp = null,
+  aboveChart = null, // Optional component to render above the chart
 }) {
   const blinker = useBlinker(500); // Blinker hook to toggle visibility every second
   const [fullChartData, setFullChartData] = useState([]);
@@ -506,6 +507,7 @@ function Chart2({
         global sea level changes relative to the 1900 baseline. The projections
         are based on different greenhouse gas emission scenarios.
       </p>
+      {aboveChart}
       <div>
         <ResponsiveContainer width="100%" height={400}>
           <LineChart

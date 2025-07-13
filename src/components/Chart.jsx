@@ -121,7 +121,6 @@ const CircleIcon = (props) => {
   );
 };
 
-
 const FirstIcon = (props) => {
   const { cx, cy, fill } = props;
   const SCALE = 0.35;
@@ -202,6 +201,7 @@ function Chart({
   maxTemperature = 5,
   maxYear = 2099,
   blinkingScenarioForMaxTemp = null,
+  aboveChart = null, // Optional component to render above the chart
 }) {
   const blinker = useBlinker(500); // Blinker hook to toggle visibility every second
   const [fullChartData, setFullChartData] = useState([]);
@@ -480,9 +480,10 @@ function Chart({
       <h1>Global surface temperature change relative to 1850-1900</h1>
       <p>
         This chart illustrates observed (1950–2024) and projected (2025–2099)
-        global surface temperature changes relative to the 1900 baseline. The projections
-        are based on different greenhouse gas emission scenarios.
+        global surface temperature changes relative to the 1900 baseline. The
+        projections are based on different greenhouse gas emission scenarios.
       </p>
+      {aboveChart}
       <div>
         <ResponsiveContainer width="100%" height={400}>
           <LineChart
@@ -606,8 +607,7 @@ function Chart({
                     const iconColor =
                       lineColors[scenarioIndex % lineColors.length]; // Get the color of the scenario line
                     if (
-                      blinkingScenarioForMaxTemp === scenario &&
-                      thresh.value === maxTemperature &&
+                      crossingYear+0.1 > maxYear &&
                       !blinker
                     ) {
                       return null; // Skip rendering if blinking is active for this scenario
