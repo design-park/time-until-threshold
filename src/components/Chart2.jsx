@@ -401,43 +401,13 @@ function Chart2({
       ...dataPoint,
     })); // Create a shallow copy of fullChartData
 
-    // Add a point using linear interpolation if year is not an integer
-    let previousDataPoint = null;
-    for (const dataPoint of finalChartData) {
-      if (dataPoint.Year > maxYear) {
-        if (Math.round(maxYear) !== maxYear) {
-          const pointToAdd = {
-            Year: maxYear,
-          };
-          // Interpolate values for all scenarios
-          for (const scenario of Object.keys(previousDataPoint)) {
-            if (scenario === "Year") continue; // Skip the Year key
-            if (!dataPoint[scenario]) continue;
-            // If the scenario exists in the previous year and the current year
-            // Calculate value at crossing year using linear interpolation
-            const slope =
-              (dataPoint[scenario] - previousDataPoint[scenario]) /
-              (dataPoint.Year - previousDataPoint.Year);
-            const interpolatedValue =
-              previousDataPoint[scenario] +
-              slope * (maxYear - previousDataPoint.Year);
-            pointToAdd[scenario] = interpolatedValue;
-          }
-          finalChartData.push(pointToAdd);
-          break; // Stop after adding the point for maxYear
-        }
-      }
-      previousDataPoint = dataPoint;
-    }
-    // Remove points past the maxYear
-    finalChartData.sort((a, b) => a.Year - b.Year);
-
     const pointsToAdd = [];
 
     // Add a point for each year using linear interpolation
-    previousDataPoint = null;
+    let previousDataPoint = null;
+
     for (const dataPoint of finalChartData) {
-      if (previousDataPoint && dataPoint.Year <= maxYear) {
+      if (previousDataPoint && previousDataPoint.Year <= maxYear) {
         for (
           let year = Math.floor(previousDataPoint.Year + 1);
           year < dataPoint.Year;
@@ -467,8 +437,39 @@ function Chart2({
     for (const point of pointsToAdd) {
       finalChartData.push(point);
     }
-
     finalChartData.sort((a, b) => a.Year - b.Year);
+
+    // Add a point using linear interpolation if year is not an integer
+    previousDataPoint = null;
+    for (const dataPoint of finalChartData) {
+      if (dataPoint.Year > maxYear) {
+        if (Math.round(maxYear) !== maxYear) {
+          const pointToAdd = {
+            Year: maxYear,
+          };
+          // Interpolate values for all scenarios
+          for (const scenario of Object.keys(previousDataPoint)) {
+            if (scenario === "Year") continue; // Skip the Year key
+            if (!dataPoint[scenario]) continue;
+            // If the scenario exists in the previous year and the current year
+            // Calculate value at crossing year using linear interpolation
+            const slope =
+              (dataPoint[scenario] - previousDataPoint[scenario]) /
+              (dataPoint.Year - previousDataPoint.Year);
+            const interpolatedValue =
+              previousDataPoint[scenario] +
+              slope * (maxYear - previousDataPoint.Year);
+            pointToAdd[scenario] = interpolatedValue;
+          }
+          finalChartData.push(pointToAdd);
+          break; // Stop after adding the point for maxYear
+        }
+      }
+      previousDataPoint = dataPoint;
+    }
+    // Remove points past the maxYear
+    finalChartData.sort((a, b) => a.Year - b.Year);
+    
     const result = finalChartData.map((dataPoint) => {
       return dataPoint.Year <= maxYear ? dataPoint : { Year: dataPoint.Year };
     });

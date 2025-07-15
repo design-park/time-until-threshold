@@ -70,6 +70,7 @@ export const rawCsvData2 = `Year,SeaLevel,Scenario
 2018,0.203025214,Historical
 2019,0.206922507,Historical
 2024,0.224,Historical
+2024.9,0.226,Historical
 2025,0.228,SSP1-1.9 (Very low emissions)
 2030,0.248,SSP1-1.9 (Very low emissions)
 2040,0.288,SSP1-1.9 (Very low emissions)
