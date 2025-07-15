@@ -606,10 +606,7 @@ function Chart({
                     const IconComponentY = thresh.iconY;
                     const iconColor =
                       lineColors[scenarioIndex % lineColors.length]; // Get the color of the scenario line
-                    if (
-                      crossingYear+0.1 > maxYear &&
-                      !blinker
-                    ) {
+                    if (crossingYear + 0.1 > maxYear && !blinker) {
                       return null; // Skip rendering if blinking is active for this scenario
                     }
                     return (
@@ -663,7 +660,7 @@ function Chart({
         <svg width="20" height="20" viewBox="0 0 20 20">
           <CircleIcon cx={10} cy={10} fill="#7F8CAA" />
         </svg>
-        <p className="legendText">Scenario Line Crossing</p>
+        <p className="legendText">Threshold Line Crossing</p>
       </div>
     </div>
   );

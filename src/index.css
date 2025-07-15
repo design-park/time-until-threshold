@@ -44,15 +44,9 @@ body {
 
 .aboveChart {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.actionButtonContainer {
-  display: flex;
   justify-content: center;
-  margin-top: 20px;
+  align-items: center;
+  gap: 20px;
 }
 
 .resetButton {
@@ -62,6 +56,13 @@ body {
   border: none;
   border-radius: 3px;
   cursor: pointer;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
 }
 
 .userActionButton {
@@ -84,15 +85,65 @@ body {
   }
 }
 
-.buttonContainer {
+.invisible {
+  visibility: hidden;
+}
+
+.actionButtonContainer {
   display: flex;
   justify-content: center;
-  align-items: center;
   margin-top: 20px;
 }
 
+.userAnimationButton {
+  background-color: rgb(106, 106, 155);
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100px;
+  height: 50px;
+  &:hover {
+    background-color: rgb(86, 86, 124);
+  }
+  &:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+}
+
+.animationButtonContainer {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.buttonInstructionText {
+  font-size: 20px;
+  color: #757575;
+}
+
+.calenderContainer {
+  position: relative;
+  text-align: center;
+}
+
 .yearLabel {
-  text-align: right;
+  position: absolute;
+  font-weight: semi-bold;
+  color: white;
+  top: 25px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.yearValueLabel {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  font-size: 24px;
+  transform: translate(-50%, -50%);
 }
 
 .titleText {

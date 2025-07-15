@@ -6,7 +6,7 @@ const OPTIONS = {
   1: {
     title: "Stop at first and last crossing of every temperature limit",
     animationBounds: [
-      [2024, 2027.8],
+      [2025, 2027.8],
       [2027.8, 2034.1],
       [2034.1, 2041.8],
       [2041.8, 2052.3],
@@ -71,17 +71,26 @@ function AnimatedChart({ option = 1 }) {
 
   return (
     <div>
-      <h2 className="chartTitle">{OPTIONS[option].title}</h2>
       <Chart
         maxTemperature={maxTemperature}
         maxYear={value}
         blinkingScenarioForMaxTemp={isPlaying ? undefined : "SSP5-8.5"}
         aboveChart={
           <div className="aboveChart">
-            <div className="actionButtonContainer">
+            <p className="invisible"> ⬅ Click to interact with the visualization</p>
+            <div className="calenderContainer">
+              <img
+                src="/images/calendar.jpg"
+                alt="Calender Icon"
+                style={{ width: "145px" }}
+              />
+              <p className="yearLabel">Year</p>
+              <p className="yearValueLabel">{Math.round(value)}</p>
+            </div>
+            <div className="animationButtonContainer">
               {!isPlaying && value === bounds[0] && (
                 <button
-                  className="userActionButton"
+                  className="userAnimationButton"
                   onClick={() => {
                     play();
                   }}
@@ -91,7 +100,7 @@ function AnimatedChart({ option = 1 }) {
               )}
               {!isPlaying && value === bounds[1] && (
                 <button
-                  className="userActionButton"
+                  className="userAnimationButton"
                   onClick={() => {
                     changeBoundsAndPlay();
                   }}
@@ -102,12 +111,12 @@ function AnimatedChart({ option = 1 }) {
                 </button>
               )}
               {isPlaying && (
-                <button className="userActionButton" disabled>
+                <button className="userAnimationButton" disabled>
                   Playing...
                 </button>
               )}
+              <p className="buttonInstructionText"> ⬅ Click to interact with the visualization</p>
             </div>
-            <p className="yearLabel">Year: {Math.round(value)}</p>
           </div>
         }
       />
