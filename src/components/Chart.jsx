@@ -590,6 +590,9 @@ function Chart({
               />
             ))}
 
+            {/* Render ReferenceLine to indicate the current year */}
+            <ReferenceLine x={2025} stroke="red" label="Current Year"/>
+
             {/* Render ReferenceDots for threshold crossing years on X-axis */}
             {scenarios.map(
               (
