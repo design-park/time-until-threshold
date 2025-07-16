@@ -12,6 +12,8 @@ import {
 } from "recharts";
 import { rawCsvData } from "../temperatureData";
 import { useBlinker } from "../blinker";
+import Arrow from "./Arrow";
+import Area from "./Area";
 
 // Function to parse CSV data from a string
 function parseCsvString(csvString) {
@@ -196,6 +198,41 @@ const ThirdIcon = (props) => {
   );
 };
 
+// Define an array of colors for the lines (re-ordered slightly for better visual distinction)
+const lineColors = [
+  "#7F8CAA", // Gray
+  "#82ca9d", // Green
+  "#8DD8FF", // Blue
+  "#f17e5d", // Coral
+  "#8884d8", // Purple
+  "#f15d7e", // Pink
+  "#a4de6c", // Light Green
+  "#d0ed57", // Lime Green
+  "#88a8c3", // Light Blue-Gray
+  "#e3516e", // Dark Pink
+];
+
+// Define temperature thresholds and their corresponding icon types
+const thresholds = [
+  { value: 1.5, label: "1.5°C", iconX: FirstThermoIcon, iconY: CircleIcon },
+  { value: 2.0, label: "2.0°C", iconX: SecondThermoIcon, iconY: CircleIcon },
+  { value: 4.0, label: "4.0°C", iconX: ThirdThermoIcon, iconY: CircleIcon },
+];
+
+const arrows = [
+  { height: 2.8, end: 2027.8 },
+  { height: 3.2, end: 2034.1 },
+  { height: 3.6, end: 2041.8 },
+  { height: 4.0, end: 2052.3 },
+  { height: 4.4, end: 2084.2 },
+];
+
+const areas = [
+  { start: 2027.8, end: 2034.1 },
+  { start: 2041.8, end: 2052.3 },
+  { start: 2084.2, end: 2099.0 },
+];
+
 // Main React component for the application
 function Chart({
   maxTemperature = 5,
@@ -212,27 +249,6 @@ function Chart({
   const [scenarioThresholdCrossings, setScenarioThresholdCrossings] = useState(
     {}
   );
-
-  // Define an array of colors for the lines (re-ordered slightly for better visual distinction)
-  const lineColors = [
-    "#7F8CAA", // Gray
-    "#82ca9d", // Green
-    "#8DD8FF", // Blue
-    "#f17e5d", // Coral
-    "#8884d8", // Purple
-    "#f15d7e", // Pink
-    "#a4de6c", // Light Green
-    "#d0ed57", // Lime Green
-    "#88a8c3", // Light Blue-Gray
-    "#e3516e", // Dark Pink
-  ];
-
-  // Define temperature thresholds and their corresponding icon types
-  const thresholds = [
-    { value: 1.5, label: "1.5°C", iconX: FirstThermoIcon, iconY: CircleIcon },
-    { value: 2.0, label: "2.0°C", iconX: SecondThermoIcon, iconY: CircleIcon },
-    { value: 4.0, label: "4.0°C", iconX: ThirdThermoIcon, iconY: CircleIcon },
-  ];
 
   useEffect(() => {
     try {
@@ -591,7 +607,22 @@ function Chart({
             ))}
 
             {/* Render ReferenceLine to indicate the current year */}
-            <ReferenceLine x={2025} stroke="red" label="Current Year"/>
+            <ReferenceLine x={2025} stroke="red" label="Current Year" />
+
+            {arrows.map(
+              (arrow, index) =>
+                arrow.end <= maxYear && (
+                  <Arrow key={index} start={2025} {...arrow} />
+                )
+            )}
+            {areas.map(
+              (area, index) =>
+                area.end <= maxYear && (
+                  <Area key={index} startX={area.start} endX={area.end} startY={0} endY={5} />
+                )
+            )}
+
+            {/* Render ReferenceLine to indicate the current year */}
 
             {/* Render ReferenceDots for threshold crossing years on X-axis */}
             {scenarios.map(
