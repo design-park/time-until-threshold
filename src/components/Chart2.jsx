@@ -12,6 +12,8 @@ import {
 } from "recharts";
 import { rawCsvData2 } from "../seaLevelData";
 import { useBlinker } from "../blinker";
+import Arrow from "./Arrow";
+import Area from "./Area";
 
 // Function to parse CSV data from a string
 function parseCsvString(csvString) {
@@ -214,6 +216,20 @@ function Chart2({
     { value: 0.4, label: "0.4m", iconX: FirstSeaIcon, iconY: CircleIcon },
     { value: 0.6, label: "0.6m", iconX: SecondSeaIcon, iconY: CircleIcon },
     { value: 0.8, label: "0.8m", iconX: ThirdSeaIcon, iconY: CircleIcon },
+  ];
+
+  const arrows = [
+    { height: 0.53, end: 2051.5 },
+    { height: 0.63, end: 2066.5 },
+    { height: 0.73, end: 2073.9 }, 
+    { height: 0.83, end: 2085.3 },
+    { height: 0.93, end: 2090.9 },
+  ]
+
+  const areas = [
+    { start: 2051.5, end: 2066.5 },
+    { start: 2073.9, end: 2085.3 },
+    { start: 2090.9, end: 2100.0 },
   ];
 
   useEffect(() => {
@@ -614,6 +630,23 @@ function Chart2({
                 isAnimationActive={false}
               />
             ))}
+
+            {/* Render ReferenceLine to indicate the current year */}
+            <ReferenceLine x={2025} stroke="red" label="Current Year" />
+
+            {arrows.map(
+              (arrow, index) =>
+                arrow.end <= maxYear && (
+                  <Arrow key={index} start={2025} {...arrow} />
+                )
+            )}
+            {areas.map(
+              (area, index) =>
+                area.end <= maxYear && (
+                  <Area key={index} startX={area.start} endX={area.end} startY={0} endY={1} />
+                )
+            )}
+
 
             {/* Render ReferenceDots for threshold crossing years on X-axis */}
             {scenarios.map(
