@@ -42,10 +42,12 @@ export const useStore = create()(
       advocacy3: null,
       advocacy4: null,
 
-      // Supporting info seen
-      supportingInfoSeen: false,
+      // info seen
+      trainingVisInfoSeen: false,
+      targetVisInfoSeen: false,
 
       // Chart seen
+      trainingChartSeen: false,
       chartSeen: false,
 
       // Post Emotion
@@ -164,7 +166,9 @@ export const useStore = create()(
         }
       },
 
-      setSupportingInfoSeen: (seen) => set({ supportingInfoSeen: seen }),
+      setTrainingVisInfoSeen: (seen) => set({ trainingVisInfoSeen: seen }),
+      setTargetVisInfoSeen: (seen) => set({ targetVisInfoSeen: seen }),
+      setTrainingChartSeen: (seen) => set({ trainingChartSeen: seen }),
       setChartSeen: (seen) => set({ chartSeen: seen }),
 
       reset: () =>
@@ -198,7 +202,9 @@ export const useStore = create()(
           advocacy2: null,
           advocacy3: null,
           advocacy4: null,
-          supportingInfoSeen: false,
+          trainingVisInfoSeen: false,
+          targetVisInfoSeen: false,
+          trainingChartSeen: false,
           chartSeen: false,
           postValence: null,
           postArousal: null,

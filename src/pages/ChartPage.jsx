@@ -11,7 +11,7 @@ function ChartPage() {
   };
 
   return (
-    <div className="centerBody">
+    <div className="centerBody nobg">
       {condition === "control" ? <Chart /> : <AnimatedChart />}
       <div className="actionButtonContainer">
         <button className="userActionButton" onClick={handleSubmit}>

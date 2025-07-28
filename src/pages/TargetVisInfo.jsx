@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { useStore } from "../store";
 
-function SupportingInfo() {
+function TargetVisInfo() {
   let [confirmChecked, setConfirmChecked] = useState(false);
-  const setSupportingInfoSeen = useStore(
-    (state) => state.setSupportingInfoSeen
+  const setTargetVisInfoSeen = useStore(
+    (state) => state.setTargetVisInfoSeen
   );
 
   const handleSubmit = () => {
-    setSupportingInfoSeen(true);
+    setTargetVisInfoSeen(true);
   };
 
   return (
@@ -57,4 +57,4 @@ function SupportingInfo() {
   );
 }
 
-export default SupportingInfo;
+export default TargetVisInfo;
