@@ -219,18 +219,35 @@ const thresholds = [
   { value: 4.0, label: "4.0°C", iconX: ThirdThermoIcon, iconY: CircleIcon },
 ];
 
-const arrows = [
-  { height: 2.8, end: 2027.8 },
-  { height: 3.2, end: 2034.1 },
-  { height: 3.6, end: 2041.8 },
-  { height: 4.0, end: 2052.3 },
-  { height: 4.4, end: 2084.2 },
+const ARROWS_OPTIONS = [
+  [
+    { height: 2.8, start: 2025, end: 2027.8 },
+    { height: 3.2, start: 2025, end: 2034.1 },
+    { height: 3.6, start: 2025, end: 2041.8 },
+    { height: 4.0, start: 2025, end: 2052.3 },
+    { height: 4.4, start: 2025, end: 2084.2 },
+  ],
+  [
+    { height: 1, start: 2025, end: 2027.8 },
+    { height: 1, start: 2027.8, end: 2034.1 },
+    { height: 2.45, start: 2025, end: 2041.8 },
+    { height: 2.45, start: 2041.8, end: 2052.3 },
+    { height: 4.45, start: 2025, end: 2084.2 },
+    { height: 4.45, start: 2084.2, end: 2099.0, unfinished: true },
+  ],
 ];
 
-const areas = [
-  { start: 2027.8, end: 2034.1 },
-  { start: 2041.8, end: 2052.3 },
-  { start: 2084.2, end: 2099.0 },
+const AREAS_OPTIONS = [
+  [
+    { start: 2027.8, end: 2034.1, bottom: 0, top: 5 },
+    { start: 2041.8, end: 2052.3, bottom: 0, top: 5 },
+    { start: 2084.2, end: 2099.0, bottom: 0, top: 5 },
+  ],
+  [
+    { start: 2027.8, end: 2034.1, bottom: 0.75, top: 1.75 },
+    { start: 2041.8, end: 2052.3, bottom: 1.75, top: 2.75 },
+    { start: 2084.2, end: 2099.0, bottom: 3.75, top: 4.75 },
+  ],
 ];
 
 // Main React component for the application
@@ -239,6 +256,8 @@ function Chart({
   maxYear = 2099,
   blinkingScenarioForMaxTemp = null,
   aboveChart = null, // Optional component to render above the chart
+  arrowsOption = 0,
+  areasOption = 0,
 }) {
   const blinker = useBlinker(500); // Blinker hook to toggle visibility every second
   const [fullChartData, setFullChartData] = useState([]);
@@ -609,16 +628,20 @@ function Chart({
             {/* Render ReferenceLine to indicate the current year */}
             <ReferenceLine x={2025} stroke="red" label="Current Year" />
 
-            {arrows.map(
+            {ARROWS_OPTIONS[arrowsOption].map(
               (arrow, index) =>
-                arrow.end <= maxYear && (
-                  <Arrow key={index} start={2025} {...arrow} />
-                )
+                arrow.end <= maxYear && <Arrow key={index} {...arrow} />
             )}
-            {areas.map(
+            {AREAS_OPTIONS[areasOption].map(
               (area, index) =>
                 area.end <= maxYear && (
-                  <Area key={index} startX={area.start} endX={area.end} startY={0} endY={5} />
+                  <Area
+                    key={index}
+                    startX={area.start}
+                    endX={area.end}
+                    startY={area.bottom}
+                    endY={area.top}
+                  />
                 )
             )}
 

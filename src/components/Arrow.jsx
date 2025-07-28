@@ -2,7 +2,7 @@ import { useId, useRef } from "react";
 import { ReferenceDot } from "recharts";
 import { createPortal } from "react-dom";
 
-function Arrow({ height, start, end }) {
+function Arrow({ height, start, end, unfinished = false }) {
   /*console.log(
     "Arrow component rendered with start:",
     start,
@@ -52,7 +52,7 @@ function Arrow({ height, start, end }) {
               window.scrollY +
               endRef.current.getBoundingClientRect().height / 2
             }
-            label={Math.round(end - start) + "y"}
+            label={(unfinished ? "More than " : "") + Math.round(end - start) + "y"}
           />,
           document.body
         )}

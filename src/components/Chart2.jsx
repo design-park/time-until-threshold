@@ -180,12 +180,66 @@ const CircleIcon = (props) => {
   );
 };
 
+// Define an array of colors for the lines (re-ordered slightly for better visual distinction)
+const lineColors = [
+  "#7F8CAA", // Gray
+  "#82ca9d", // Green
+  "#8DD8FF", // Blue
+  "#f17e5d", // Coral
+  "#8884d8", // Purple
+  "#f15d7e", // Pink
+  "#a4de6c", // Light Green
+  "#d0ed57", // Lime Green
+  "#88a8c3", // Light Blue-Gray
+  "#e3516e", // Dark Pink
+];
+
+// Define temperature thresholds and their corresponding icon types
+const thresholds = [
+  { value: 0.4, label: "0.4m", iconX: FirstSeaIcon, iconY: CircleIcon },
+  { value: 0.6, label: "0.6m", iconX: SecondSeaIcon, iconY: CircleIcon },
+  { value: 0.8, label: "0.8m", iconX: ThirdSeaIcon, iconY: CircleIcon },
+];
+
+const ARROWS_OPTIONS = [
+  [
+    { height: 0.53, start: 2025, end: 2051.5 },
+    { height: 0.63, start: 2025, end: 2066.5 },
+    { height: 0.73, start: 2025, end: 2073.9 },
+    { height: 0.83, start: 2025, end: 2085.3 },
+    { height: 0.93, start: 2025, end: 2090.9 },
+  ],
+  [
+    { height: 0.44, start: 2025, end: 2051.5 },
+    { height: 0.44, start: 2051.5, end: 2066.5 },
+    { height: 0.64, start: 2025, end: 2073.9 },
+    { height: 0.64, start: 2073.9, end: 2100.0, unfinished: true },
+    { height: 0.84, start: 2025, end: 2090.9 },
+    { height: 0.84, start: 2090.9, end: 2100.0, unfinished: true },
+  ],
+];
+
+const AREAS_OPTIONS = [
+  [
+    { start: 2051.5, end: 2066.5, bottom: 0, top: 1 },
+    { start: 2073.9, end: 2085.3, bottom: 0, top: 1 },
+    { start: 2090.9, end: 2100.0, bottom: 0, top: 1 },
+  ],
+  [
+    { start: 2051.5, end: 2066.5, bottom: 0.3, top: 0.5 },
+    { start: 2073.9, end: 2100.0, bottom: 0.5, top: 0.7 },
+    { start: 2090.9, end: 2100.0, bottom: 0.71, top: 0.9 },
+  ],
+];
+
 // Main React component for the application
 function Chart2({
   maxSeaLevel = 1,
   maxYear = 2100,
   blinkingScenarioForMaxTemp = null,
   aboveChart = null, // Optional component to render above the chart
+  arrowsOption = 0,
+  areasOption = 0,
 }) {
   const blinker = useBlinker(500); // Blinker hook to toggle visibility every second
   const [fullChartData, setFullChartData] = useState([]);
@@ -196,41 +250,6 @@ function Chart2({
   const [scenarioThresholdCrossings, setScenarioThresholdCrossings] = useState(
     {}
   );
-
-  // Define an array of colors for the lines (re-ordered slightly for better visual distinction)
-  const lineColors = [
-    "#7F8CAA", // Gray
-    "#82ca9d", // Green
-    "#8DD8FF", // Blue
-    "#f17e5d", // Coral
-    "#8884d8", // Purple
-    "#f15d7e", // Pink
-    "#a4de6c", // Light Green
-    "#d0ed57", // Lime Green
-    "#88a8c3", // Light Blue-Gray
-    "#e3516e", // Dark Pink
-  ];
-
-  // Define temperature thresholds and their corresponding icon types
-  const thresholds = [
-    { value: 0.4, label: "0.4m", iconX: FirstSeaIcon, iconY: CircleIcon },
-    { value: 0.6, label: "0.6m", iconX: SecondSeaIcon, iconY: CircleIcon },
-    { value: 0.8, label: "0.8m", iconX: ThirdSeaIcon, iconY: CircleIcon },
-  ];
-
-  const arrows = [
-    { height: 0.53, end: 2051.5 },
-    { height: 0.63, end: 2066.5 },
-    { height: 0.73, end: 2073.9 }, 
-    { height: 0.83, end: 2085.3 },
-    { height: 0.93, end: 2090.9 },
-  ]
-
-  const areas = [
-    { start: 2051.5, end: 2066.5 },
-    { start: 2073.9, end: 2085.3 },
-    { start: 2090.9, end: 2100.0 },
-  ];
 
   useEffect(() => {
     try {
@@ -485,7 +504,7 @@ function Chart2({
     }
     // Remove points past the maxYear
     finalChartData.sort((a, b) => a.Year - b.Year);
-    
+
     const result = finalChartData.map((dataPoint) => {
       return dataPoint.Year <= maxYear ? dataPoint : { Year: dataPoint.Year };
     });
@@ -634,19 +653,22 @@ function Chart2({
             {/* Render ReferenceLine to indicate the current year */}
             <ReferenceLine x={2025} stroke="red" label="Current Year" />
 
-            {arrows.map(
+            {ARROWS_OPTIONS[arrowsOption].map(
               (arrow, index) =>
-                arrow.end <= maxYear && (
-                  <Arrow key={index} start={2025} {...arrow} />
-                )
+                arrow.end <= maxYear && <Arrow key={index} {...arrow} />
             )}
-            {areas.map(
+            {AREAS_OPTIONS[areasOption].map(
               (area, index) =>
                 area.end <= maxYear && (
-                  <Area key={index} startX={area.start} endX={area.end} startY={0} endY={1} />
+                  <Area
+                    key={index}
+                    startX={area.start}
+                    endX={area.end}
+                    startY={area.bottom}
+                    endY={area.top}
+                  />
                 )
             )}
-
 
             {/* Render ReferenceDots for threshold crossing years on X-axis */}
             {scenarios.map(
