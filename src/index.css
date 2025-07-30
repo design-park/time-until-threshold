@@ -141,14 +141,14 @@ body {
   position: absolute;
   font-weight: semi-bold;
   color: white;
-  top: 25px;
+  top: 1px;
   left: 50%;
   transform: translate(-50%, -50%);
 }
 
 .yearValueLabel {
   position: absolute;
-  top: 45%;
+  top: 30%;
   left: 50%;
   font-size: 24px;
   transform: translate(-50%, -50%);

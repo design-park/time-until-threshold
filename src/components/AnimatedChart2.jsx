@@ -80,9 +80,9 @@ function AnimatedChart2({ option = 1 }) {
             <p className="invisible"> ⬅ Click to interact with the visualization</p>
             <div className="calenderContainer">
               <img
-                src="/images/calendar.jpg"
+                src="/images/calendar.png"
                 alt="Calender Icon"
-                style={{ width: "145px" }}
+                style={{ width: "80px" }}
               />
               <p className="yearLabel">Year</p>
               <p className="yearValueLabel">{Math.round(value)}</p>
