@@ -34,10 +34,10 @@ function SubmitPage() {
   };
 
   return (
-    <div className="submit-page">
+    <div className="centerBody">
       <h1>Everything is complete!</h1>
       <p>Please click submit to send your responses.</p>
-      <button onClick={handleSubmit} disabled={buttonClicked}>
+      <button onClick={handleSubmit} className="userActionButton" disabled={buttonClicked}>
         Submit
       </button>
     </div>

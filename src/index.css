@@ -74,18 +74,20 @@ body {
 }
 
 .userActionButton {
-  background-color: #4a90e2;
+  background-color: #437dbf;
   color: white;
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   width: 180px;
+  &:hover {
+    background-color: #5A94D4;
+  }
   &:disabled {
     background-color: #ccc;
     cursor: not-allowed;
   }
-
   &.rightButton {
     display: block;
     margin-left: auto;
