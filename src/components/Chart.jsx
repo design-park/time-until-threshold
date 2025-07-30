@@ -204,8 +204,8 @@ const lineColors = [
   "#0065F8", // Blue
   "#06923E", // Green
   "#9E6F21", // Brown
-  "#FE7743", // Orange
-  "#E14434", // Red
+  "#640D5F", // Purple
+  "#B12C00", // Red
   "#a4de6c", // Light Green
   "#d0ed57", // Lime Green
   "#88a8c3", // Light Blue-Gray
@@ -239,10 +239,10 @@ const ARROWS_OPTIONS = [
   [
     { height: 0.7, start: 2025, end: 2027.8 },
     { height: 0.7, start: 2027.8, end: 2034.1, secondarrow: true, color: "#0065F8" },
-    { height: 1, start: 2025, end: 2041.8 },
-    { height: 1, start: 2041.8, end: 2052.3, secondarrow: true, color: "#9E6F21" },
+    { height: 1.1, start: 2025, end: 2041.8 },
+    { height: 1.1, start: 2041.8, end: 2052.3, secondarrow: true, color: "#9E6F21" },
     { height: 3, start: 2025, end: 2084.2 },
-    { height: 3, start: 2084.2, end: 2099.0, secondarrow: true, unfinished: true, color: "#FE7743" },
+    { height: 3, start: 2084.2, end: 2099.0, secondarrow: true, unfinished: true, color: "#640D5F" },
   ],
 ];
 
@@ -524,6 +524,7 @@ function Chart({
         global surface temperature changes relative to the 1900 baseline. The
         projections are based on different greenhouse gas emission scenarios.
       </p>
+      <p>Reaching the threshold later is better!!!</p>
       {aboveChart}
       <div>
         <ResponsiveContainer width="100%" height={400}>

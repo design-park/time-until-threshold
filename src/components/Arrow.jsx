@@ -65,7 +65,7 @@ function Arrow({
               Math.round(end - start) +
               "y"
             }
-            color={secondarrow ? color : "#E14434"}
+            color={secondarrow ? color : "#B12C00"}
             unfinished={unfinished}
           />,
           document.body

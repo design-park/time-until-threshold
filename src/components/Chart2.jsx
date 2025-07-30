@@ -186,8 +186,8 @@ const lineColors = [
   "#0065F8", // Blue
   "#06923E", // Green
   "#9E6F21", // Brown
-  "#FE7743", // Orange
-  "#E14434", // Red
+  "#640D5F", // Purple
+  "#B12C00", // Red
   "#a4de6c", // Light Green
   "#d0ed57", // Lime Green
   "#88a8c3", // Light Blue-Gray
@@ -214,9 +214,9 @@ const ARROWS_OPTIONS = [
 
 const AREAS_OPTIONS = [
   [
-    { start: 2051.5, end: 2066.5, bottom: 0, top: 0.4, color: "#FFFF76", opacity: 0.25 },
-    { start: 2073.9, end: 2100.0, bottom: 0, top: 0.6, color: "#FF8800", opacity: 0.25 },
-    { start: 2090.9, end: 2100.0, bottom: 0, top: 0.8, color: "#F53B3B", opacity: 0.35 },
+    { start: 2051.5, end: 2066.5, bottom: 0, top: 0.4, color: "#C5FF95", opacity: 0.25 },
+    { start: 2073.9, end: 2100.0, bottom: 0, top: 0.6, color: "#5DEBD7", opacity: 0.25 },
+    { start: 2090.9, end: 2100.0, bottom: 0, top: 0.8, color: "#1679AB", opacity: 0.35 },
   ],
 ];
 
