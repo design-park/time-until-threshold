@@ -666,7 +666,7 @@ input[type="range"]:focus::-ms-fill-upper {
   background-color: #f9f9f9;
 }
 
-.iconLegend {
+.legendContainer {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -681,4 +681,12 @@ input[type="range"]:focus::-ms-fill-upper {
 
 .recharts-tooltip-wrapper {
   z-index: 1;
+}
+
+.arrow-end {
+  border-width: 0;
+  border-style: solid;
+  border-right-width: 2px;
+  border-top-width: 2px;
+  transform: rotate(45deg);
 }

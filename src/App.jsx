@@ -8,7 +8,7 @@ import TargetVisInfo from "./pages/TargetVisInfo.jsx";
 import { useStore } from "./store.js";
 import ChartPage from "./pages/ChartPage.jsx";
 import SubmitPage from "./pages/SubmitPage.jsx";
-import Test from "./Test.js";
+import Test from "./pages/Test.jsx";
 import Chart2 from "./components/Chart2.jsx";
 import AnimatedChart2 from "./components/AnimatedChart2.jsx";
 import TrainingChartPage from "./pages/TrainingChartPage.jsx";

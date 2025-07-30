@@ -183,11 +183,11 @@ const CircleIcon = (props) => {
 // Define an array of colors for the lines (re-ordered slightly for better visual distinction)
 const lineColors = [
   "#7F8CAA", // Gray
-  "#82ca9d", // Green
-  "#8DD8FF", // Blue
-  "#f17e5d", // Coral
-  "#8884d8", // Purple
-  "#f15d7e", // Pink
+  "#0065F8", // Blue
+  "#06923E", // Green
+  "#9E6F21", // Brown
+  "#FE7743", // Orange
+  "#E14434", // Red
   "#a4de6c", // Light Green
   "#d0ed57", // Lime Green
   "#88a8c3", // Light Blue-Gray
@@ -203,32 +203,20 @@ const thresholds = [
 
 const ARROWS_OPTIONS = [
   [
-    { height: 0.53, start: 2025, end: 2051.5 },
-    { height: 0.63, start: 2025, end: 2066.5 },
-    { height: 0.73, start: 2025, end: 2073.9 },
-    { height: 0.83, start: 2025, end: 2085.3 },
-    { height: 0.93, start: 2025, end: 2090.9 },
-  ],
-  [
-    { height: 0.44, start: 2025, end: 2051.5 },
-    { height: 0.44, start: 2051.5, end: 2066.5 },
-    { height: 0.64, start: 2025, end: 2073.9 },
-    { height: 0.64, start: 2073.9, end: 2100.0, unfinished: true },
-    { height: 0.84, start: 2025, end: 2090.9 },
-    { height: 0.84, start: 2090.9, end: 2100.0, unfinished: true },
+    { height: 0.12, start: 2025, end: 2051.5 },
+    { height: 0.12, start: 2051.5, end: 2066.5, secondarrow: true, color: "#0065F8" },
+    { height: 0.2, start: 2025, end: 2073.9 },
+    { height: 0.2, start: 2073.9, end: 2100.0, secondarrow: true, unfinished: true, color: "#0065F8" },
+    { height: 0.28, start: 2025, end: 2090.9 },
+    { height: 0.28, start: 2090.9, end: 2100.0, secondarrow: true, unfinished: true, color: "#0065F8" },
   ],
 ];
 
 const AREAS_OPTIONS = [
   [
-    { start: 2051.5, end: 2066.5, bottom: 0, top: 1 },
-    { start: 2073.9, end: 2085.3, bottom: 0, top: 1 },
-    { start: 2090.9, end: 2100.0, bottom: 0, top: 1 },
-  ],
-  [
-    { start: 2051.5, end: 2066.5, bottom: 0.3, top: 0.5 },
-    { start: 2073.9, end: 2100.0, bottom: 0.5, top: 0.7 },
-    { start: 2090.9, end: 2100.0, bottom: 0.71, top: 0.9 },
+    { start: 2051.5, end: 2066.5, bottom: 0, top: 0.4, color: "#FFFF76", opacity: 0.25 },
+    { start: 2073.9, end: 2100.0, bottom: 0, top: 0.6, color: "#FF8800", opacity: 0.25 },
+    { start: 2090.9, end: 2100.0, bottom: 0, top: 0.8, color: "#F53B3B", opacity: 0.35 },
   ],
 ];
 
@@ -666,6 +654,8 @@ function Chart2({
                     endX={area.end}
                     startY={area.bottom}
                     endY={area.top}
+                    color={area.color}
+                    opacity={area.opacity}
                   />
                 )
             )}
@@ -734,7 +724,7 @@ function Chart2({
           </LineChart>
         </ResponsiveContainer>
       </div>
-      <div className="iconLegend">
+      <div className="legendContainer">
         <FirstSeaIcon cx={14} cy={14} fill="#7F8CAA" />
         <p className="legendText">0.4m Threshold Reached</p>
         <SecondSeaIcon cx={14} cy={14} fill="#7F8CAA" />

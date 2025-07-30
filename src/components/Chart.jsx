@@ -201,11 +201,11 @@ const ThirdIcon = (props) => {
 // Define an array of colors for the lines (re-ordered slightly for better visual distinction)
 const lineColors = [
   "#7F8CAA", // Gray
-  "#82ca9d", // Green
-  "#8DD8FF", // Blue
-  "#f17e5d", // Coral
-  "#8884d8", // Purple
-  "#f15d7e", // Pink
+  "#0065F8", // Blue
+  "#06923E", // Green
+  "#9E6F21", // Brown
+  "#FE7743", // Orange
+  "#E14434", // Red
   "#a4de6c", // Light Green
   "#d0ed57", // Lime Green
   "#88a8c3", // Light Blue-Gray
@@ -219,34 +219,40 @@ const thresholds = [
   { value: 4.0, label: "4.0°C", iconX: ThirdThermoIcon, iconY: CircleIcon },
 ];
 
+function sortArrows(arr) {
+  const secondArrowElements = [];
+  const otherElements = [];
+
+  arr.forEach(item => {
+    if (item.secondarrow) {
+      secondArrowElements.push(item);
+    } else {
+      otherElements.push(item);
+    }
+  });
+
+  return secondArrowElements.concat(otherElements);
+}
+
+// To apply this to your ARROWS_OPTIONS, you would map over the outer array:
 const ARROWS_OPTIONS = [
   [
-    { height: 2.8, start: 2025, end: 2027.8 },
-    { height: 3.2, start: 2025, end: 2034.1 },
-    { height: 3.6, start: 2025, end: 2041.8 },
-    { height: 4.0, start: 2025, end: 2052.3 },
-    { height: 4.4, start: 2025, end: 2084.2 },
-  ],
-  [
-    { height: 1, start: 2025, end: 2027.8 },
-    { height: 1, start: 2027.8, end: 2034.1 },
-    { height: 2.45, start: 2025, end: 2041.8 },
-    { height: 2.45, start: 2041.8, end: 2052.3 },
-    { height: 4.45, start: 2025, end: 2084.2 },
-    { height: 4.45, start: 2084.2, end: 2099.0, unfinished: true },
+    { height: 0.7, start: 2025, end: 2027.8 },
+    { height: 0.7, start: 2027.8, end: 2034.1, secondarrow: true, color: "#0065F8" },
+    { height: 1, start: 2025, end: 2041.8 },
+    { height: 1, start: 2041.8, end: 2052.3, secondarrow: true, color: "#9E6F21" },
+    { height: 3, start: 2025, end: 2084.2 },
+    { height: 3, start: 2084.2, end: 2099.0, secondarrow: true, unfinished: true, color: "#FE7743" },
   ],
 ];
 
+const sortedARROWS_OPTIONS = ARROWS_OPTIONS.map(innerArray => sortArrows(innerArray));
+
 const AREAS_OPTIONS = [
   [
-    { start: 2027.8, end: 2034.1, bottom: 0, top: 5 },
-    { start: 2041.8, end: 2052.3, bottom: 0, top: 5 },
-    { start: 2084.2, end: 2099.0, bottom: 0, top: 5 },
-  ],
-  [
-    { start: 2027.8, end: 2034.1, bottom: 0.75, top: 1.75 },
-    { start: 2041.8, end: 2052.3, bottom: 1.75, top: 2.75 },
-    { start: 2084.2, end: 2099.0, bottom: 3.75, top: 4.75 },
+    { start: 2027.8, end: 2034.1, bottom: 0, top: 1.5, color: "#FFFF76", opacity: 0.25 },
+    { start: 2041.8, end: 2052.3, bottom: 0, top: 2, color: "#FF8800", opacity: 0.25  },
+    { start: 2084.2, end: 2099.0, bottom: 0, top: 4, color: "#F53B3B", opacity: 0.35 },
   ],
 ];
 
@@ -626,9 +632,9 @@ function Chart({
             ))}
 
             {/* Render ReferenceLine to indicate the current year */}
-            <ReferenceLine x={2025} stroke="red" label="Current Year" />
+            <ReferenceLine x={2025} stroke="#f15d7e" label="Current Year" />
 
-            {ARROWS_OPTIONS[arrowsOption].map(
+            {sortedARROWS_OPTIONS[arrowsOption].map(
               (arrow, index) =>
                 arrow.end <= maxYear && <Arrow key={index} {...arrow} />
             )}
@@ -641,6 +647,8 @@ function Chart({
                     endX={area.end}
                     startY={area.bottom}
                     endY={area.top}
+                    color={area.color}
+                    opacity={area.opacity}
                   />
                 )
             )}
@@ -707,7 +715,7 @@ function Chart({
           </LineChart>
         </ResponsiveContainer>
       </div>
-      <div className="iconLegend">
+      <div className="legendContainer">
         <FirstThermoIcon cx={14} cy={14} fill="#7F8CAA" />
         <p className="legendText">0.4m Threshold Reached</p>
         <SecondThermoIcon cx={14} cy={14} fill="#7F8CAA" />

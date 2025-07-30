@@ -2,7 +2,14 @@ import { useId, useRef } from "react";
 import { ReferenceDot } from "recharts";
 import { createPortal } from "react-dom";
 
-function Arrow({ height, start, end, unfinished = false }) {
+function Arrow({
+  height,
+  start,
+  end,
+  secondarrow = false,
+  unfinished = false,
+  color,
+}) {
   /*console.log(
     "Arrow component rendered with start:",
     start,
@@ -52,7 +59,14 @@ function Arrow({ height, start, end, unfinished = false }) {
               window.scrollY +
               endRef.current.getBoundingClientRect().height / 2
             }
-            label={(unfinished ? "More than " : "") + Math.round(end - start) + "y"}
+            label={
+              (secondarrow ? "+" : "") +
+              (unfinished ? " >" : "") +
+              Math.round(end - start) +
+              "y"
+            }
+            color={secondarrow ? color : "#E14434"}
+            unfinished={unfinished}
           />,
           document.body
         )}
@@ -60,7 +74,7 @@ function Arrow({ height, start, end, unfinished = false }) {
   );
 }
 
-function ArrowInPortal({ startX, endX, y, label, color = "orange", textColor = "#333" }) {
+function ArrowInPortal({ startX, endX, y, label, color, textColor = "#333", unfinished }) {
   return (
     <>
       <div
@@ -76,7 +90,15 @@ function ArrowInPortal({ startX, endX, y, label, color = "orange", textColor = "
           height: "26px",
         }}
       >
-        <div style={{ fontSize: "12px", color: textColor, flexGrow: 1, position: "relative", top: "3px" }}>
+        <div
+          style={{
+            fontSize: "12px",
+            color: textColor,
+            flexGrow: 1,
+            position: "relative",
+            top: "3px",
+          }}
+        >
           {label}
         </div>
         <div
@@ -85,6 +107,7 @@ function ArrowInPortal({ startX, endX, y, label, color = "orange", textColor = "
             border: `2px solid ${color}`,
             borderBottomWidth: "1px",
             borderTop: "none",
+            borderRightWidth: unfinished ? 0 : "2px",
             width: "100%",
             flexGrow: 0,
           }}
@@ -95,11 +118,25 @@ function ArrowInPortal({ startX, endX, y, label, color = "orange", textColor = "
             border: `2px solid ${color}`,
             borderTopWidth: "1px",
             borderBottom: "none",
+            borderRightWidth: unfinished ? 0 : "2px",
             width: "100%",
             flexGrow: 0,
           }}
         ></div>
       </div>
+      {unfinished && (
+        <div
+          style={{
+            position: "absolute",
+            left: endX -9,
+            top: y - 5,
+            width: 8,
+            height: 8,
+            borderColor: color,
+          }}
+          className="arrow-end"
+        ></div>
+      )}
     </>
   );
 }

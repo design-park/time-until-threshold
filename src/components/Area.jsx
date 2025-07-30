@@ -2,7 +2,7 @@ import { useId, useRef } from "react";
 import { ReferenceDot } from "recharts";
 import { createPortal } from "react-dom";
 
-function Area({ startX, endX, startY, endY }) {
+function Area({ startX, endX, startY, endY, color, opacity }) {
   console.log(
     "Area component rendered with startX:",
     startX,
@@ -11,7 +11,11 @@ function Area({ startX, endX, startY, endY }) {
     "startY:",
     startY,
     "endY:",
-    endY
+    endY,
+    "color:",
+    color,
+    "opacity:",
+    opacity
   );
   const startRef = useRef();
   const endRef = useRef();
@@ -59,6 +63,8 @@ function Area({ startX, endX, startY, endY }) {
               window.scrollY +
               startRef.current.getBoundingClientRect().height / 2
             }
+            color={color}
+            opacity={opacity} 
           />,
           document.body
         )}
@@ -66,7 +72,7 @@ function Area({ startX, endX, startY, endY }) {
   );
 }
 
-function AreaInPortal({ startX, endX, startY, endY, color = "#ffff9bff" }) {
+function AreaInPortal({ startX, endX, startY, endY, color, opacity }) {
   return (
     <>
       <div
@@ -77,6 +83,7 @@ function AreaInPortal({ startX, endX, startY, endY, color = "#ffff9bff" }) {
           width: endX - startX,
           height: endY - startY,
           backgroundColor: color,
+          opacity: opacity,
           zIndex: -1,
         }}
       ></div>
