@@ -204,19 +204,60 @@ const thresholds = [
 const ARROWS_OPTIONS = [
   [
     { height: 0.12, start: 2025, end: 2051.5 },
-    { height: 0.12, start: 2051.5, end: 2066.5, secondarrow: true, color: "#0065F8" },
+    {
+      height: 0.12,
+      start: 2051.5,
+      end: 2066.5,
+      secondarrow: true,
+      color: "#0065F8",
+    },
     { height: 0.2, start: 2025, end: 2073.9 },
-    { height: 0.2, start: 2073.9, end: 2100.0, secondarrow: true, unfinished: true, color: "#0065F8" },
+    {
+      height: 0.2,
+      start: 2073.9,
+      end: 2100.0,
+      secondarrow: true,
+      unfinished: true,
+      color: "#0065F8",
+    },
     { height: 0.28, start: 2025, end: 2090.9 },
-    { height: 0.28, start: 2090.9, end: 2100.0, secondarrow: true, unfinished: true, color: "#0065F8" },
+    {
+      height: 0.28,
+      start: 2090.9,
+      end: 2100.0,
+      secondarrow: true,
+      unfinished: true,
+      color: "#0065F8",
+    },
   ],
 ];
 
 const AREAS_OPTIONS = [
   [
-    { start: 2051.5, end: 2066.5, bottom: 0, top: 0.4, color: "#C5FF95", opacity: 0.25 },
-    { start: 2073.9, end: 2100.0, bottom: 0, top: 0.6, color: "#5DEBD7", opacity: 0.25 },
-    { start: 2090.9, end: 2100.0, bottom: 0, top: 0.8, color: "#1679AB", opacity: 0.35 },
+    {
+      start: 2051.5,
+      end: 2066.4,
+      bottom: 0,
+      top: 0.4,
+      color: "#C5FF95",
+      opacity: 0.25,
+    },
+    {
+      start: 2073.9,
+      end: 2100.0,
+      bottom: 0,
+      top: 0.6,
+      color: "#5DEBD7",
+      opacity: 0.25,
+    },
+    {
+      start: 2090.9,
+      end: 2100.0,
+      bottom: 0,
+      top: 0.8,
+      color: "#1679AB",
+      opacity: 0.35,
+    },
   ],
 ];
 
@@ -676,11 +717,7 @@ function Chart2({
                     const IconComponentY = thresh.iconY;
                     const iconColor =
                       lineColors[scenarioIndex % lineColors.length]; // Get the color of the scenario line
-                    if (
-                      blinkingScenarioForMaxTemp === scenario &&
-                      thresh.value === maxSeaLevel &&
-                      !blinker
-                    ) {
+                    if (crossingYear + 0.1 > maxYear && !blinker) {
                       return null; // Skip rendering if blinking is active for this scenario
                     }
                     return (
