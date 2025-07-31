@@ -129,7 +129,7 @@ function ArrowInPortal({ startX, endX, y, label, color, textColor = "#333", unfi
           style={{
             position: "absolute",
             left: endX -9,
-            top: y - 5,
+            top: y - 6,
             width: 8,
             height: 8,
             borderColor: color,
