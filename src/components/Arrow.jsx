@@ -74,7 +74,15 @@ function Arrow({
   );
 }
 
-function ArrowInPortal({ startX, endX, y, label, color, textColor = "#333", unfinished }) {
+function ArrowInPortal({
+  startX,
+  endX,
+  y,
+  label,
+  color,
+  textColor = "#333",
+  unfinished,
+}) {
   return (
     <>
       <div
@@ -125,17 +133,29 @@ function ArrowInPortal({ startX, endX, y, label, color, textColor = "#333", unfi
         ></div>
       </div>
       {unfinished && (
-        <div
-          style={{
-            position: "absolute",
-            left: endX -9,
-            top: y - 6,
-            width: 8,
-            height: 8,
-            borderColor: color,
-          }}
-          className="arrow-end"
-        ></div>
+        <>
+          <div
+            style={{
+              position: "absolute",
+              left: endX - 9,
+              top: y - 6,
+              width: 8,
+              height: 8,
+              borderColor: color,
+            }}
+            className="arrow-end"
+          ></div>
+          <img
+            src="/images/animated-dots.webp"
+            style={{
+              position: "absolute",
+              left: endX + 5,
+              top: y - 11,
+              height: 20,
+              borderColor: color,
+            }}
+          />
+        </>
       )}
     </>
   );
