@@ -521,7 +521,7 @@ function Chart({
       <h1>Global surface temperature change relative to 1850-1900</h1>
       <p>
         This chart illustrates observed (1950–2024) and projected (2025–2099)
-        global surface temperature changes relative to the 1900 baseline. The
+        global surface temperature changes relative to the 1850-1900 baseline. The
         projections are based on different greenhouse gas emission scenarios.
       </p>
       <p>Reaching the threshold later is better!!!</p>
