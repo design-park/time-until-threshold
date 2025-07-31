@@ -5,9 +5,9 @@ function Demography() {
   const [gender, setGender] = useState("");
   const [age, setAge] = useState("");
   const [education, setEducation] = useState("");
-  const [partyAffiliation, setPartyAffiliation] = useState("");
-  const [income, setIncome] = useState("");
-  const [religion, setReligion] = useState("");
+  const [scienceKnowledge, setscienceKnowledge] = useState("");
+  const [engageFrequency, setengageFrequency] = useState("");
+  const [lineGraphConfidency, setlineGraphConfidency] = useState("");
   const storeDemographicInfo = useStore((state) => state.storeDemographicInfo);
 
   const handleSubmit = (e) => {
@@ -16,14 +16,19 @@ function Demography() {
       gender,
       age,
       education,
-      partyAffiliation,
-      income,
-      religion
+      scienceKnowledge,
+      engageFrequency,
+      lineGraphConfidency
     );
   };
 
   const isFormComplete =
-    gender && age && education && partyAffiliation && income && religion;
+    gender &&
+    age &&
+    education &&
+    scienceKnowledge &&
+    engageFrequency &&
+    lineGraphConfidency;
 
   return (
     <div className="centerBody">
@@ -38,7 +43,7 @@ function Demography() {
             {/* Gender Question */}
             <div className="form-section">
               <label htmlFor="gender" className="form-label">
-                Gender:
+                1. What is your gender?
               </label>
               <div className="radio-group">
                 <label className="radio-label">
@@ -80,7 +85,7 @@ function Demography() {
             {/* Age Question */}
             <div className="form-section">
               <label htmlFor="age" className="form-label">
-                Age:
+                2. What is your age group?
               </label>
               <select
                 id="age"
@@ -88,7 +93,7 @@ function Demography() {
                 onChange={(e) => setAge(e.target.value)}
                 className="select-field"
               >
-                <option value="">Select your age group</option>
+                <option value="">No selection</option>
                 <option value="1">18-24</option>
                 <option value="2">25-34</option>
                 <option value="3">35-44</option>
@@ -101,7 +106,8 @@ function Demography() {
             {/* Education Question */}
             <div className="form-section">
               <label htmlFor="education" className="form-label">
-                Education:
+                3. What is the highest level of education you have completed or
+                are currently pursuing?
               </label>
               <select
                 id="education"
@@ -109,84 +115,78 @@ function Demography() {
                 onChange={(e) => setEducation(e.target.value)}
                 className="select-field"
               >
-                <option value="">Select your education level</option>
-                <option value="1">Below Year 12</option>
-                <option value="2">Year 10/11</option>
-                <option value="3">Year 12/HSC</option>
-                <option value="4">Advanced Diploma/TAFE</option>
-                <option value="5">Bachelor's degree or equivalent</option>
-                <option value="6">Graduate Diploma/Certificate</option>
-                <option value="7">Master's/Doctoral degree</option>
+                <option value="">No selection</option>
+                <option value="1">Less than High School</option>
+                <option value="2">
+                  Higher Education less than Bachelor's Degree
+                </option>
+                <option value="3">Bachelor's Degree</option>
+                <option value="4">Master's Degree</option>
+                <option value="5">Doctorate or Professional Degree</option>
                 <option value="8">Prefer not to answer</option>
               </select>
             </div>
 
-            {/* Party Affiliation Question */}
+            {/* Climate Change Science Knowledge Question */}
             <div className="form-section">
-              <label htmlFor="partyAffiliation" className="form-label">
-                Party Affiliation:
+              <label htmlFor="scienceKnowledge" className="form-label">
+                4. How would you rate your overall knowledge and understanding
+                of climate change science?
               </label>
               <select
-                id="partyAffiliation"
-                value={partyAffiliation}
-                onChange={(e) => setPartyAffiliation(e.target.value)}
+                id="scienceKnowledge"
+                value={scienceKnowledge}
+                onChange={(e) => setscienceKnowledge(e.target.value)}
                 className="select-field"
               >
-                <option value="">Select your party affiliation</option>
-                <option value="0">
-                  "conservative" (Liberal & National Coalition)
-                </option>
-                <option value="1">
-                  "liberal" (Labor Party and Australian Green Party)
-                </option>
-                <option value="2">None of the above</option>
+                <option value="">No selection</option>
+                <option value="0">No knowledge/understanding</option>
+                <option value="1">Limited Knowledge/understanding</option>
+                <option value="2">Moderate knowledge/understanding</option>
+                <option value="3">Good knowledge/understanding</option>
+                <option value="4">Expert knowledge/understanding</option>
               </select>
             </div>
 
-            {/* Income Question */}
+            {/* Engage Frequency Question */}
             <div className="form-section">
-              <label htmlFor="income" className="form-label">
-                Income:
+              <label htmlFor="engageFrequency" className="form-label">
+                5. How frequently do you seek information or engage with
+                discussions related to climate change (e.g., news, scientific
+                articles, documentaries, conversations)?
               </label>
               <select
-                id="income"
-                value={income}
-                onChange={(e) => setIncome(e.target.value)}
+                id="engageFrequency"
+                value={engageFrequency}
+                onChange={(e) => setengageFrequency(e.target.value)}
                 className="select-field"
               >
-                <option value="">Select your income group</option>
-                <option value="1">&lt;$24,999</option>
-                <option value="2">$25,000 to $49,999</option>
-                <option value="3">$50,000 to $74,999</option>
-                <option value="4">$75,000 to $99,999</option>
-                <option value="5">$100,000 to $149,999</option>
-                <option value="6">$150,000 to $249,999</option>
-                <option value="7">{">"}$250,000</option>
-                <option value="8">Prefer not to answer</option>
+                <option value="">No selection</option>
+                <option value="1">Never</option>
+                <option value="2">Rarely (less than once a month)</option>
+                <option value="3">Occasionally (a few times a month)</option>
+                <option value="4">Frequently (a few times a week)</option>
+                <option value="5">Very Frequently (daily)</option>
               </select>
             </div>
 
-            {/* Religion Question */}
+            {/* Confidency in Line Graphs */}
             <div className="form-section">
-              <label htmlFor="religion" className="form-label">
-                Religion:
+              <label htmlFor="lineGraphConfidency" className="form-label">
+                6. How confident are you in interpreting line graphs?
               </label>
               <select
-                id="religion"
-                value={religion}
-                onChange={(e) => setReligion(e.target.value)}
+                id="lineGraphConfidency"
+                value={lineGraphConfidency}
+                onChange={(e) => setlineGraphConfidency(e.target.value)}
                 className="select-field"
               >
-                <option value="">Select your religion</option>
-                <option value="1">Christianity</option>
-                <option value="2">Islam</option>
-                <option value="3">Judaism</option>
-                <option value="4">Hinduism</option>
-                <option value="5">Buddhism</option>
-                <option value="6">Sikhism</option>
-                <option value="7">Other</option>
-                <option value="8">No religion</option>
-                <option value="9">Prefer not to answer</option>
+                <option value="">No selection</option>
+                <option value="1">Not confident at all</option>
+                <option value="2">Slightly confident</option>
+                <option value="3">Moderately confident</option>
+                <option value="4">Confident</option>
+                <option value="5">Very Confident</option>
               </select>
             </div>
 
