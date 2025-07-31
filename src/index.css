@@ -491,8 +491,9 @@ input[type="range"]:focus::-ms-fill-upper {
 
 .section-description {
   margin-bottom: 25px;
-  color: #78909c;
+  color: #57564F;
   font-size: 1em;
+  font-style: italic;
 }
 
 /* Table Styling */

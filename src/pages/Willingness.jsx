@@ -111,7 +111,7 @@ function Willingness({ step }) {
     },
     {
       id: "societal7",
-      text: "Raise taxes to fund the development of technology to ensure the majority of energy comes from renewable sources by the year 2030",
+      text: "Raise taxes to find the development of technology to ensure the majority of energy comes from renewable sources by the year 2030",
     },
   ];
 
@@ -166,7 +166,7 @@ function Willingness({ step }) {
       <section className="survey-section">
         <p className="section-description">
           For the following items, please indicate the extent to which you think
-          that as a society we should be willing to take these actions:
+          that <strong>as a society</strong> we should be willing to take these actions:
         </p>
         <form>
           <table className="likert-table">
@@ -211,7 +211,7 @@ function Willingness({ step }) {
       {/* Personal Willingness Section */}
       <section className="survey-section">
         <p className="section-description">
-          For the following items, please indicate the extent to which you would
+          For the following items, please indicate the extent to which <strong>you</strong> would
           be willing to personally take these actions:
         </p>
         <form>
