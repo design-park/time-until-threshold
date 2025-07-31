@@ -7,10 +7,9 @@ const OPTIONS = {
     title: "Stop at first and last crossing of every temperature limit",
     animationBounds: [
       [2025, 2051.5],
-      [2051.5, 2066.5],
-      [2066.5, 2073.9],
-      [2073.9, 2085.3],
-      [2085.3, 2090.9],
+      [2051.5, 2066.4],
+      [2066.4, 2073.9],
+      [2073.9, 2090.9],
       [2090.9,  2100],
     ],
     maxSeaLevels: [1, 1, 1, 1],
