@@ -36,7 +36,7 @@ function TrainingVisInfo() {
             The next step is<strong> a training phase.</strong> You will
             interact with a training visualization designed to help you get
             familiar with how this type of visualization works. During this
-            phase, you will also receive a <strong>quiz sheet</strong>
+            phase, you will also receive a <strong> quiz sheet</strong>
             that checks your understanding of the visualization.
           </p>
           <p className="subText">
