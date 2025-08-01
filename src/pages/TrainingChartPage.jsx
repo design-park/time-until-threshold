@@ -4,7 +4,8 @@ import Chart2 from "../components/Chart2";
 import { useStore } from "../store";
 import { simpleHash } from "../utils";
 
-const DURATION = 5 * 60 * 1000; // 5 minutes in milliseconds
+//const DURATION = 5 * 60 * 1000; // 5 minutes in milliseconds
+const DURATION = 30 * 1000; // 30 seconds in milliseconds
 
 function TrainingChartPage() {
   const condition = useStore((state) => state.condition);
@@ -48,6 +49,7 @@ function TrainingChartPage() {
             placeholder="Ask code to researcher"
             className="codeInput"
             name="codeInput"
+            autoComplete="off"
           />
         )}
         <button

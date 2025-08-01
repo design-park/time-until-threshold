@@ -645,7 +645,7 @@ input[type="range"]:focus::-ms-fill-upper {
   text-align: center; /* Center align radio buttons */
 }
 
-.survey-table td:first-child {
+.survey-table:not(.quiz-table) td:first-child {
   text-align: left; /* Left align statement text */
   color: #444;
 }

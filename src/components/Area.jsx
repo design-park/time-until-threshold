@@ -3,7 +3,7 @@ import { ReferenceDot } from "recharts";
 import { createPortal } from "react-dom";
 
 function Area({ startX, endX, startY, endY, color, opacity }) {
-  console.log(
+  /*console.log(
     "Area component rendered with startX:",
     startX,
     "endX:",
@@ -16,7 +16,7 @@ function Area({ startX, endX, startY, endY, color, opacity }) {
     color,
     "opacity:",
     opacity
-  );
+  );*/
   const startRef = useRef();
   const endRef = useRef();
   return (

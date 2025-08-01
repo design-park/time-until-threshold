@@ -90,6 +90,7 @@ export const useStore = create()(
       q5Confidence: null,
       q6Answer: null,
       q6Confidence: null,
+      quizCompleted: false,
 
       storeParticipantInfo: (userID, condition) => set({ userID, condition }),
       storeDemographicInfo: (
@@ -184,6 +185,7 @@ export const useStore = create()(
       setTargetVisInfoSeen: (seen) => set({ targetVisInfoSeen: seen }),
       setTrainingChartSeen: (seen) => set({ trainingChartSeen: seen }),
       setChartSeen: (seen) => set({ chartSeen: seen }),
+      setQuizCompleted: (completed) => set({ quizCompleted: completed }),
 
       reset: () =>
         set({
@@ -253,6 +255,7 @@ export const useStore = create()(
           q5Confidence: null,
           q6Answer: null,
           q6Confidence: null,
+          quizCompleted: false,
         }),
       setQ1Answer: (answer) => set({ q1Answer: answer }),
       setQ1Confidence: (confidence) => set({ q1Confidence: confidence }),

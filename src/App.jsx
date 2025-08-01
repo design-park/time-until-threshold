@@ -13,6 +13,7 @@ import Chart2 from "./components/Chart2.jsx";
 import AnimatedChart2 from "./components/AnimatedChart2.jsx";
 import TrainingChartPage from "./pages/TrainingChartPage.jsx";
 import TrainingVisInfo from "./pages/TrainingVisInfo.jsx";
+import Quiz from "./pages/Quiz.jsx";
 
 function App() {
   return (
@@ -61,11 +62,12 @@ function NotIntroContent() {
   const gender = useStore((state) => state.gender);
   const arousal = useStore((state) => state.arousal);
   const tempDistance1 = useStore((state) => state.tempDistance1);
-  const societal1 = useStore((state) => state.societal1); 
+  const societal1 = useStore((state) => state.societal1);
   const trainingVisInfoSeen = useStore((state) => state.trainingVisInfoSeen);
   const targetVisInfoSeen = useStore((state) => state.targetVisInfoSeen);
   const trainingChartSeen = useStore((state) => state.trainingChartSeen);
   const chartSeen = useStore((state) => state.chartSeen);
+  const quizCompleted = useStore((state) => state.quizCompleted);
   const postArousal = useStore((state) => state.postArousal);
   const postTempDistance1 = useStore((state) => state.postTempDistance1);
   const postSocietal1 = useStore((state) => state.postSocietal1);
@@ -92,6 +94,8 @@ function NotIntroContent() {
     return <TempDistance step="post" />;
   } else if (postSocietal1 === null) {
     return <Willingness step="post" />;
+  } else if (!quizCompleted) {
+    return <Quiz />;
   } else {
     return <SubmitPage />;
   }
