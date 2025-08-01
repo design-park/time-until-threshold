@@ -16,20 +16,50 @@ function TrainingVisInfo() {
       <div className="main-container">
         <div className="card">
           <h4 className="instruction-text">
-            Please ask the researcher to provide you with the information sheet.
+            Please be prepared to focus on interacting with the visualization in
+            the next step.
           </h4>
 
-          <h4 className="titleText">What you will read:</h4>
+          <h4 className="titleText">Before the next step:</h4>
           <p className="subText">
-            The information sheet is here to support your understanding the
-            visualization you will see at the next step.
+            You have received <strong> an information sheet</strong> that
+            provides a<strong> brief overview of SSP-RCP scenarios.</strong>{" "}
+            This sheet is meant to help you understand the type of visualization
+            you will see.
+            <strong>Please read it carefully before proceeding.</strong> You may
+            keep the sheet until the end of the experiment, but you are
+            <strong> not allowed to take notes</strong> on it.
           </p>
 
-          <h4 className="titleText">When to read:</h4>
+          <h4 className="titleText">During the next step:</h4>
           <p className="subText">
-            Before going to the next step, please read what is written on the
-            paper. At the next step, you will interact with the visualization.
-            You are also allowed to read the sheet during this step if needed.
+            The next step is<strong> a training phase.</strong> You will
+            interact with a training visualization designed to help you get
+            familiar with how this type of visualization works. During this
+            phase, you will also receive a <strong>quiz sheet</strong>
+            that checks your understanding of the visualization.
+          </p>
+          <p className="subText">
+            You are welcome to refer to the<strong> information sheet</strong>{" "}
+            at any time while interacting with the visualization and answering
+            the quiz.
+          </p>
+          <p className="subText">
+            A timer will be running. It is not to limit your time, but to ensure
+            you spend at least a minimum amount of time engaging with the
+            visualization.
+          </p>
+          <p className="subText">
+            ⚠️<strong> Important</strong>: Once you complete the quiz, the
+            researcher will check your answers. If your responses show
+            sufficient understanding, you will receive a code to unlock the next
+            step of the experiment. If not, you will be asked to review the
+            training visualization again with the help from the researcher.
+          </p>
+          <p className="subText">
+            The next step after training will involve interacting with the
+            <strong> target visualization</strong>, which is the main part of
+            the experiment.
           </p>
 
           <label className="checkBox">

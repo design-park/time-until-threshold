@@ -157,14 +157,14 @@ body {
 }
 
 .titleText {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: bold;
   margin-top: 20px;
   margin-bottom: 5px;
 }
 
 .subText {
-  font-size: 12px;
+  font-size: 16px;
   margin-top: 5x;
   margin-bottom: 0px;
   max-width: 800px;
@@ -194,6 +194,8 @@ body {
   margin: 20px 0px;
   font-size: 16px;
   display: block;
+  color:#1A2A80;
+  font-style: italic;
 }
 
 .affectiveSlider {
