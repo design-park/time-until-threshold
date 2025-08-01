@@ -699,3 +699,9 @@ input[type="range"]:focus::-ms-fill-upper {
 .codeInput {
   display: block;
 }
+
+.warningText {
+  color: #d32f2f;
+  font-weight: bold;
+  text-align: center;
+}

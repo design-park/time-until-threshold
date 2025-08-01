@@ -524,8 +524,8 @@ function Chart({
         global surface temperature changes relative to the 1850-1900 baseline. The
         projections are based on different greenhouse gas emission scenarios.
       </p>
-      <p>Reaching the threshold later is better!!!</p>
       {aboveChart}
+      <p className="warningText">Reaching the threshold early is worse.</p>
       <div>
         <ResponsiveContainer width="100%" height={400}>
           <LineChart

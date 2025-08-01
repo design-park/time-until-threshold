@@ -573,6 +573,7 @@ function Chart2({
         are based on different greenhouse gas emission scenarios.
       </p>
       {aboveChart}
+      <p className="warningText">Reaching the threshold early is worse.</p>
       <div>
         <ResponsiveContainer width="100%" height={400}>
           <LineChart
