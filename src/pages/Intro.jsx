@@ -34,12 +34,69 @@ function Intro() {
       <div className="main-container">
         <div className="card">
           <h4 className="instruction-text">
-            Please read the following information about my research project and
-            sign the consent form to proceed.
+            A study on the impact of climate change visualization
           </h4>
 
-          <h4 className="titleText">Title of the project:</h4>
-          <p className="subText">Affective Climate Change Visualization</p>
+          <p className="subText">
+            You are invited to participate in our study called
+            <strong>
+              {" "}
+              "A study on the impact of climate change visualization."
+            </strong>
+          </p>
+
+          <p className="subText">This study will take around 30 minutes.</p>
+
+          <p className="subText">
+            Our goal is to understand how interactive data visualizations can
+            support public understanding and involvement in climate change
+            issues. The results from this experiment will help inform the design
+            of visualizations that more effectively raise awareness and
+            encourage meaningful engagement.
+          </p>
+
+          <p className="subText">
+            Please participate in this experiment only if you meet all of the
+            following criteria:
+          </p>
+          <ul className="subText">
+            <li>You are fluent in English</li>
+            <li>You are at least 18 years old</li>
+            <li>
+              You do not have <strong>low vision</strong> or{" "}
+              <strong>any form of color vision deficiency</strong>
+            </li>
+            <li>You are completing this survey on a computer screen</li>
+          </ul>
+
+          <p className="subText">
+            <strong>
+              You can only participate using a computer screen, as a mobile
+              phone's screen is too small to display the visualizations
+              correctly.
+            </strong>
+          </p>
+
+          <p className="subText">
+            After agreeing to the terms (on the next page), you will begin the
+            experiment. You will be seated at a computer with a screen and
+            keyboard, and you will follow the instructions displayed on the
+            screen. The tasks will include answering questionnaires, reading
+            content, interacting with visualizations, and solving quizzes. Most
+            activities will be completed on the computer; however, at certain
+            points, the researcher may provide you with paper materials and a
+            pen, which will require you to read or write by hand. The researcher
+            will be present throughout the process, and you are welcome to ask
+            questions at any time. Your responses during the study will be
+            recorded.
+          </p>
+
+          <p className="subText">
+            This study is conducted by Jihyun Park (Intern researcher, ILDA
+            Team, Inria Saclay) under the supervision of Florent Cabric and
+            Vanessa Peña Araya. If you have any questions or concerns about the
+            study, please feel free to contact Jihyun Park at{" "}
+          </p>
 
           <h4 className="titleText">Participant Code:</h4>
           <p className="subText">{participantCode}</p>
@@ -62,15 +119,6 @@ function Intro() {
           </p>
 
           <h4 className="titleText">Purpose of the research project:</h4>
-          <p className="subText">
-            Version 1: The purpose of this research is to investigate how
-            different ways of visualizing climate change data affect people's
-            perception of its urgency and their willingness to take action.
-            Specifically, we are exploring if animating temperature projections
-            on a line graph can reduce the feeling that climate change is a
-            distant problem, thereby increasing your willingness to engage in
-            mitigation behaviors.
-          </p>
 
           <p className="subText">
             Version 2: The purpose of this research is to investigate how
