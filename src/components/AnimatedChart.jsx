@@ -80,7 +80,7 @@ function AnimatedChart({ option = 1 }) {
             <p className="invisible"> ⬅ Click to interact with the visualization</p>
             <div className="calenderContainer">
               <img
-                src="/images/calendar.png"
+                src="./images/calendar.png"
                 alt="Calender Icon"
                 style={{ width: "80px" }}
               />

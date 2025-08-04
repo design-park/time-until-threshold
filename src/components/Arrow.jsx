@@ -146,7 +146,7 @@ function ArrowInPortal({
             className="arrow-end"
           ></div>
           <img
-            src="/images/animated-dots.webp"
+            src="./images/animated-dots.webp"
             style={{
               position: "absolute",
               left: endX + 5,

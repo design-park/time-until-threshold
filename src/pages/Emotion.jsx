@@ -34,7 +34,7 @@ function Emotion({ step }) {
               Level of Arousal (Displeasure-Pleasure)
             </h4>
             <div className="sliderContainer">
-              <img src="/images/AS_unhappy.png" alt="Unhappy Icon" />
+              <img src="./images/AS_unhappy.png" alt="Unhappy Icon" />
               <div className="slider">
                 <input
                   type="range"
@@ -47,15 +47,15 @@ function Emotion({ step }) {
                     setHasMovedArousal(true);
                   }}
                 />
-                <img src="/images/AS_intensity_cue.png" alt="Intensity Cue" />
+                <img src="./images/AS_intensity_cue.png" alt="Intensity Cue" />
               </div>
-              <img src="/images/AS_happy.png" alt="Happy Icon" />
+              <img src="./images/AS_happy.png" alt="Happy Icon" />
             </div>
           </div>
           <div className="sliderWrapper">
             <h4 className="sliderLabel">Level of Valence (Boring-Excited)</h4>
             <div className="sliderContainer">
-              <img src="/images/AS_sleepy.png" alt="Sleepy Icon" />
+              <img src="./images/AS_sleepy.png" alt="Sleepy Icon" />
               <div className="slider">
                 <input
                   type="range"
@@ -68,9 +68,9 @@ function Emotion({ step }) {
                     setHasMovedValence(true);
                   }}
                 />
-                <img src="/images/AS_intensity_cue.png" alt="Intensity Cue" />
+                <img src="./images/AS_intensity_cue.png" alt="Intensity Cue" />
               </div>
-              <img src="/images/AS_wideawake.png" alt="Wideawake Icon" />
+              <img src="./images/AS_wideawake.png" alt="Wideawake Icon" />
             </div>
           </div>
         </div>

@@ -83,7 +83,7 @@ function AnimatedChart2({ option = 1, showText = true }) {
             </p>
             <div className="calenderContainer">
               <img
-                src="/images/calendar.png"
+                src="./images/calendar.png"
                 alt="Calender Icon"
                 style={{ width: "80px" }}
               />
