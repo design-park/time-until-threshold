@@ -14,6 +14,7 @@ import AnimatedChart2 from "./components/AnimatedChart2.jsx";
 import TrainingChartPage from "./pages/TrainingChartPage.jsx";
 import TrainingVisInfo from "./pages/TrainingVisInfo.jsx";
 import Quiz from "./pages/Quiz.jsx";
+import NewTraining from "./pages/NewTraining.jsx";
 
 function App() {
   return (
@@ -83,7 +84,8 @@ function NotIntroContent() {
   } else if (!trainingVisInfoSeen) {
     return <TrainingVisInfo />;
   } else if (!trainingChartSeen) {
-    return <TrainingChartPage />;
+    return <NewTraining />;
+    //return <TrainingChartPage />;
   } else if (!targetVisInfoSeen) {
     return <TargetVisInfo />;
   } else if (!chartSeen) {

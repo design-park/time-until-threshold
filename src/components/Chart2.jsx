@@ -269,6 +269,15 @@ function Chart2({
   aboveChart = null, // Optional component to render above the chart
   arrowsOption = 0,
   areasOption = 0,
+  showArrows = true,
+  showAreas = true,
+  showThresholds = true,
+  showMarkers = true,
+  showXMarkers = true,
+  showText = true,
+  showWarning = true,
+  showReadingGuide = false,
+  showReadingGuide2 = false,
 }) {
   const blinker = useBlinker(500); // Blinker hook to toggle visibility every second
   const [fullChartData, setFullChartData] = useState([]);
@@ -566,14 +575,21 @@ function Chart2({
 
   return (
     <div className="chartBody">
-      <h1>Global mean sea level change relative to 1900</h1>
-      <p>
-        This chart illustrates observed (1950–2024) and projected (2025–2099)
-        global sea level changes relative to the 1900 baseline. The projections
-        are based on different greenhouse gas emission scenarios.
-      </p>
-      {aboveChart}
-      <p className="warningText">Reaching the threshold early is worse.</p>
+      {showText && (
+        <>
+          <h1>Global mean sea level change relative to 1900</h1>
+          <p>
+            This chart illustrates observed (1950–2024) and projected
+            (2025–2099) global sea level changes relative to the 1900 baseline.
+            The projections are based on different greenhouse gas emission
+            scenarios.
+          </p>
+        </>
+      )}
+      {aboveChart}{" "}
+      {showWarning && (
+        <p className="warningText">Reaching the threshold early is worse.</p>
+      )}
       <div>
         <ResponsiveContainer width="100%" height={400}>
           <LineChart
@@ -600,7 +616,7 @@ function Chart2({
             />
             <YAxis
               stroke="#333"
-              ticks={[0, 0.4, 0.6, 0.8, 1.0]} // Explicit Y-axis ticks
+              ticks={[0, 0.115, 0.2, 0.4, 0.6, 0.8, 1.0]} // Explicit Y-axis ticks
               tick={{ fill: "#555", fontSize: 12 }}
               label={{
                 value: "Relative sea level (m)",
@@ -610,6 +626,78 @@ function Chart2({
               }}
               domain={[0, 1]}
             />
+            {showReadingGuide && (
+              <>
+                <ReferenceLine
+                  segment={[
+                    { x: 1982, y: 0 },
+                    { x: 1982, y: 0.115 },
+                  ]}
+                  stroke="green"
+                  strokeWidth={2}
+                />
+                <ReferenceLine
+                  segment={[
+                    { x: 1950, y: 0.115 },
+                    { x: 1982, y: 0.115 },
+                  ]}
+                  stroke="green"
+                  strokeWidth={2}
+                />
+                <ReferenceLine
+                  segment={[
+                    { x: 1950, y: 0.115 },
+                    { x: 1951, y: 0.145 },
+                  ]}
+                  stroke="green"
+                  strokeWidth={2}
+                />
+                <ReferenceLine
+                  segment={[
+                    { x: 1950, y: 0.115 },
+                    { x: 1951, y: 0.085 },
+                  ]}
+                  stroke="green"
+                  strokeWidth={2}
+                />
+              </>
+            )}
+            {showReadingGuide2 && (
+              <>
+                <ReferenceLine
+                  segment={[
+                    { x: 2051, y: 0 },
+                    { x: 2051, y: 0.4 },
+                  ]}
+                  stroke="green"
+                  strokeWidth={2}
+                />
+                <ReferenceLine
+                  segment={[
+                    { x: 1950, y: 0.4 },
+                    { x: 2051, y: 0.4 },
+                  ]}
+                  stroke="green"
+                  strokeWidth={2}
+                />
+                <ReferenceLine
+                  segment={[
+                    { x: 2050, y: 0.045 },
+                    { x: 2051, y: 0 },
+                  ]}
+                  stroke="green"
+                  strokeWidth={2}
+                />
+                <ReferenceLine
+                  segment={[
+                    { x: 2051, y: 0 },
+                    { x: 2052, y: 0.045 },
+                  ]}
+                  stroke="green"
+                  strokeWidth={2}
+                />
+              </>
+            )}
             <Legend
               wrapperStyle={{
                 paddingTop: "20px",
@@ -664,116 +752,128 @@ function Chart2({
             ))}
 
             {/* Render ReferenceLines for temperature thresholds */}
-            {thresholds.map((thresh) => (
-              <ReferenceLine
-                key={`thresh-${thresh.value}`}
-                y={thresh.value}
-                stroke={"#333"}
-                strokeDasharray="3 3"
-                label={{
-                  value: `${thresh.label} Threshold`,
-                  position: "right",
-                  fill: "#333",
-                  fontSize: 12,
-                }}
-                isAnimationActive={false}
-              />
-            ))}
+            {showThresholds &&
+              thresholds.map((thresh) => (
+                <ReferenceLine
+                  key={`thresh-${thresh.value}`}
+                  y={thresh.value}
+                  stroke={"#333"}
+                  strokeDasharray="3 3"
+                  label={{
+                    value: `${thresh.label} Threshold`,
+                    position: "right",
+                    fill: "#333",
+                    fontSize: 12,
+                  }}
+                  isAnimationActive={false}
+                />
+              ))}
 
             {/* Render ReferenceLine to indicate the current year */}
             <ReferenceLine x={2025} stroke="red" label="Current Year" />
 
-            {ARROWS_OPTIONS[arrowsOption].map(
-              (arrow, index) =>
-                arrow.end <= maxYear && <Arrow key={index} {...arrow} />
-            )}
-            {AREAS_OPTIONS[areasOption].map(
-              (area, index) =>
-                area.end <= maxYear && (
-                  <Area
-                    key={index}
-                    startX={area.start}
-                    endX={area.end}
-                    startY={area.bottom}
-                    endY={area.top}
-                    color={area.color}
-                    opacity={area.opacity}
-                  />
-                )
-            )}
+            {showArrows &&
+              ARROWS_OPTIONS[arrowsOption].map(
+                (arrow, index) =>
+                  arrow.end <= maxYear && <Arrow key={index} {...arrow} />
+              )}
+            {showAreas &&
+              AREAS_OPTIONS[areasOption].map(
+                (area, index) =>
+                  area.start < maxYear && (
+                    <Area
+                      key={index}
+                      startX={area.start}
+                      endX={Math.min(area.end, maxYear)}
+                      startY={area.bottom}
+                      endY={area.top}
+                      color={area.color}
+                      opacity={area.opacity}
+                    />
+                  )
+              )}
 
             {/* Render ReferenceDots for threshold crossing years on X-axis */}
-            {scenarios.map(
-              (
-                scenario,
-                scenarioIndex // Added scenarioIndex here
-              ) =>
-                thresholds.map((thresh) => {
-                  if (thresh.value > maxSeaLevel) return null; // Skip thresholds above maxSeaLevel
-                  const crossingYear =
-                    scenarioThresholdCrossings[scenario]?.[thresh.value];
-                  if (crossingYear) {
-                    if (crossingYear > maxYear) return null; // Skip if crossing year is beyond maxYear
-                    const IconComponentX = thresh.iconX;
-                    const IconComponentY = thresh.iconY;
-                    const iconColor =
-                      lineColors[scenarioIndex % lineColors.length]; // Get the color of the scenario line
-                    if (crossingYear + 0.1 > maxYear && !blinker) {
-                      return null; // Skip rendering if blinking is active for this scenario
-                    }
-                    return (
-                      <Fragment key={thresh.label}>
-                        {/* Dot slightly above X-axis */}
-                        <ReferenceDot
-                          key={`${scenario}-${thresh.value}-dot-above-x`}
-                          x={crossingYear}
-                          y={0.01}
-                          r={0}
-                          fill={iconColor}
-                          stroke={iconColor}
-                          isAnimationActive={false}
-                          shape={<IconComponentX fill={iconColor} />}
-                        >
-                          <label
-                            className="custom-dot-label"
-                            style={{ fontSize: "10px", fill: "#333" }}
-                          >
-                            {`${scenario}: ${thresh.label} reached in ${crossingYear}`}
-                          </label>
-                        </ReferenceDot>
+            {showMarkers &&
+              scenarios.map(
+                (
+                  scenario,
+                  scenarioIndex // Added scenarioIndex here
+                ) =>
+                  thresholds.map((thresh) => {
+                    if (thresh.value > maxSeaLevel) return null; // Skip thresholds above maxSeaLevel
+                    const crossingYear =
+                      scenarioThresholdCrossings[scenario]?.[thresh.value];
+                    if (crossingYear) {
+                      if (crossingYear > maxYear) return null; // Skip if crossing year is beyond maxYear
+                      const IconComponentX = thresh.iconX;
+                      const IconComponentY = thresh.iconY;
+                      const iconColor =
+                        lineColors[scenarioIndex % lineColors.length]; // Get the color of the scenario line
+                      if (crossingYear + 0.1 > maxYear && !blinker) {
+                        return null; // Skip rendering if blinking is active for this scenario
+                      }
+                      return (
+                        <Fragment key={thresh.label}>
+                          {/* Dot slightly above X-axis */}
+                          {showXMarkers && (
+                            <ReferenceDot
+                              key={`${scenario}-${thresh.value}-dot-above-x`}
+                              x={crossingYear}
+                              y={0.01}
+                              r={0}
+                              fill={iconColor}
+                              stroke={iconColor}
+                              isAnimationActive={false}
+                              shape={<IconComponentX fill={iconColor} />}
+                            >
+                              <label
+                                className="custom-dot-label"
+                                style={{ fontSize: "10px", fill: "#333" }}
+                              >
+                                {`${scenario}: ${thresh.label} reached in ${crossingYear}`}
+                              </label>
+                            </ReferenceDot>
+                          )}
 
-                        {/* Dot at the actual Y-value */}
-                        <ReferenceDot
-                          key={`${scenario}-${thresh.value}-dot-on-line`}
-                          x={crossingYear}
-                          y={thresh.value}
-                          r={0}
-                          fill={iconColor}
-                          stroke={iconColor}
-                          isAnimationActive={false}
-                          shape={<IconComponentY fill={iconColor} />}
-                        />
-                      </Fragment>
-                    );
-                  }
-                  return null;
-                })
-            )}
+                          {/* Dot at the actual Y-value */}
+                          <ReferenceDot
+                            key={`${scenario}-${thresh.value}-dot-on-line`}
+                            x={crossingYear}
+                            y={thresh.value}
+                            r={0}
+                            fill={iconColor}
+                            stroke={iconColor}
+                            isAnimationActive={false}
+                            shape={<IconComponentY fill={iconColor} />}
+                          />
+                        </Fragment>
+                      );
+                    }
+                    return null;
+                  })
+              )}
           </LineChart>
         </ResponsiveContainer>
       </div>
-      <div className="legendContainer">
-        <FirstSeaIcon cx={14} cy={14} fill="#7F8CAA" />
-        <p className="legendText">0.4m Threshold Reached</p>
-        <SecondSeaIcon cx={14} cy={14} fill="#7F8CAA" />
-        <p className="legendText">0.6m Threshold Reached</p>
-        <ThirdSeaIcon cx={14} cy={14} fill="#7F8CAA" />
-        <p className="legendText">0.8m Threshold Reached</p>
-        <svg width="20" height="20" viewBox="0 0 20 20">
-          <CircleIcon cx={10} cy={10} fill="#7F8CAA" />
-        </svg>
-        <p className="legendText">Threshold Line Crossing</p>
-      </div>
+      {showMarkers && (
+        <div className="legendContainer">
+          {showXMarkers && (
+            <>
+              <FirstSeaIcon cx={14} cy={14} fill="#7F8CAA" />
+              <p className="legendText">0.4m Threshold Reached</p>
+              <SecondSeaIcon cx={14} cy={14} fill="#7F8CAA" />
+              <p className="legendText">0.6m Threshold Reached</p>
+              <ThirdSeaIcon cx={14} cy={14} fill="#7F8CAA" />
+              <p className="legendText">0.8m Threshold Reached</p>
+            </>
+          )}
+          <svg width="20" height="20" viewBox="0 0 20 20">
+            <CircleIcon cx={10} cy={10} fill="#7F8CAA" />
+          </svg>
+          <p className="legendText">Threshold Line Crossing</p>
+        </div>
+      )}
     </div>
   );
 }

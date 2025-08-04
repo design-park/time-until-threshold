@@ -641,11 +641,11 @@ function Chart({
             )}
             {AREAS_OPTIONS[areasOption].map(
               (area, index) =>
-                area.end <= maxYear && (
+                area.start < maxYear && (
                   <Area
                     key={index}
                     startX={area.start}
-                    endX={area.end}
+                    endX={Math.min(area.end, maxYear)}
                     startY={area.bottom}
                     endY={area.top}
                     color={area.color}

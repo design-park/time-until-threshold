@@ -24,9 +24,17 @@ body {
   overflow-y: auto; /* Allow scrolling if content overflows */
   background-color: #f4f7f6;
 
-  &:has(>.nobg) {
+  &:has(> .nobg) {
     background-color: transparent; /* No background for .nobg class */
   }
+}
+
+.paddingBody {
+  padding: 20px;
+  padding-top: 0;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+  background-color: #f3f4f6;
 }
 
 .centerBody {
@@ -82,7 +90,7 @@ body {
   cursor: pointer;
   width: 180px;
   &:hover {
-    background-color: #5A94D4;
+    background-color: #5a94d4;
   }
   &:disabled {
     background-color: #ccc;
@@ -194,7 +202,7 @@ body {
   margin: 20px 0px;
   font-size: 16px;
   display: block;
-  color:#1A2A80;
+  color: #1a2a80;
   font-style: italic;
 }
 
@@ -493,7 +501,7 @@ input[type="range"]:focus::-ms-fill-upper {
 
 .section-description {
   margin-bottom: 25px;
-  color: #57564F;
+  color: #57564f;
   font-size: 1em;
   font-style: italic;
 }

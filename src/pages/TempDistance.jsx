@@ -7,7 +7,8 @@ function TempDistance({ step }) {
     question1: null,
     question2: null,
   });
-  console.log(temporalResponses);
+  const [yearsUntilImpact, setYearsUntilImpact] = useState("");
+  const [noIdeaYearsUntilImpact, setNoIdeaYearsUntilImpact] = useState(false);
 
   const storeTempDistanceInfo = useStore(
     (state) => state.storeTempDistanceInfo
@@ -20,10 +21,14 @@ function TempDistance({ step }) {
   };
 
   const handleSubmit = (e) => {
+    const yearsUntilImpactValue = noIdeaYearsUntilImpact
+      ? null
+      : parseInt(yearsUntilImpact);
     storeTempDistanceInfo(
       step,
       temporalResponses.question1,
-      temporalResponses.question2
+      temporalResponses.question2,
+      yearsUntilImpactValue
     );
   };
 
@@ -93,17 +98,56 @@ function TempDistance({ step }) {
             </table>
           </form>
         </section>
-        <div className="buttonContainer">
-          <button
-            className="userActionButton"
-            onClick={handleSubmit}
-            disabled={
-              !temporalResponses.question1 || !temporalResponses.question2
-            }
-          >
-            Submit
-          </button>
-        </div>
+      </div>
+      <div className="survey-section">
+        <p className="survey-description">
+          Please answer the following question:
+        </p>
+
+        <section>
+          <p>
+            According to you, how many years from now will we start to feel
+            drastic consequences of climate change?
+          </p>
+          <p>
+            <label htmlFor="yearsUntilImpact" style={{ fontWeight: "bold" }}>
+              Answer:{" "}
+            </label>
+            In{" "}
+            <input
+              type="number"
+              id="yearsUntilImpact"
+              disabled={noIdeaYearsUntilImpact}
+              value={yearsUntilImpact}
+              onChange={(e) => setYearsUntilImpact(e.target.value)}
+            />{" "}
+            years.
+            <label style={{ marginLeft: "20px" }}>
+              <input
+                type="checkbox"
+                checked={noIdeaYearsUntilImpact}
+                onChange={(e) => {
+                  setNoIdeaYearsUntilImpact(e.target.checked);
+                  setYearsUntilImpact("");
+                }}
+              />
+              I have no idea
+            </label>
+          </p>
+        </section>
+      </div>
+      <div className="buttonContainer">
+        <button
+          className="userActionButton"
+          onClick={handleSubmit}
+          disabled={
+            !temporalResponses.question1 ||
+            !temporalResponses.question2 ||
+            (!noIdeaYearsUntilImpact && !yearsUntilImpact)
+          }
+        >
+          Submit
+        </button>
       </div>
     </div>
   );

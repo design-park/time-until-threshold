@@ -10,7 +10,7 @@ const OPTIONS = {
       [2051.5, 2066.4],
       [2066.4, 2073.9],
       [2073.9, 2090.9],
-      [2090.9,  2100],
+      [2090.9, 2100],
     ],
     maxSeaLevels: [1, 1, 1, 1],
   },
@@ -32,7 +32,7 @@ const OPTIONS = {
   },
 };
 
-function AnimatedChart2({ option = 1 }) {
+function AnimatedChart2({ option = 1, showText = true }) {
   const [index, setIndex] = useState(0);
   const bounds = useMemo(() => {
     const newBounds = OPTIONS[option].animationBounds[index];
@@ -71,12 +71,16 @@ function AnimatedChart2({ option = 1 }) {
   return (
     <div>
       <Chart2
+        showText={showText}
         maxSeaLevel={maxSeaLevel}
         maxYear={value}
         blinkingScenarioForMaxTemp={isPlaying ? undefined : "SSP5-8.5"}
         aboveChart={
           <div className="aboveChart">
-            <p className="invisible"> ⬅ Click to interact with the visualization</p>
+            <p className="invisible">
+              {" "}
+              ⬅ Click to interact with the visualization
+            </p>
             <div className="calenderContainer">
               <img
                 src="/images/calendar.png"
@@ -114,7 +118,10 @@ function AnimatedChart2({ option = 1 }) {
                   Playing...
                 </button>
               )}
-              <p className="buttonInstructionText"> ⬅ Click to interact with the visualization</p>
+              <p className="buttonInstructionText">
+                {" "}
+                ⬅ Click to interact with the visualization
+              </p>
             </div>
           </div>
         }

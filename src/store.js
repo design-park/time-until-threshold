@@ -22,6 +22,7 @@ export const useStore = create()(
       // Temporal Distance
       tempDistance1: null,
       tempDistance2: null,
+      yearsUntilImpact: null,
 
       //Behavioral Willigness
       societal1: null,
@@ -57,6 +58,7 @@ export const useStore = create()(
       // Post Temporal Distance
       postTempDistance1: null,
       postTempDistance2: null,
+      postYearsUntilImpact: null,
 
       // Post Behavioral Willigness
       postSocietal1: null,
@@ -92,6 +94,9 @@ export const useStore = create()(
       q6Confidence: null,
       quizCompleted: false,
 
+      // Training
+      trainingStep: 1,
+
       storeParticipantInfo: (userID, condition) => set({ userID, condition }),
       storeDemographicInfo: (
         gender,
@@ -108,12 +113,18 @@ export const useStore = create()(
           set({ postValence: valence, postArousal: arousal });
         }
       },
-      storeTempDistanceInfo: (step, tempDistance1, tempDistance2) =>
+      storeTempDistanceInfo: (
+        step,
+        tempDistance1,
+        tempDistance2,
+        yearsUntilImpact
+      ) =>
         step === "pre"
-          ? set({ tempDistance1, tempDistance2 })
+          ? set({ tempDistance1, tempDistance2, yearsUntilImpact })
           : set({
               postTempDistance1: tempDistance1,
               postTempDistance2: tempDistance2,
+              postYearsUntilImpact: yearsUntilImpact,
             }),
       storeWillingnessInfo: (
         step,
@@ -186,6 +197,7 @@ export const useStore = create()(
       setTrainingChartSeen: (seen) => set({ trainingChartSeen: seen }),
       setChartSeen: (seen) => set({ chartSeen: seen }),
       setQuizCompleted: (completed) => set({ quizCompleted: completed }),
+      setTrainingStep: (step) => set({ trainingStep: step }),
 
       reset: () =>
         set({
@@ -201,6 +213,7 @@ export const useStore = create()(
           arousal: null,
           tempDistance1: null,
           tempDistance2: null,
+          yearsUntilImpact: null,
           societal1: null,
           societal2: null,
           societal3: null,
@@ -226,6 +239,7 @@ export const useStore = create()(
           postArousal: null,
           postTempDistance1: null,
           postTempDistance2: null,
+          postYearsUntilImpact: null,
           postSocietal1: null,
           postSocietal2: null,
           postSocietal3: null,
@@ -256,6 +270,7 @@ export const useStore = create()(
           q6Answer: null,
           q6Confidence: null,
           quizCompleted: false,
+          trainingStep: 1,
         }),
       setQ1Answer: (answer) => set({ q1Answer: answer }),
       setQ1Confidence: (confidence) => set({ q1Confidence: confidence }),
