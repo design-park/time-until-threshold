@@ -75,7 +75,7 @@ function TrainingVisInfo() {
           </label>
 
           <button
-            className="userActionButton"
+            className="userActionButton rightButton"
             disabled={!confirmChecked}
             onClick={handleSubmit}
           >
