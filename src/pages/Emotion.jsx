@@ -24,7 +24,7 @@ function Emotion({ step }) {
       <section className="survey-section">
         <h4 className="instructionText">
           Please rate how you feel about the climate change issue using{" "}
-          <span>BOTH the sliders </span>(their order of appearance is random).{" "}
+          <span>BOTH </span>the sliders.{" "}
           <span>Don't think too much </span>about it, just{" "}
           <span>rate how you feel </span>when thinking about the issue.
         </h4>
