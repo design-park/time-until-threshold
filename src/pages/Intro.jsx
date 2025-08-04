@@ -217,6 +217,33 @@ function Intro() {
           >
             Continue
           </button>
+          <div>
+            <p>Debug only:</p>
+
+            <button
+              className="userActionButton rightButton"
+              disabled={!consentChecked || condition === ""}
+              onClick={() => {
+                setCondition("control");
+                alert("Debug mode: Condition set to 'control'");
+                storeParticipantInfo(participantCode, condition);
+              }}
+            >
+              Continue with<br /> Control Condition
+            </button>
+            <button
+              style={{ marginTop: "10px" }}
+              className="userActionButton rightButton"
+              disabled={!consentChecked || condition === ""}
+              onClick={() => {
+                setCondition("treatment");
+                alert("Debug mode: Condition set to 'treatment'");
+                storeParticipantInfo(participantCode, condition);
+              }}
+            >
+              Continue with Treatment Condition
+            </button>
+          </div>
         </div>
       </div>
     </div>
