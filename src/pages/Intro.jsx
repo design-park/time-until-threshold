@@ -224,24 +224,24 @@ function Intro() {
               className="userActionButton rightButton"
               disabled={!consentChecked || condition === ""}
               onClick={() => {
-                setCondition("control");
                 alert("Debug mode: Condition set to 'control'");
-                storeParticipantInfo(participantCode, condition);
+                storeParticipantInfo(participantCode, "control");
               }}
             >
-              Continue with<br /> Control Condition
+              Continue with
+              <br /> Control Condition
             </button>
             <button
               style={{ marginTop: "10px" }}
               className="userActionButton rightButton"
               disabled={!consentChecked || condition === ""}
               onClick={() => {
-                setCondition("treatment");
                 alert("Debug mode: Condition set to 'treatment'");
-                storeParticipantInfo(participantCode, condition);
+                storeParticipantInfo(participantCode, "treatment");
               }}
             >
-              Continue with Treatment Condition
+              Continue with
+              <br /> Treatment Condition
             </button>
           </div>
         </div>

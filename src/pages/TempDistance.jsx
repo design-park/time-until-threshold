@@ -14,10 +14,14 @@ function TempDistance({ step }) {
     (state) => state.storeTempDistanceInfo
   );
 
+  const changeTemporalResponse = (question, value) => {
+    setTemporalResponses((prev) => ({ ...prev, [question]: value }));
+  };
+
   // Handler for changing radio button values
   const handleChange = (e) => {
     const { name, value } = e.target; // Use 'name' for radio buttons to identify the question
-    setTemporalResponses((prev) => ({ ...prev, [name]: parseInt(value) }));
+    changeTemporalResponse(name, parseInt(value));
   };
 
   const handleSubmit = (e) => {
@@ -79,7 +83,12 @@ function TempDistance({ step }) {
                   <tr key={q.id}>
                     <td>{q.text}</td>
                     {likertOptions.map((option) => (
-                      <td key={`${q.id}-${option.value}`}>
+                      <td
+                        key={`${q.id}-${option.value}`}
+                        onClick={() =>
+                          changeTemporalResponse(q.id, option.value)
+                        }
+                      >
                         <label className="likert-radio-label">
                           <input
                             type="radio"

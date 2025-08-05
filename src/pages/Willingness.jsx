@@ -69,16 +69,20 @@ function Willingness({ step }) {
     ]
   );
 
+  const changeWillingnessResponse = (section, question, value) => {
+    if (section === "societal") {
+      setSocietalWillingness((prev) => ({ ...prev, [question]: value }));
+    } else if (section === "personal") {
+      setPersonalWillingness((prev) => ({ ...prev, [question]: value }));
+    } else if (section === "advocacy") {
+      setAdvocacyIndex((prev) => ({ ...prev, [question]: value }));
+    }
+  };
+
   // Handler for changing radio button values
   const handleChange = (e, section) => {
     const { name, value } = e.target;
-    if (section === "societal") {
-      setSocietalWillingness((prev) => ({ ...prev, [name]: parseInt(value) }));
-    } else if (section === "personal") {
-      setPersonalWillingness((prev) => ({ ...prev, [name]: parseInt(value) }));
-    } else if (section === "advocacy") {
-      setAdvocacyIndex((prev) => ({ ...prev, [name]: parseInt(value) }));
-    }
+    changeWillingnessResponse(section, name, parseInt(value));
   };
 
   // Common options for the Likert scale for Willingness (4-point)
@@ -166,7 +170,8 @@ function Willingness({ step }) {
       <section className="survey-section">
         <p className="section-description">
           For the following items, please indicate the extent to which you think
-          that <strong>as a society</strong> we should be willing to take these actions:
+          that <strong>as a society</strong> we should be willing to take these
+          actions:
         </p>
         <form>
           <table className="likert-table">
@@ -188,6 +193,13 @@ function Willingness({ step }) {
                     <td
                       key={`${q.id}-${option.value}`}
                       className="table-cell radio-cell"
+                      onClick={() =>
+                        changeWillingnessResponse(
+                          "societal",
+                          q.id,
+                          option.value
+                        )
+                      }
                     >
                       <label className="radio-label">
                         <input
@@ -211,8 +223,9 @@ function Willingness({ step }) {
       {/* Personal Willingness Section */}
       <section className="survey-section">
         <p className="section-description">
-          For the following items, please indicate the extent to which <strong>you</strong> would
-          be willing to personally take these actions:
+          For the following items, please indicate the extent to which{" "}
+          <strong>you</strong> would be willing to personally take these
+          actions:
         </p>
         <form>
           <table className="likert-table">
@@ -234,6 +247,13 @@ function Willingness({ step }) {
                     <td
                       key={`${q.id}-${option.value}`}
                       className="table-cell radio-cell"
+                      onClick={() =>
+                        changeWillingnessResponse(
+                          "personal",
+                          q.id,
+                          option.value
+                        )
+                      }
                     >
                       <label className="radio-label">
                         <input
@@ -280,6 +300,13 @@ function Willingness({ step }) {
                     <td
                       key={`${q.id}-${option.value}`}
                       className="table-cell radio-cell"
+                      onClick={() =>
+                        changeWillingnessResponse(
+                          "advocacy",
+                          q.id,
+                          option.value
+                        )
+                      }
                     >
                       <label className="radio-label">
                         <input
