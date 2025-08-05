@@ -13,33 +13,36 @@ function TargetVisInfo() {
     <div className="centerBody">
       <div className="main-container">
         <div className="card">
-          <h4 className="instruction-text">
-            Main Task: Interacting with the Target Visualization
-          </h4>
+          <h4 className="instruction-text">Instruction for the Main Task</h4>
           <p className="subText">
             You are now entering the <strong>main part</strong> of the
-            experiment.
+            experiment. The visualization format is similar to the training one,
+            but the
+            <strong> subject has changed</strong>. Instead of showing
+            <em> global mean sea level change</em>, the new graph presents
+            <strong> global surface temperature trends</strong>.
           </p>
+
+          <p className="subText">Here is what you will be expected to do:</p>
+
           <ul>
             <li>
-              You will interact with a <strong>line graph visualization</strong>
-              .
+              Interact with a <strong>line graph visualization</strong>.
             </li>
             <li>
-              You will complete a <strong>quiz sheet</strong> based on the
+              Complete a <strong>quiz sheet</strong> based on the visualization.
+            </li>
+            <li>
+              <strong>Additional writing session</strong> related to the
               visualization.
-            </li>
-            <li>
-              A <strong>timer</strong> will run to ensure you spend a minimum
-              amount of time engaging with the visualization.
             </li>
           </ul>
 
           <p className="subText">
-            The visualization format is similar to the training one, but the
-            <strong> subject has changed</strong>. Instead of showing
-            <em> global mean sea level change</em>, the new graph presents
-            <strong> global surface temperature trends</strong>.
+            Please note that you may be prevented from proceeding to the next
+            step immediately. It is intentional that you spend adequate time
+            engaging with the visualization and fully understand the
+            information.
           </p>
 
           <p className="subText">
@@ -54,8 +57,8 @@ function TargetVisInfo() {
             <li>
               <strong>Sheet 2</strong> (new): Information on how{" "}
               <em>
-                projected changes in climate extremes increase in frequency and
-                intensity with every additional increment of global warming
+                climate extremes intensify and occur more frequently with each
+                additional increment of global warming.
               </em>
               .
             </li>
@@ -63,16 +66,14 @@ function TargetVisInfo() {
 
           <p className="subText">
             You are encouraged to{" "}
-            <strong>refer to both information sheets</strong> while interacting
-            with the visualization and completing the quiz. However, please
-            remember that{" "}
-            <span class="important">note-taking is not allowed</span>.
+            <strong>refer to both information sheets</strong>. You are
+            encouraged to refer to both sheets during your work with the
+            visualization and while answering the quiz and writing tasks.
           </p>
 
           <p className="subText">
-            As in the training step, the researcher will review your quiz
-            responses before allowing you to continue to the final part of the
-            experiment.
+            Please take a moment to review the information sheets before
+            continuing. You may also refer to them during the next steps.
           </p>
 
           <label className="checkBox">
