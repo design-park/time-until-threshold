@@ -15,56 +15,54 @@ function TrainingVisInfo() {
     <div className="centerBody">
       <div className="main-container">
         <div className="card">
-          <h4 className="instruction-text">
-            Please be prepared to focus on interacting with the visualization in
-            the next step.
-          </h4>
+          <h4 className="instruction-text">Training Phase Instructions</h4>
 
-          <h4 className="titleText">Before the next step:</h4>
           <p className="subText">
-            You have received <strong> an information sheet</strong> that
-            provides a<strong> brief overview of SSP-RCP scenarios.</strong>{" "}
-            This sheet is meant to help you understand the type of visualization
-            you will see.
-            <strong>Please read it carefully before proceeding.</strong> You may
-            keep the sheet until the end of the experiment, but you are
-            <strong> not allowed to take notes</strong> on it.
+            You are about to begin<strong> the training phase.</strong> This
+            phase is designed to guide you step by step through a training
+            visualization, helping you become familiar with how this type of
+            graph works. At each step, you may be asked to complete a short quiz
+            on the monitor to check your understanding.
           </p>
 
-          <h4 className="titleText">During the next step:</h4>
           <p className="subText">
-            The next step is<strong> a training phase.</strong> You will
-            interact with a training visualization designed to help you get
-            familiar with how this type of visualization works. During this
-            phase, you will also receive a <strong> quiz sheet</strong>
-            that checks your understanding of the visualization.
+            If you answer incorrectly, the researcher may guide you through the
+            process again. However, if you continue to answer incorrectly, we
+            may ask you to return your submission in accordance with{" "}
+            <a
+              href="https://researcher-help.prolific.com/en#h_01FBPJ5DZJHYHB5D2QMAK2V1SQ"
+              target="_blank"
+              className="link"
+            >
+              Prolific's policy
+            </a>
           </p>
+
           <p className="subText">
-            You are welcome to refer to the<strong> information sheet</strong>{" "}
-            at any time while interacting with the visualization and answering
-            the quiz.
-          </p>
-          <p className="subText">
-            A timer will be running. It is not to limit your time, but to ensure
-            you spend at least a minimum amount of time engaging with the
+            You should now have received <strong> an information sheet</strong>{" "}
+            that provides a
+            <strong> brief overview of SSP-RCP scenarios.</strong> This sheet
+            will help you understand certain elements that appear in the
             visualization.
+            <strong> Please read it carefully before proceeding.</strong> You
+            may keep and refer to the sheet at any time during the experiment.
           </p>
+
           <p className="subText">
-            ⚠️<strong> Important</strong>: Once you complete the quiz, the
-            researcher will check your answers. If your responses show
-            sufficient understanding, you will receive a code to unlock the next
-            step of the experiment. If not, you will be asked to review the
-            training visualization again with the help from the researcher.
+            You are encouraged to refer to the information sheet whenever needed
+            while interacting with the visualization and answering the quiz
+            questions.
           </p>
+
           <p className="subText">
-            The next step after training will involve interacting with the
-            <strong> target visualization</strong>, which is the main part of
-            the experiment.
+            After the training phase, you will move on to the
+            <strong> main part of the experiment</strong>, where you will
+            interact with a similar type of visualization.
           </p>
 
           <label className="checkBox">
-            I have well understood the instruction above and read the
-            information sheet.
+            I have read and understood the instructions above and reviewed the
+            information sheet. I’m ready to proceed with the training phase.
             <input
               type="checkbox"
               name="confirmCheckbox"

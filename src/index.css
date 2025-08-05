@@ -713,3 +713,9 @@ input[type="range"]:focus::-ms-fill-upper {
   font-weight: bold;
   text-align: center;
 }
+
+.link {
+  text-decoration: none;
+  color: #3b82f6;
+  font-weight: bold;
+}
