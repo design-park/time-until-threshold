@@ -719,3 +719,35 @@ input[type="range"]:focus::-ms-fill-upper {
   color: #3b82f6;
   font-weight: bold;
 }
+
+.veryLowColor {
+  color: #0065F8;
+}
+
+.lowColor {
+  color: #06923E;
+}
+
+.intermediateColor {
+  color: #9E6F21;
+}
+
+.highColor {
+  color: #640D5F;
+}
+
+.veryHighColor {
+  color: #B12C00;
+}
+
+.yellowBoxColor {
+  background-color: rgba(255, 255, 118, 0.5);
+}
+
+.orangeBoxColor {
+  background-color: rgba(255, 136, 0, 0.25);
+}
+
+.redBoxColor {
+  background-color: rgba(245, 59, 59, 0.25);
+}
