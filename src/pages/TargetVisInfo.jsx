@@ -77,8 +77,8 @@ function TargetVisInfo() {
           </p>
 
           <label className="checkBox">
-            I have well understood the instruction above and read the
-            information sheets.
+            I have understood the instructions above and have read the
+            information sheets. I am ready to proceed to the next step.
             <input
               type="checkbox"
               name="confirmCheckbox"
