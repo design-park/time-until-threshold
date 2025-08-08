@@ -56,6 +56,9 @@ function ChartPage() {
           className="userActionButton"
           onClick={handleSubmit}
           disabled={timeLeft > 0 || !codeIsValid}
+          style={{
+            marginLeft: "10px",
+          }}
         >
           {timeLeft > 0
             ? `Next in ${Math.ceil(timeLeft / 1000)} seconds`

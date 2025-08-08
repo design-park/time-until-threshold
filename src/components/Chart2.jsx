@@ -207,7 +207,7 @@ const ARROWS_OPTIONS = [
     {
       height: 0.12,
       start: 2051.5,
-      end: 2066.5,
+      end: 2066.4,
       secondarrow: true,
       color: "#0065F8",
     },

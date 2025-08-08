@@ -28,14 +28,7 @@ function TrainingVisInfo() {
           <p className="subText">
             If you answer incorrectly, the researcher may guide you through the
             process again. However, if you continue to answer incorrectly, we
-            may ask you to return your submission in accordance with{" "}
-            <a
-              href="https://researcher-help.prolific.com/en#h_01FBPJ5DZJHYHB5D2QMAK2V1SQ"
-              target="_blank"
-              className="link"
-            >
-              Prolific's policy
-            </a>
+            may ask you to return your submission.
           </p>
 
           <p className="subText">

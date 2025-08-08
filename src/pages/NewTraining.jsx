@@ -42,16 +42,16 @@ function Step1({ onNext }) {
   };
   return (
     <div>
-      <p>
+      <p className="trainingText">
         Look at the line chart below. The x-axis is the year. It is mainly
         divided into 2 sections by the "current year" vertical line in the
         middle.
       </p>
-      <p>
+      <p className="trainingText">
         On the left, you see one line that represents historically observed
         data.
       </p>
-      <p>
+      <p className="trainingText">
         On the right side you see 5 curved lines which represent projected data
         of which colors correspond to each greenhouse gas emissions scenarios
         marked in the legend.
@@ -76,37 +76,16 @@ function Step1({ onNext }) {
 function Step2({ onNext }) {
   const ref1 = useRef();
   const ref2 = useRef();
-  const ref3 = useRef();
-  const ref4 = useRef();
-  const ref5 = useRef();
   const stepHandleNext = () => {
     const s1 =
       ref1.current.value === "" ? null : parseFloat(ref1.current.value);
     const s2 =
       ref2.current.value === "" ? null : parseFloat(ref2.current.value);
-    const s3 =
-      ref3.current.value === "" ? null : parseFloat(ref3.current.value);
-    const s4 =
-      ref4.current.value === "" ? null : parseFloat(ref4.current.value);
-    const s5 =
-      ref5.current.value === "" ? null : parseFloat(ref5.current.value);
-    if (
-      s1 === null ||
-      s2 === null ||
-      s3 === null ||
-      s4 === null ||
-      s5 === null
-    ) {
+    if (s1 === null || s2 === null) {
       alert("Please fill in all fields.");
       return;
     }
-    if (
-      s1 != 0.508 ||
-      s2 != 0.548 ||
-      s3 != 0.638 ||
-      s4 != 0.718 ||
-      s5 != 0.788
-    ) {
+    if (s1 != 0.508 || s2 != 0.718) {
       alert("Incorrect values. Please try again.");
       return;
     }
@@ -115,7 +94,7 @@ function Step2({ onNext }) {
 
   return (
     <div>
-      <p>
+      <p className="trainingText">
         The Y axis is global sea level changes relative to 1900. As an example,
         let's read the data at 1982. By reading like the green arrow, we can
         know that in 1982, the global mean sea level was 0.115m higher compared
@@ -130,12 +109,13 @@ function Step2({ onNext }) {
         showWarning={false}
         showReadingGuide={true}
       />
-      <p>
+      <p className="trainingText">
         You can also get the detailed data for each year by hovering the mouse.
       </p>
       <div>
-        <p style={{ textAlign: "left" }}>
-          Please input the projected sea level rise in meters for the year 2090
+        <p style={{ textAlign: "left" }} className="trainingText">
+          Please input the projected sea level rise in meters for the year{" "}
+          <strong>2090 </strong>
           for each scenario:
         </p>
         <table
@@ -150,33 +130,23 @@ function Step2({ onNext }) {
           </thead>
           <tbody>
             <tr>
-              <td>SSP1-1.9 (Very low emissions)</td>
+              <td>
+                <p className="veryLowColor" style={{ margin: "0 0" }}>
+                  SSP1-1.9 (Very low emissions)
+                </p>
+              </td>
               <td>
                 <input type="number" id="s1" ref={ref1} />
               </td>
             </tr>
             <tr>
-              <td>SSP1-2.6 (Low emissions)</td>
+              <td>
+                <p className="highColor" style={{ margin: "0 0" }}>
+                  SSP3-7.0 (High emissions)
+                </p>
+              </td>
               <td>
                 <input type="number" id="s2" ref={ref2} />
-              </td>
-            </tr>
-            <tr>
-              <td>SSP2-4.5 (Intermediate emissions)</td>
-              <td>
-                <input type="number" id="s3" ref={ref3} />
-              </td>
-            </tr>
-            <tr>
-              <td>SSP3-7.0 (High emissions)</td>
-              <td>
-                <input type="number" id="s4" ref={ref4} />
-              </td>
-            </tr>
-            <tr>
-              <td>SSP5-8.5 (Very high emissions)</td>
-              <td>
-                <input type="number" id="s5" ref={ref5} />
               </td>
             </tr>
           </tbody>
@@ -209,7 +179,7 @@ function Step3({ onNext }) {
 
   return (
     <div>
-      <p>
+      <p className="trainingText">
         Now, how could we make it easier to notice if the scenario lines
         surpassed certain relative sea levels? Let's call Them "thresholds",
         beyond which irreversible, drastic change is expected. In this training,
@@ -223,16 +193,19 @@ function Step3({ onNext }) {
         showWarning={false}
         showReadingGuide2={true}
       />
-      <p>
+      <p className="trainingText">
         On the graph above, we put horizontal dashed lines to highlight these
         thresholds. By reading as shown by the green line, you can know that
-        scenario SS5-8.5 (very high emissions) reaches the 0.4m threshold in
-        2051.
+        scenario{" "}
+        <span className="veryHighColor">SSP5-8.5 (very high emissions)</span>{" "}
+        reaches the <strong>0.4m</strong> threshold in
+        <strong> 2051</strong>.
       </p>
       <div>
-        <p style={{ textAlign: "left" }}>
-          Please input the year when scenario SSP3-7.0 (high emissions) reaches
-          the 0.6m threshold:
+        <p style={{ textAlign: "left" }} className="trainingText">
+          Please input the year when{" "}
+          <span className="highColor">scenario SSP3-7.0 (high emissions)</span>{" "}
+          reaches the <strong>0.6m</strong> threshold:
         </p>
         <table
           className="survey-table"
@@ -246,7 +219,11 @@ function Step3({ onNext }) {
           </thead>
           <tbody>
             <tr>
-              <td>SSP3-7.0 (High emissions)</td>
+              <td>
+                <p className="highColor" style={{ margin: "0 0" }}>
+                  SSP3-7.0 (High emissions)
+                </p>
+              </td>
               <td>
                 <input type="number" id="s1" ref={ref1} />
               </td>
@@ -284,12 +261,12 @@ function Step4({ onNext }) {
 
   return (
     <div>
-      <p>
+      <p className="trainingText">
         As shown below, we added circles at the intersections between each
         scenario's curve and the horizontal threshold lines. They pinpoint when
         each emissions pathway crosses a specific sea level threshold.
       </p>
-      <p>
+      <p className="trainingText">
         Each circle's color corresponds to its respective emissions scenario.
       </p>
       <Chart2
@@ -299,15 +276,15 @@ function Step4({ onNext }) {
         showText={false}
         showWarning={false}
       />
-      <p>
+      <p className="trainingText">
         On the 0.4m threshold line, we see five colored circles — one for each
-        scenario — indicating that all five are projected to reach the 0.4m mark
-        sometime between 2025 and 2100.
+        scenario — indicating that all five are projected to reach the relative
+        0.4m sea level.
       </p>
       <div>
-        <p style={{ textAlign: "left" }}>
+        <p style={{ textAlign: "left" }} className="trainingText">
           Please enter the number of scenarios that reach the 0.6m and the 0.8m
-          thresholds between 2025 and 2100:
+          thresholds until 2100:
         </p>
         <table
           className="survey-table"
@@ -365,12 +342,14 @@ function Step5({ onNext }) {
 
   return (
     <div>
-      <p>
+      <p className="trainingText">
         Aligned with the circles above, we added droplet-shaped icons along the
         x-axis to pinpoint when each emissions scenario reaches each threshold.
       </p>
-      <p>Each droplet's color corresponds to the scenario colors.</p>
-      <p>
+      <p className="trainingText">
+        Each droplet's color corresponds to the scenario colors.
+      </p>
+      <p className="trainingText">
         Each droplet's shape indicates a specific sea level threshold crossed:
       </p>
       <ul>
@@ -418,24 +397,32 @@ function Step5({ onNext }) {
         showText={false}
         showWarning={false}
       />
-      <p>
+      <p className="trainingText">
         The placement of{" "}
         <span style={{ position: "relative", top: "6px" }}>
           <ThirdSeaIcon fill="#B12C00" />
         </span>{" "}
-        on the X-axis show that scenario SSP5-8.5 (very high emissions) reaches
-        the 0.8m threshold in 2090.
+        on the X-axis show that scenario{" "}
+        <span className="veryHighColor">SSP5-8.5 (Very high emissions)</span>{" "}
+        reaches the 0.8m threshold in 2090.
       </p>
       <div>
-        <p style={{ textAlign: "left", fontWeight: "bold" }}>
+        <p
+          style={{ textAlign: "left", fontWeight: "bold" }}
+          className="trainingText"
+        >
           Please fill in the blanks correctly:
         </p>
-        <p style={{ textAlign: "left" }}>
+        <p style={{ textAlign: "left" }} className="trainingText">
           The placement of{" "}
           <span style={{ position: "relative", top: "6px", marginTop: -10 }}>
             <SecondSeaIcon fill="#9E6F21" />
           </span>{" "}
-          on the X-axis shows that scenario SSP2-4.5 (intermediate emissions)
+          on the X-axis shows that scenario
+          <span className="intermediateColor">
+            {" "}
+            SSP2-4.5 (Intermediate emissions){" "}
+          </span>
           reaches the <input type="number" id="s1" ref={ref1} />m threshold in
           the year <input type="number" id="s2" ref={ref2} />.
         </p>
@@ -456,20 +443,29 @@ function Step6({ onNext }) {
 
   return (
     <div>
-      <p>
-        There are three <b>shaded areas</b>, each representing a sea level
-        threshold:
-        <b>0.4m, 0.6m, and 0.8m</b>.
+      <p className="trainingText">
+        <strong>How to read the shaded bands</strong>
       </p>
-      <p>
-        Each area shows the <b>time range</b> between the{" "}
-        <b>earliest and latest years</b> that different emissions scenarios are
-        projected to cross that threshold.
-      </p>
-      <p>
-        The areas appear <b>between the x-axis and each threshold line</b>, with{" "}
-        <b>different colors</b> for each threshold.
-      </p>
+
+      <ul>
+        <li className="trainingText">
+          Each band captures the range of crossing years across all emission
+          scenarios for its respective threshold—0.4 m, 0.6 m, or 0.8 m.
+        </li>
+        <li className="trainingText">
+          <strong>Horizontal span:</strong> The band begins at the earliest year
+          any emissions scenario crosses that threshold and ends at the latest.
+        </li>
+        <li className="trainingText">
+          <strong>Vertical span:</strong> A band fills the space between the
+          x-axis and its corresponding threshold line.
+        </li>
+        <li className="trainingText">
+          If at least one scenario is expected to cross the threshold after
+          2100—beyond the limits of the chart—the band extends to the right‐hand
+          edge of the graph.
+        </li>
+      </ul>
       <Chart2 showArrows={false} showText={false} showWarning={false} />
       <div className="actionButtonContainer">
         <button className="userActionButton" onClick={stepHandleNext}>
@@ -504,87 +500,131 @@ function Step7({ onNext }) {
 
   return (
     <div>
-      <p>
-        Each shaded area is paired with a <b>horizontal indicator</b> that shows
-        when different scenarios cross the threshold:
+      <p className="trainingText">
+        <strong>How to read duration indicators</strong>
       </p>
       <ul>
-        <li>
-          The <b>first part</b> spans from{" "}
-          <b>2025 to the earliest crossing year</b>, colored to match the
-          scenario that crosses <b>first</b>. The text above shows this year
-          range.
+        <li className="trainingText">
+          Each shaded band has a corresponding duration bar divided into two
+          colour segments:
+          <ol>
+            <li className="trainingText">
+              <strong>2025 → earliest crossing year</strong> – tinted with the
+              colour of the scenario that is projected to cross first; the label
+              above shows this range.
+            </li>
+            <li className="trainingText">
+              <strong>Earliest → latest crossing year</strong> – tinted with the
+              colour of the scenario that is projected to cross last; the label
+              above shows that range.
+            </li>
+          </ol>
         </li>
-        <li>
-          The <b>second part</b> continues to the <b>latest crossing year</b>,
-          colored by the scenario that crosses <b>last</b>. Its text above also
-          displays the corresponding year range.
+        <li className="trainingText">
+          <p className="trainingText">
+            The <b>end of the second part</b> is:
+          </p>
+          <ul>
+            <li className="trainingText">
+              <b>Closed</b> if all scenarios cross the threshold{" "}
+              <b>before 2100</b>.
+            </li>
+            <li className="trainingText">
+              <b>Pointy</b> if any scenario is expected to cross it{" "}
+              <b>after 2100</b>, indicating continuation{" "}
+              <b>beyond the graph's time span</b>. We also added "
+              <img
+                src="./images/animated-dots.webp"
+                alt="animated dots"
+                style={{
+                  height: "1.5rem",
+                  position: "relative",
+                  top: "0.5rem",
+                  marginTop: "-1rem",
+                }}
+              />
+              " on the right of the pointy end.
+            </li>
+          </ul>
         </li>
       </ul>
-      <p>
-        The <b>end of the second part</b> is:
-      </p>
-      <ul>
-        <li>
-          <b>Closed</b> if all scenarios cross the threshold <b>before 2100</b>.
-        </li>
-        <li>
-          <b>Pointy</b> if any scenario is expected to cross it{" "}
-          <b>after 2100</b>, indicating continuation{" "}
-          <b>beyond the graph's time span</b>. We also added "
-          <img
-            src="./images/animated-dots.webp"
-            alt="animated dots"
-            style={{
-              height: "1.5rem",
-              position: "relative",
-              top: "0.5rem",
-              marginTop: "-1rem",
-            }}
-          />
-          " on the right of the pointy end.
-        </li>
-      </ul>
+
       <Chart2 showText={false} showWarning={false} />
       <div>
-        <p style={{ textAlign: "left", fontWeight: "bold" }}>
+        <p
+          style={{ textAlign: "left", fontWeight: "bold" }}
+          className="trainingText"
+        >
           Please fill in the blanks correctly:
         </p>
         <ul>
-          <li>
-            Scenario SSP5-8.5 (very high emissions) is projected to reach the
-            0.6m threshold <input type="number" id="s1" ref={ref1} /> years from
-            now.
+          <li className="trainingText">
+            Scenario{" "}
+            <span className="veryHighColor">
+              SSP5-8.5 (very high emissions)
+            </span>{" "}
+            is projected to reach the <strong>0.6m</strong> threshold{" "}
+            <input type="number" id="s1" ref={ref1} /> years from now.
           </li>
-          <li>
-            The second part of the horizontal indicator that belongs to the 0.8m
+          <li className="trainingText">
+            The second part of the horizontal indicator that belongs to the{" "}
+            <strong>0.8m </strong>
             threshold area has the color{" "}
-            <select id="s2" ref={ref2}>
-              <option value="">Select color</option>
-              <option value="blue">blue</option>
-              <option value="green">green</option>
-              <option value="brown">brown</option>
-              <option value="purple">purple</option>
-              <option value="red">red</option>
+            <select id="s2" ref={ref2} style={{ height: "23px" }}>
+              <option value="" style={{ fontSize: "20px" }}>
+                Select color
+              </option>
+              <option value="blue" style={{ fontSize: "20px" }}>
+                blue
+              </option>
+              <option value="green" style={{ fontSize: "20px" }}>
+                green
+              </option>
+              <option value="brown" style={{ fontSize: "20px" }}>
+                brown
+              </option>
+              <option value="purple" style={{ fontSize: "20px" }}>
+                purple
+              </option>
+              <option value="red" style={{ fontSize: "20px" }}>
+                red
+              </option>
             </select>{" "}
             and has a{" "}
-            <select id="s3" ref={ref3}>
-              <option value="">Select shape</option>
-              <option value="closed">closed</option>
-              <option value="pointy">pointy</option>
+            <select id="s3" ref={ref3} style={{ height: "23px" }}>
+              <option value="" style={{ fontSize: "20px" }}>
+                Select shape
+              </option>
+              <option value="closed" style={{ fontSize: "20px" }}>
+                closed
+              </option>
+              <option value="pointy" style={{ fontSize: "20px" }}>
+                pointy
+              </option>
             </select>{" "}
             end.
             <br />
-            Therefore, the last scenario to reach the 0.8m threshold is{" "}
-            <select id="s4" ref={ref4}>
-              <option value="">Select scenario</option>
-              <option value="SSP1-1.9">SSP1-1.9 (Very low emissions)</option>
-              <option value="SSP1-2.6">SSP1-2.6 (Low emissions)</option>
-              <option value="SSP2-4.5">
+            Therefore, the last scenario to reach the <strong>0.8m</strong>{" "}
+            threshold—beyond the chart’s 2100 limit—is{" "}
+            <select id="s4" ref={ref4} style={{ height: "23px" }}>
+              <option value="" style={{ fontSize: "20px" }}>
+                Select scenario
+              </option>
+              <option value="SSP1-1.9" style={{ fontSize: "20px" }}>
+                SSP1-1.9 (Very low emissions)
+              </option>
+              <option value="SSP1-2.6" style={{ fontSize: "20px" }}>
+                SSP1-2.6 (Low emissions)
+              </option>
+              <option value="SSP2-4.5" style={{ fontSize: "20px" }}>
                 SSP2-4.5 (Intermediate emissions)
               </option>
-              <option value="SSP3-7.0">SSP3-7.0 (High emissions)</option>
-              <option value="SSP5-8.5">SSP5-8.5 (Very high emissions)</option>
+              <option value="SSP3-7.0" style={{ fontSize: "20px" }}>
+                SSP3-7.0 (High emissions)
+              </option>
+              <option value="SSP5-8.5" style={{ fontSize: "20px" }}>
+                SSP5-8.5 (Very high emissions)
+              </option>
             </select>
             .
           </li>
@@ -607,22 +647,25 @@ function Step8({ onNext }) {
   };
   return (
     <div>
-      <p>Please, be careful about the following:</p>
+      <p className="trainingText">Please, be careful about the following:</p>
       <ul>
-        <li>
+        <li className="trainingText">
           <b>Higher greenhouse gas emissions</b> leads to{" "}
           <b>faster sea level rise</b>, which poses <b>greater risks</b>.
         </li>
-        <li>
+        <li className="trainingText">
           Therefore, <b>crossing a threshold earlier</b> is <b>worse</b> than
           crossing it later, as it reflects more severe and rapid climate
           impact.
         </li>
       </ul>
       <Chart2 showText={false} />
-      <p>
-        As you see above, we added the warning message "Reaching the threshold
-        early is worse" to make it clearer to you.
+      <p className="trainingText">
+        As you see above, we added the warning message{" "}
+        <span className="warningText">
+          "Reaching the threshold early is worse"
+        </span>{" "}
+        to make it clearer to you.
       </p>
       <div className="actionButtonContainer">
         <button className="userActionButton" onClick={stepHandleNext}>
@@ -639,18 +682,14 @@ function Step9({ onNext }) {
   };
   return (
     <div>
-      <p>
+      <p className="trainingText">
         Now, the elements that were at the right part of "current year" vertical
         line is gone. This is to reveal them little by little with the
-        animation. The calendar shows the year the animation is in.
-      </p>
-      <p>
-        {" "}
-        You can click the purple button to start, continue, or reset animation.
-        Try it!
+        animation. The calendar shows the year the animation is in. You can
+        click the purple button to start, continue, or reset animation. Try it!
       </p>
       <AnimatedChart2 showText={false} />
-      <p>
+      <p className="trainingText">
         You will notice that the animation stops playing at certain timings. The
         animation stops at the beginning and the end of each shaded area.
       </p>
