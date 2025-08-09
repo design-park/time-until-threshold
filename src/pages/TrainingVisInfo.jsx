@@ -34,7 +34,7 @@ function TrainingVisInfo() {
           <p className="subText">
             You should now have received <strong> an information sheet</strong>{" "}
             that provides a
-            <strong> brief overview of SSP-RCP scenarios.</strong> This sheet
+            <strong> brief overview of 5 greenhouse‑gas emission scenarios.</strong> This sheet
             will help you understand certain elements that appear in the
             visualization.
             <strong> Please read it carefully before proceeding.</strong> You

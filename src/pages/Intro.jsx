@@ -38,7 +38,7 @@ function Intro() {
             sign the consent form to proceed.
           </h4>
           <h4 className="introTitle">Title of the project:</h4>
-          <p className="introParagraph">Time Until Threshold</p>
+          <p className="introParagraph">Interactive Visualization on Climate Change</p>
 
           <h4 className="titleText">Participant Code:</h4>
           <p className="subText">{participantCode}</p>

@@ -11,6 +11,9 @@ function NewTraining() {
 
   const handleNext = () => {
     window.scrollTo(0, 0); // Scroll to top of the page
+    setTimeout(() => {
+      window.scrollTo(0, 0); // Scroll to top of the page again after a short delay
+    }, 100);
     if (step >= 9 || (step === 8 && condition === "control")) {
       setTrainingChartSeen(true);
       return;
@@ -116,7 +119,7 @@ function Step2({ onNext }) {
         <p style={{ textAlign: "left" }} className="trainingText">
           Please input the projected sea level rise in meters for the year{" "}
           <strong>2090 </strong>
-          for each scenario:
+          for each of the following scenarios:
         </p>
         <table
           className="survey-table"
