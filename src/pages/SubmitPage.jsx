@@ -45,15 +45,6 @@ function SubmitPage() {
       <button onClick={handleExport} className="userActionButton">
         Export Responses
       </button>
-      <p>DEBUG</p>
-      <button
-        onClick={() => {
-          setQuizCompleted(false);
-        }}
-        className="userActionButton"
-      >
-        Back to Quiz
-      </button>
     </div>
   );
 }
