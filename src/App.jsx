@@ -15,6 +15,7 @@ import TrainingChartPage from "./pages/TrainingChartPage.jsx";
 import TrainingVisInfo from "./pages/TrainingVisInfo.jsx";
 import Quiz from "./pages/Quiz.jsx";
 import NewTraining from "./pages/NewTraining.jsx";
+import DebugQuiz from "./DebugQuiz.jsx";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
       <Route path="/test" element={<Test />} />
       <Route path="/animated-sea-chart" element={<AnimatedChart2 />} />
       <Route path="/sea-chart" element={<Chart2 />} />
+      <Route path="/quiz" element={<DebugQuiz />} />
     </Routes>
   );
 }
