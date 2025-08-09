@@ -714,12 +714,6 @@ input[type="range"]:focus::-ms-fill-upper {
   text-align: center;
 }
 
-.link {
-  text-decoration: none;
-  color: #3b82f6;
-  font-weight: bold;
-}
-
 .veryLowColor {
   color: #0065F8;
 }
@@ -750,4 +744,9 @@ input[type="range"]:focus::-ms-fill-upper {
 
 .redBoxColor {
   background-color: rgba(245, 59, 59, 0.25);
+}
+
+.trainingText {
+  font-size: 20px;
+  margin: 10px 0;
 }

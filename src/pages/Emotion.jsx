@@ -24,14 +24,13 @@ function Emotion({ step }) {
       <section className="survey-section">
         <h4 className="instructionText">
           Please rate how you feel about the climate change issue using{" "}
-          <span>BOTH </span>the sliders.{" "}
-          <span>Don't think too much </span>about it, just{" "}
-          <span>rate how you feel </span>when thinking about the issue.
+          <span>BOTH </span>the sliders. <span>Don't think too much </span>about
+          it, just <span>rate how you feel </span>when thinking about the issue.
         </h4>
         <div className="affectiveSlider" style={{ flexDirection: direction }}>
           <div className="sliderWrapper">
             <h4 className="sliderLabel">
-              Level of Arousal (Displeasure-Pleasure)
+              Level of Valence (Displeasure-Pleasure)
             </h4>
             <div className="sliderContainer">
               <img src="./images/AS_unhappy.png" alt="Unhappy Icon" />
@@ -53,7 +52,7 @@ function Emotion({ step }) {
             </div>
           </div>
           <div className="sliderWrapper">
-            <h4 className="sliderLabel">Level of Valence (Boring-Excited)</h4>
+            <h4 className="sliderLabel">Level of Arousal (Boring-Excited)</h4>
             <div className="sliderContainer">
               <img src="./images/AS_sleepy.png" alt="Sleepy Icon" />
               <div className="slider">

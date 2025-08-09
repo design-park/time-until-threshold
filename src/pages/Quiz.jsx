@@ -60,38 +60,47 @@ function Quiz() {
   return (
     <div className="centerBody">
       <section className="survey-section">
-        <h1>Quiz</h1>
+        <h1>Last Part — Quiz Instructions</h1>
         <p>
-          The following questions designed to see how much you{" "}
-          <strong> remember</strong> about
+          You’ve reached the final part of the experiment. In this section, we
+          will like to ask you how much you <strong> remember</strong> about the
+          second graph we showed you during the experiment, which was
           <strong>
             {" "}
             “the global surface temperature change relative to 1850-1900”
           </strong>
-          , which is the <strong>second</strong> line graph we showed you during
-          the experiment. The chart illustrated observed (1950-2024) and
-          projected (2025-2099) global surface temperature changes relative to
-          the 1850-1900 baseline. The projections are based on 5 different
-          greenhouse gas emission scenarios:
         </p>
+        <p>The chart included:</p>
         <ul>
-          <li className="veryLowColor">SSP1-1.9 (Very low emissions)</li>
-          <li className="lowColor">SSP1-2.6 (Low emissions)</li>
-          <li className="intermediateColor">
-            SSP2-4.5 (Intermediate emissions)
+          <li><strong>Observed data</strong> (1950-2024)</li>
+          <li><strong>Projected data</strong> (2025-2099) under five emission scenarios</li>
+          <ul>
+            <li className="veryLowColor">SSP1-1.9 (Very low emissions)</li>
+            <li className="lowColor">SSP1-2.6 (Low emissions)</li>
+            <li className="intermediateColor">
+              SSP2-4.5 (Intermediate emissions)
+            </li>
+            <li className="highColor">SSP3-7.0 (High emissions)</li>
+            <li className="veryHighColor">SSP5-8.5 (Very high emissions)</li>
+          </ul>
+          <li>
+            Estimated years remaining until the world reaches
+            <strong> 1.5°C, 2.0°C, and 4.0°C</strong> of warming.
           </li>
-          <li className="highColor">SSP3-7.0 (High emissions)</li>
-          <li className="veryHighColor">SSP5-8.5 (Very high emissions)</li>
         </ul>
-        <p>
-          The graph also illustrated the years we have left to reach 3
-          thresholds which are:<strong> 1.5°C, 2.0°C, and 4.0°C</strong>.
-        </p>
-        <p>
-          Try to answer as best as you can the following questions. If you don’t
-          remember at all, you can choose “I have no idea”. If you have chosen
-          the answer, please rate your certainty level as well.
-        </p>
+
+        <h1>What to do</h1>
+        <ol>
+          <li>
+            Answer each question about the graph as accurately as you can.
+            <ul>
+              <li>
+                If you don't remember, choose <strong>"I have no idea."</strong>
+              </li>
+            </ul>
+          </li>
+          <li>After each answer, <strong>rate your certainty</strong> on a 1 – 5 scale.</li>
+        </ol>
       </section>
       <form>
         <NumberQuestion
@@ -155,7 +164,7 @@ function Quiz() {
               last scenarios that reached the <strong>1.5°C</strong> threshold.
               Using that as a reference for your memory, what was the year
               difference between the first and last scenarios that reached the{" "}
-              <strong>2.0°C</strong> threshold, as shown by the width of{" "}
+              <strong>2.0°C</strong> threshold, as shown by the year range of{" "}
               <mark className="orangeBoxColor">the orange-shaded box</mark>? If
               you're unsure, give your best estimate.
             </>
@@ -174,9 +183,9 @@ function Quiz() {
               last scenarios that reached the <strong>1.5°C</strong> threshold.
               Using that as a reference for your memory, what was the year
               difference between the first and last scenarios that reached the{" "}
-              <strong>4.0°C</strong> threshold, as shown by the width of{" "}
-              <mark className="redBoxColor">the red-shaded box</mark>? If
-              you're unsure, give your best estimate.
+              <strong>4.0°C</strong> threshold, as shown by the year range of{" "}
+              <mark className="redBoxColor">the red-shaded box</mark>? If you're
+              unsure, give your best estimate.
             </>
           }
           textBeforeInput="More than"

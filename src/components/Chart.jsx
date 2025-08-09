@@ -223,7 +223,7 @@ function sortArrows(arr) {
   const secondArrowElements = [];
   const otherElements = [];
 
-  arr.forEach(item => {
+  arr.forEach((item) => {
     if (item.secondarrow) {
       secondArrowElements.push(item);
     } else {
@@ -238,21 +238,63 @@ function sortArrows(arr) {
 const ARROWS_OPTIONS = [
   [
     { height: 0.7, start: 2025, end: 2027.8 },
-    { height: 0.7, start: 2027.8, end: 2034.1, secondarrow: true, color: "#0065F8" },
+    {
+      height: 0.7,
+      start: 2027.8,
+      end: 2034.1,
+      secondarrow: true,
+      color: "#0065F8",
+    },
     { height: 1.1, start: 2025, end: 2041.8 },
-    { height: 1.1, start: 2041.8, end: 2052.3, secondarrow: true, color: "#9E6F21" },
+    {
+      height: 1.1,
+      start: 2041.8,
+      end: 2052.3,
+      secondarrow: true,
+      color: "#9E6F21",
+    },
     { height: 3, start: 2025, end: 2084.2 },
-    { height: 3, start: 2084.2, end: 2099.0, secondarrow: true, unfinished: true, color: "#640D5F" },
+    {
+      height: 3,
+      start: 2084.2,
+      end: 2099.0,
+      secondarrow: true,
+      unfinished: true,
+      color: "#640D5F",
+    },
   ],
 ];
 
-const sortedARROWS_OPTIONS = ARROWS_OPTIONS.map(innerArray => sortArrows(innerArray));
+const sortedARROWS_OPTIONS = ARROWS_OPTIONS.map((innerArray) =>
+  sortArrows(innerArray)
+);
 
 const AREAS_OPTIONS = [
   [
-    { start: 2027.8, end: 2034.1, bottom: 0, top: 1.5, color: "#FFFF76", opacity: 0.25 },
-    { start: 2041.8, end: 2052.3, bottom: 0, top: 2, color: "#FF8800", opacity: 0.25  },
-    { start: 2084.2, end: 2099.0, bottom: 0, top: 4, color: "#F53B3B", opacity: 0.35 },
+    {
+      start: 2027.8,
+      end: 2034.1,
+      bottom: 0,
+      top: 1.5,
+      color: "#FFFF76",
+      opacity: 0.25,
+    },
+    {
+      start: 2041.8,
+      end: 2052.3,
+      bottom: 0,
+      top: 2,
+      color: "#FF8800",
+      opacity: 0.25,
+    },
+    {
+      start: 2084.2,
+      end: 2099.0,
+      bottom: 0,
+      top: 4,
+      color: "#F53B3B",
+      opacity: 0.35,
+    },
   ],
 ];
 
@@ -521,9 +563,15 @@ function Chart({
       <h1>Global surface temperature change relative to 1850-1900</h1>
       <p>
         This chart illustrates observed (1950–2024) and projected (2025–2099)
-        global surface temperature changes relative to the 1850-1900 baseline. The
-        projections are based on different greenhouse gas emission scenarios.
+        global surface temperature changes relative to the 1850-1900 baseline.
+        The projections are based on different greenhouse gas emission
+        scenarios.
       </p>
+      <p>
+        <strong>Please proceed with the two tasks we gave to you: quiz and
+        writing activity. You can take as much time as you want.</strong>
+      </p>
+      
       {aboveChart}
       <p className="warningText">Reaching the threshold early is worse.</p>
       <div>
