@@ -10,9 +10,9 @@ function NewTraining() {
   const setTrainingChartSeen = useStore((state) => state.setTrainingChartSeen);
 
   const handleNext = () => {
-    window.scrollTo(0, 0); // Scroll to top of the page
+    document.querySelector(".content").scrollTo(0, 0); // Scroll to top of the page
     setTimeout(() => {
-      window.scrollTo(0, 0); // Scroll to top of the page again after a short delay
+      document.querySelector(".content").scrollTo(0, 0); // Scroll to top of the page again after a short delay
     }, 100);
     if (step >= 9 || (step === 8 && condition === "control")) {
       setTrainingChartSeen(true);
@@ -139,7 +139,7 @@ function Step2({ onNext }) {
                 </p>
               </td>
               <td>
-                <input type="number" id="s1" ref={ref1} />
+                <input type="number" min="0" id="s1" ref={ref1} />
               </td>
             </tr>
             <tr>
@@ -149,7 +149,7 @@ function Step2({ onNext }) {
                 </p>
               </td>
               <td>
-                <input type="number" id="s2" ref={ref2} />
+                <input type="number" min="0" id="s2" ref={ref2} />
               </td>
             </tr>
           </tbody>
@@ -228,7 +228,7 @@ function Step3({ onNext }) {
                 </p>
               </td>
               <td>
-                <input type="number" id="s1" ref={ref1} />
+                <input type="number" min="0" id="s1" ref={ref1} />
               </td>
             </tr>
           </tbody>
@@ -303,13 +303,13 @@ function Step4({ onNext }) {
             <tr>
               <td>0.6m</td>
               <td>
-                <input type="number" id="s1" ref={ref1} />
+                <input type="number" min="0" id="s1" ref={ref1} />
               </td>
             </tr>
             <tr>
               <td>0.8m</td>
               <td>
-                <input type="number" id="s2" ref={ref2} />
+                <input type="number" min="0" id="s2" ref={ref2} />
               </td>
             </tr>
           </tbody>
@@ -426,8 +426,8 @@ function Step5({ onNext }) {
             {" "}
             SSP2-4.5 (Intermediate emissions){" "}
           </span>
-          reaches the <input type="number" id="s1" ref={ref1} />m threshold in
-          the year <input type="number" id="s2" ref={ref2} />.
+          reaches the <input type="number" min="0" id="s1" ref={ref1} />m threshold in
+          the year <input type="number" min="0" id="s2" ref={ref2} />.
         </p>
       </div>
       <div className="actionButtonContainer">
@@ -567,7 +567,7 @@ function Step7({ onNext }) {
               SSP5-8.5 (very high emissions)
             </span>{" "}
             is projected to reach the <strong>0.6m</strong> threshold{" "}
-            <input type="number" id="s1" ref={ref1} /> years from now.
+            <input type="number" min="0" id="s1" ref={ref1} /> years from now.
           </li>
           <li className="trainingText">
             The second part of the horizontal indicator that belongs to the{" "}

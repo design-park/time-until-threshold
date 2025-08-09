@@ -42,7 +42,7 @@ function Emotion({ step }) {
                   step="0.01"
                   value={arousal}
                   onChange={(e) => {
-                    setArousal(e.target.value);
+                    setArousal(parseFloat(e.target.value));
                     setHasMovedArousal(true);
                   }}
                 />
@@ -63,7 +63,7 @@ function Emotion({ step }) {
                   step="0.01"
                   value={valence}
                   onChange={(e) => {
-                    setValence(e.target.value);
+                    setValence(parseFloat(e.target.value));
                     setHasMovedValence(true);
                   }}
                 />

@@ -2,43 +2,57 @@ import { useState } from "react";
 import { useStore } from "../store"; // Import zustand store
 
 function SubmitPage() {
-  const [buttonClicked, setButtonClicked] = useState(false);
-  const storeData = useStore((state) => state); // Access all data from the store
-  const reset = useStore((state) => state.reset); // Function to reset the store
-  const handleSubmit = async () => {
-    setButtonClicked(true);
-    try {
-      const response = await fetch(
-        "https://chardet.org/time-until-threshold/log.php",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(storeData),
-        }
-      );
+  const submitted = useStore((state) => state.submitted);
+  const storeResponse = useStore((state) => state.storeResponse);
+  const setQuizCompleted = useStore((state) => state.setQuizCompleted);
+  const getCurrentResponse = useStore((state) => state.getCurrentResponse);
+  const handleSave = () => {
+    storeResponse();
+  };
 
-      if (!response.ok) {
-        throw new Error("Failed to submit data");
-      }
+  const handleExport = () => {
+    const response = getCurrentResponse();
+    const blob = new Blob([JSON.stringify(response, null, 2)], {
+      type: "application/json",
+    });
 
-      console.log("Data submitted successfully");
-      alert(
-        "Thank you for your participation! Your responses have been recorded."
-      );
-      reset(); // Reset the store after successful submission
-    } catch (error) {
-      console.error("Error submitting data:", error);
-    }
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "response.json";
+    a.click();
+    URL.revokeObjectURL(url);
+    a.remove();
   };
 
   return (
     <div className="centerBody">
       <h1>Everything is complete!</h1>
-      <p>Please click submit to send your responses.</p>
-      <button onClick={handleSubmit} className="userActionButton" disabled={buttonClicked}>
-        Submit
+      <p>Please "Save Response" to complete the process.</p>
+      {submitted ? (
+        <p style={{ color: "#4CAF50" }}>
+          Your response has been saved successfully.
+        </p>
+      ) : (
+        <button onClick={handleSave} className="userActionButton">
+          Save Response
+        </button>
+      )}
+      <p>
+        If you did the experiment remotely, you may export your responses to
+        send them to the team.
+      </p>
+      <button onClick={handleExport} className="userActionButton">
+        Export Responses
+      </button>
+      <p>DEBUG</p>
+      <button
+        onClick={() => {
+          setQuizCompleted(false);
+        }}
+        className="userActionButton"
+      >
+        Back to Quiz
       </button>
     </div>
   );

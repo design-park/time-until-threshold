@@ -94,12 +94,12 @@ function Demography() {
                 className="select-field"
               >
                 <option value="">No selection</option>
-                <option value="1">18-24</option>
-                <option value="2">25-34</option>
-                <option value="3">35-44</option>
-                <option value="4">45-54</option>
-                <option value="5">55-65</option>
-                <option value="6">65+</option>
+                <option value="18-24">18-24</option>
+                <option value="25-34">25-34</option>
+                <option value="35-44">35-44</option>
+                <option value="45-54">45-54</option>
+                <option value="55-65">55-65</option>
+                <option value="65+">65+</option>
               </select>
             </div>
 
@@ -116,14 +116,15 @@ function Demography() {
                 className="select-field"
               >
                 <option value="">No selection</option>
-                <option value="1">Less than High School</option>
-                <option value="2">
+                <option value="Less than High School">Less than High School</option>
+                <option value="High School">High School Diploma or Equivalent</option>
+                <option value="Higher Ed (less than Bachelor's)">
                   Higher Education less than Bachelor's Degree
                 </option>
-                <option value="3">Bachelor's Degree</option>
-                <option value="4">Master's Degree</option>
-                <option value="5">Doctorate or Professional Degree</option>
-                <option value="8">Prefer not to answer</option>
+                <option value="Bachelor's Degree">Bachelor's Degree</option>
+                <option value="Master's Degree">Master's Degree</option>
+                <option value="Doctorate or Professional Degree">Doctorate or Professional Degree</option>
+                <option value="Prefer not to answer">Prefer not to answer</option>
               </select>
             </div>
 
@@ -140,11 +141,11 @@ function Demography() {
                 className="select-field"
               >
                 <option value="">No selection</option>
-                <option value="0">No knowledge/understanding</option>
-                <option value="1">Limited Knowledge/understanding</option>
-                <option value="2">Moderate knowledge/understanding</option>
-                <option value="3">Good knowledge/understanding</option>
-                <option value="4">Expert knowledge/understanding</option>
+                <option value="None">No knowledge/understanding</option>
+                <option value="Limited">Limited Knowledge/understanding</option>
+                <option value="Moderate">Moderate knowledge/understanding</option>
+                <option value="Good">Good knowledge/understanding</option>
+                <option value="Expert">Expert knowledge/understanding</option>
               </select>
             </div>
 
@@ -162,11 +163,11 @@ function Demography() {
                 className="select-field"
               >
                 <option value="">No selection</option>
-                <option value="1">Never</option>
-                <option value="2">Rarely (less than once a month)</option>
-                <option value="3">Occasionally (a few times a month)</option>
-                <option value="4">Frequently (a few times a week)</option>
-                <option value="5">Very Frequently (daily)</option>
+                <option value="Never">Never</option>
+                <option value="Rarely">Rarely (less than once a month)</option>
+                <option value="Occasionally">Occasionally (a few times a month)</option>
+                <option value="Frequently">Frequently (a few times a week)</option>
+                <option value="Very Frequently">Very Frequently (daily)</option>
               </select>
             </div>
 
@@ -182,11 +183,11 @@ function Demography() {
                 className="select-field"
               >
                 <option value="">No selection</option>
-                <option value="1">Not confident at all</option>
-                <option value="2">Slightly confident</option>
-                <option value="3">Moderately confident</option>
-                <option value="4">Confident</option>
-                <option value="5">Very Confident</option>
+                <option value="Not confident at all">Not confident at all</option>
+                <option value="Slightly confident">Slightly confident</option>
+                <option value="Moderately confident">Moderately confident</option>
+                <option value="Confident">Confident</option>
+                <option value="Very Confident">Very Confident</option>
               </select>
             </div>
 

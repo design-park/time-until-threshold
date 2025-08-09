@@ -3,30 +3,14 @@ import { useStore } from "../store";
 import { generateRandomCode } from "../utils";
 
 function Intro() {
+  const getFewestCondition = useStore((state) => state.getFewestCondition);
   let [consentChecked, setConsentChecked] = useState(false);
   let participantCode = useMemo(generateRandomCode, []);
   let [condition, setCondition] = useState("");
   const storeParticipantInfo = useStore((state) => state.storeParticipantInfo);
 
   useEffect(() => {
-    const fetchCondition = async () => {
-      const response = await fetch(
-        "https://chardet.org/time-until-threshold/getFewestCondition.php"
-      );
-      const data = await response.json();
-      if (
-        data.condition &&
-        (data.condition === "control" || data.condition === "treatment")
-      ) {
-        setCondition(data.condition);
-      } else {
-        console.error("Failed to fetch condition");
-        alert(
-          "Failed to fetch condition. Please try again later or contact the researcher."
-        );
-      }
-    };
-    fetchCondition();
+    setCondition(getFewestCondition());
   }, []);
 
   return (

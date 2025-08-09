@@ -125,6 +125,7 @@ function TempDistance({ step }) {
             In{" "}
             <input
               type="number"
+              min="0"
               id="yearsUntilImpact"
               disabled={noIdeaYearsUntilImpact}
               value={yearsUntilImpact}
