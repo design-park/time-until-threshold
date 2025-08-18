@@ -40,10 +40,10 @@ function Emotion({ step }) {
                   min="0"
                   max="1"
                   step="0.01"
-                  value={arousal}
+                  value={valence}
                   onChange={(e) => {
-                    setArousal(parseFloat(e.target.value));
-                    setHasMovedArousal(true);
+                    setValence(parseFloat(e.target.value));
+                    setHasMovedValence(true);
                   }}
                 />
                 <img src="./images/AS_intensity_cue.png" alt="Intensity Cue" />
@@ -61,10 +61,10 @@ function Emotion({ step }) {
                   min="0"
                   max="1"
                   step="0.01"
-                  value={valence}
+                  value={arousal}
                   onChange={(e) => {
-                    setValence(parseFloat(e.target.value));
-                    setHasMovedValence(true);
+                    setArousal(parseFloat(e.target.value));
+                    setHasMovedArousal(true);
                   }}
                 />
                 <img src="./images/AS_intensity_cue.png" alt="Intensity Cue" />
