@@ -17,18 +17,44 @@ import Quiz from "./pages/Quiz.jsx";
 import NewTraining from "./pages/NewTraining.jsx";
 import DebugQuiz from "./DebugQuiz.jsx";
 import ViewResponses from "./pages/ViewResponses.jsx";
+import Chart from "./components/Chart.jsx";
+import AnimatedChart from "./components/AnimatedChart.jsx";
+import { useEffect } from "react";
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<Form />} />
       <Route path="/test" element={<Test />} />
+      <Route
+        path="/temperature-chart"
+        element={<Chart showTasksInstructions={false} />}
+      />
+      <Route
+        path="/animated-temperature-chart"
+        element={<AnimatedChart showTasksInstructions={false} />}
+      />
       <Route path="/animated-sea-chart" element={<AnimatedChart2 />} />
       <Route path="/sea-chart" element={<Chart2 />} />
+      <Route path="/training" element={<SandboxedTraining />} />
       <Route path="/quiz" element={<DebugQuiz />} />
       <Route path="/view-responses" element={<ViewResponses />} />
     </Routes>
   );
+}
+
+function SandboxedTraining() {
+  const setStep = useStore((state) => state.setTrainingStep);
+  const reset = useStore((state) => state.reset);
+  useEffect(() => {
+    reset();
+    setStep(1);
+    return () => {
+      setStep(1);
+      reset();
+    };
+  }, []);
+  return <NewTraining showStep9Explanation={true} />;
 }
 
 function Form() {

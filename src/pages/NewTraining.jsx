@@ -3,16 +3,16 @@ import Chart2 from "../components/Chart2";
 import AnimatedChart2 from "../components/AnimatedChart2";
 import { useStore } from "../store";
 
-function NewTraining() {
+function NewTraining({ showStep9Explanation = false }) {
   const step = useStore((state) => state.trainingStep);
   const setStep = useStore((state) => state.setTrainingStep);
   const condition = useStore((state) => state.condition);
   const setTrainingChartSeen = useStore((state) => state.setTrainingChartSeen);
 
   const handleNext = () => {
-    document.querySelector(".content").scrollTo(0, 0); // Scroll to top of the page
+    (document.querySelector(".content") ?? window).scrollTo(0, 0); // Scroll to top of the page
     setTimeout(() => {
-      document.querySelector(".content").scrollTo(0, 0); // Scroll to top of the page again after a short delay
+      (document.querySelector(".content") ?? window).scrollTo(0, 0); // Scroll to top of the page again after a short delay
     }, 100);
     if (step >= 9 || (step === 8 && condition === "control")) {
       setTrainingChartSeen(true);
@@ -24,7 +24,12 @@ function NewTraining() {
   return (
     <div className="paddingBody nobg">
       <h1>
-        Training ({step}/{condition === "control" ? 8 : 9})
+        Training ({step}/{condition === "control" ? 8 : 9}){" "}
+        {step === 9 && showStep9Explanation && (
+          <span style={{ fontWeight: "normal", fontStyle: "italic", fontSize: 20 }}>
+            (only shown to participants in the "animated" condition)
+          </span>
+        )}
       </h1>
       {step === 1 && <Step1 onNext={handleNext} />}
       {step === 2 && <Step2 onNext={handleNext} />}
@@ -353,7 +358,8 @@ function Step5({ onNext }) {
         Each droplet's color corresponds to the scenario colors.
       </p>
       <p className="trainingText">
-        Each droplet's shape indicates a specific sea level threshold crossed:
+        The amount of water in each droplet indicates a specific sea level
+        threshold crossed:
       </p>
       <ul>
         <li>
@@ -426,8 +432,9 @@ function Step5({ onNext }) {
             {" "}
             SSP2-4.5 (Intermediate emissions){" "}
           </span>
-          reaches the <input type="number" min="0" id="s1" ref={ref1} />m threshold in
-          the year <input type="number" min="0" id="s2" ref={ref2} />.
+          reaches the <input type="number" min="0" id="s1" ref={ref1} />m
+          threshold in the year{" "}
+          <input type="number" min="0" id="s2" ref={ref2} />.
         </p>
       </div>
       <div className="actionButtonContainer">
@@ -508,8 +515,8 @@ function Step7({ onNext }) {
       </p>
       <ul>
         <li className="trainingText">
-          Each shaded band has a corresponding duration bar divided into two
-          colour segments:
+          Each shaded band has a corresponding arrow divided into two colour
+          segments:
           <ol>
             <li className="trainingText">
               <strong>2025 → earliest crossing year</strong> – tinted with the
@@ -570,7 +577,7 @@ function Step7({ onNext }) {
             <input type="number" min="0" id="s1" ref={ref1} /> years from now.
           </li>
           <li className="trainingText">
-            The second part of the horizontal indicator that belongs to the{" "}
+            The second part of the arrow that belongs to the{" "}
             <strong>0.8m </strong>
             threshold area has the color{" "}
             <select id="s2" ref={ref2} style={{ height: "23px" }}>

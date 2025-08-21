@@ -33,7 +33,7 @@ const OPTIONS = {
   },
 };
 
-function AnimatedChart({ option = 1 }) {
+function AnimatedChart({ option = 1, showTasksInstructions = true }) {
   const [index, setIndex] = useState(0);
   const bounds = useMemo(() => {
     const newBounds = OPTIONS[option].animationBounds[index];
@@ -75,6 +75,7 @@ function AnimatedChart({ option = 1 }) {
         maxTemperature={maxTemperature}
         maxYear={value}
         blinkingScenarioForMaxTemp={isPlaying ? undefined : "SSP5-8.5"}
+        showTasksInstructions={showTasksInstructions}
         aboveChart={
           <div className="aboveChart">
             <p className="invisible"> ⬅ Click to interact with the visualization</p>

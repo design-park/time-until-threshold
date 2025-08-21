@@ -306,6 +306,7 @@ function Chart({
   aboveChart = null, // Optional component to render above the chart
   arrowsOption = 0,
   areasOption = 0,
+  showTasksInstructions = true,
 }) {
   const blinker = useBlinker(500); // Blinker hook to toggle visibility every second
   const [fullChartData, setFullChartData] = useState([]);
@@ -567,11 +568,15 @@ function Chart({
         The projections are based on different greenhouse gas emission
         scenarios.
       </p>
-      <p>
-        <strong>Please proceed with the two tasks we gave to you: quiz and
-        writing activity. You can take as much time as you want.</strong>
-      </p>
-      
+      {showTasksInstructions && (
+        <p>
+          <strong>
+            Please proceed with the two tasks we gave to you: quiz and writing
+            activity. You can take as much time as you want.
+          </strong>
+        </p>
+      )}
+
       {aboveChart}
       <p className="warningText">Reaching the threshold early is worse.</p>
       <div>
